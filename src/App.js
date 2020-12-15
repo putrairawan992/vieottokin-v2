@@ -5,6 +5,7 @@ import Header from './components/header/Header';
 import theme from './utils/theme';
 import Footer from './components/footer/Footer';
 import LandingPage from './pages/landingPage/LandingPage';
+import AboutUs from './pages/aboutUs/AboutUs';
 
 class App extends Component {
 	render() {
@@ -12,7 +13,8 @@ class App extends Component {
 			<div style={{ overflowX: 'hidden' }}>
 				<Header />
 				{/* <Card /> */}
-				<LandingPage />
+				{/* <LandingPage /> */}
+				<AboutUs />
 				<Footer />
 				<CssBaseline />
 			</div>
