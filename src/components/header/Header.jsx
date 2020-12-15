@@ -34,6 +34,8 @@ const useStyle = makeStyles((theme) => ({
 		color: theme.palette.text.secondary
 	},
 	logo: {
+		paddingTop:'5px',
+		paddingLeft:'20px',
 		height: '54px'
 	},
 	seacrhInput: {
@@ -42,10 +44,12 @@ const useStyle = makeStyles((theme) => ({
 		backgroundColor: '#FFFFFF',
 		borderRadius: '3px',
 		padding: '0px 8px',
-		color: '#B3BDCB',
+		color: '#000000',
 		alignItems: 'center',
 		fontSize: '12px',
-		display: 'flex'
+		display: 'flex',
+		borderTopRightRadius:'0px',
+		borderBottomRightRadius:'0px'
 	},
 	buttonInput: {
 		width: '93px',
@@ -53,7 +57,9 @@ const useStyle = makeStyles((theme) => ({
 		color: '#FFFFFF',
 		fontSize: '12px',
 		backgroundColor: '#F58120',
-		borderRadius: '3px'
+		borderRadius: '3px',
+		borderTopLeftRadius:'0px',
+		borderBottomLeftRadius:'0px'
 	}
 }));
 

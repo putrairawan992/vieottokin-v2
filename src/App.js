@@ -9,7 +9,7 @@ import LandingPage from './pages/landingPage/LandingPage';
 class App extends Component {
 	render() {
 		return (
-			<div>
+			<div style={{ overflowX: 'hidden' }}>
 				<Header />
 				{/* <Card /> */}
 				<LandingPage />

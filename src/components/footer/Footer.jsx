@@ -7,7 +7,8 @@ import {
 	Button,
 	Badge,
 	BottomNavigation,
-	BottomNavigationAction
+	BottomNavigationAction,
+	AppBar
 } from '@material-ui/core';
 import logo from '../../assets/svg/logo.svg';
 import FacebookIcon from '@material-ui/icons/Facebook';
