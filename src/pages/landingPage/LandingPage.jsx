@@ -20,6 +20,7 @@ import pic1 from '../../assets/image/pic1.png'
 import pic2 from '../../assets/image/pic2.png'
 import pic3 from '../../assets/image/pic3.png'
 import pic4 from '../../assets/image/pic4.png'
+import Bottom from '../../components/bottom/Bottom';
 
 function LandingPage() {
     const classes = useStyle()
@@ -243,6 +244,7 @@ function LandingPage() {
                     </Box>
                 </Box>
             </Box>
+            <Bottom/>
         </div>
     )
 }
