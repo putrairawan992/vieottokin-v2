@@ -8,16 +8,21 @@
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.5.0",
+    "autoprefixer": "^10.1.0",
+    "postcss": "^8.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",
+    "tailwindcss": "^2.0.2",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "tailwind:build": "tailwindcss build src/assets/tailwind.css -o src/assets/tailwind.output.css",
+    "tailwind:prod": "cross-env NODE_ENV=production npm run tailwind:build"
   },
   "eslintConfig": {
     "extends": [
