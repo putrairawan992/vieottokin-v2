@@ -27,7 +27,7 @@ const Navbar = () => {
 
         <div className="flex items-center mx-0 md:mx-16">
           <div className="bg-white h-10 w-8 flex justify-center items-center rounded-l-sm">
-            <Icon name="search" className="w-3 h-3" />
+            <Icon name="search" size={ 12 } color="#333" />
           </div>
 
           <input className="h-10" />
@@ -48,7 +48,7 @@ const Navbar = () => {
           ))}
 
           <button className="flex items-center text-blue ml-10">
-            <Icon name="user" className="w-3 h-3 mr-2" />
+            <Icon name="user" size={ 12 } className="mr-2" />
             Login
           </button>
         </nav>
