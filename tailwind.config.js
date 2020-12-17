@@ -10,7 +10,7 @@ module.exports = {
     },
     extend: {
       colors: {
-        orange: "#7A08FA",
+        orange: "#f58120",
         blue: '#1eb0e0',
         darkdrop: '#0d3555',
         softdrop: '#0f4875'
