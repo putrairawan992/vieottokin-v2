@@ -40,14 +40,14 @@ const Navbar = () => {
         <nav className="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
           { listMenu.map((item, i) => (
             <Link
-              className="mt-2 text-sm md:mt-0 mr-6"
+              className="mt-2 text-sm md:mt-0 mx-6"
               to={ item.link } key={ i }
             >
               { item.label }
             </Link>
           ))}
 
-          <button className="flex items-center text-blue">
+          <button className="flex items-center text-blue ml-10">
             <Icon name="user" className="w-3 h-3 mr-2" />
             Login
           </button>

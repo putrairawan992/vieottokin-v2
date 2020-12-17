@@ -1,7 +1,5 @@
 import React from 'react';
 
-const baseContainer = ''
-
 const Container = ({ children, className = '', fluid }) => {
   return (
     <section

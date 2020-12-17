@@ -36,14 +36,14 @@ const AboutUs = () => {
         </Container>
       </Container>
 
-      <Container className="my-16 text-center">
+      <Container className="my-28 text-center">
         <h2 className="mb-4 text-4xl font-bold">
           What <span className="text-orange">We Believe</span>
         </h2>
 
         <div className="flex items-end">
           { whatWeBelieve.map((item, i) => (
-            <div className="mx-5 rounded" key={ i }>
+            <div className="mx-5 rounded w-4/12" key={ i }>
               <img src={ item.image } className="mx-auto" alt={ item.title } />
 
               <div className="shadow-lg pt-20 -mt-16 h-56 flex items-end flex-wrap">
@@ -75,18 +75,18 @@ const AboutUs = () => {
             </p>
 
             <div className="mt-7">
-              <Button style="solid" className="px-12 py-4 mx-4">
+              <Button type="solid" className="px-12 py-4 mx-4">
                 Find Service Providers
               </Button>
 
-              <Button style="outline" className="px-12 py-4 mx-3 text-orange">
+              <Button type="outline" className="px-12 py-4 mx-3 text-orange">
                 Join Our Network of Partners
               </Button>
             </div>
           </div>
 
-          <div className="absolute inset-0 h-auto z-0">
-            <img src="/images/about-cta.jpg" alt="contact" className="h-96 w-full object-fit-cover" />
+          <div className="absolute inset-0 overflow-hidden z-0">
+            <img src="/images/about-cta.jpg" alt="contact" className="w-full h-full object-cover" />
           </div>
         </Container>
       </Container>
