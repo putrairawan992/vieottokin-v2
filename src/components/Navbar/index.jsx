@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Container from 'components/Container';
 import Icon from 'icon';
 
 const listMenu = [
@@ -20,8 +21,8 @@ const listMenu = [
 
 const Navbar = () => {
   return (
-    <div className="py-3 w-full bg-softdrop text-white">
-      <div className="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+    <Container fluid className="py-3 bg-softdrop text-white">
+      <Container className="flex flex-col md:items-center md:justify-between md:flex-row">
         <img src="images/logo.svg" className="w-32 md:w-52" alt="logo" />
 
         <div className="flex items-center mx-0 md:mx-16">
@@ -35,7 +36,6 @@ const Navbar = () => {
             Search
           </button>
         </div>
-
 
         <nav className="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
           { listMenu.map((item, i) => (
@@ -52,8 +52,8 @@ const Navbar = () => {
             Login
           </button>
         </nav>
-      </div>
-    </div>
+      </Container>
+    </Container>
   );
 }
 

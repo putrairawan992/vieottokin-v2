@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import Navbar from 'components/Navbar';
 import AboutUs from 'pages/AboutUs';
 
 const RouterManager = () => (
-  <Switch>
+  <Fragment>
     <Navbar />
-    <Route exact path='/' component={ AboutUs } />
-  </Switch>
+
+    <Switch>
+      <Route exact path='/' component={ AboutUs } />
+    </Switch>
+  </Fragment>
 );
 
 export default RouterManager;
