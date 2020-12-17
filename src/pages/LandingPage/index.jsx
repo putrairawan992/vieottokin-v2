@@ -80,7 +80,7 @@ const listProcess = [
 const Home = () => {
   return (
     <Fragment>
-      <Container fluid className="md:px-6 lg:px-8 relative py-20 bg-darkdrop">
+      <Container fluid className="md:px-6 lg:px-8 relative py-20">
         <Container>
           <div className="relative text-white z-10 md:ml-16">
             <h1 className="mb-4 font-bold text-4xl">We help you find the best service provider</h1>
@@ -107,7 +107,7 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="flex items-end text-center relative z-20 mt-24">
+          <div className="flex items-end text-center relative z-20 my-24">
             { listFeature.map((item, i) => (
               <div className="shadow-lg h-72 mx-5 px-6 py-12 rounded w-4/12 bg-white flex justify-between flex-col" key={ i }>
                 <img src={ item.image } className="mx-auto" alt={ item.title } />
@@ -121,7 +121,7 @@ const Home = () => {
           </div>
 
           <div className="absolute inset-0 overflow-hidden z-0">
-            <img src="/images/landing.png" alt="contact" className="w-full h-full object-cover" />
+            <img src="/images/landing.png" alt="landing page" className="w-full h-full" />
           </div>
         </Container>
       </Container>
