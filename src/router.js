@@ -2,8 +2,8 @@ import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import SignupPopup from 'components/SignupPopup';
-import SigninPopup from 'components/SigninPopup';
+import SignupPopup from 'components/AuthPopup/Signup';
+import SigninPopup from 'components/AuthPopup/Signin';
 import Navbar from 'components/Navbar';
 import Footer from 'components/Footer';
 import AboutUs from 'pages/AboutUs';
