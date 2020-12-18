@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import iconPath from './library';
 
-const Icon = ({ size, color, name, className = '' }) => (
+const Icon = ({ size, color, name, className }) => (
   <svg
     viewBox={iconPath[name].box}
     width={size}
@@ -19,7 +19,8 @@ const Icon = ({ size, color, name, className = '' }) => (
 
 Icon.defaultProps = {
   size: 16,
-  color: "#fff"
+  color: "#fff",
+  className: ''
 };
 
 Icon.propTypes = {
