@@ -1,5 +1,5 @@
 import {
-  MODAL_SIGNIN
+  MODAL_SIGNUP
 } from '../types';
 
-export const openModalSignin = payload => ({ type: MODAL_SIGNIN, payload });
+export const openModalSignup = payload => ({ type: MODAL_SIGNUP, payload });

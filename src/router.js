@@ -2,13 +2,13 @@ import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import SigninPopup from 'components/SigninPopup';
+import SigninPopup from 'components/SignupPopup';
 import Navbar from 'components/Navbar';
 import Footer from 'components/Footer';
 import AboutUs from 'pages/AboutUs';
 import LandingPage from 'pages/LandingPage';
 
-const RouterManager = ({ showModalSignin }) => (
+const RouterManager = ({ showModalSignup }) => (
   <Fragment>
     <Navbar />
 
@@ -19,7 +19,7 @@ const RouterManager = ({ showModalSignin }) => (
 
     <Footer />
 
-    { showModalSignin && <SigninPopup /> }
+    { showModalSignup && <SigninPopup /> }
   </Fragment>
 );
 

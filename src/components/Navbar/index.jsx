@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { openModalSignin } from 'store/actions/ModalControl';
+import { openModalSignup } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import Container from 'components/Container';
 import Icon from 'icon';
@@ -52,7 +52,7 @@ const Navbar = ({ dispatch }) => {
             </Link>
           ))}
 
-          <button className="flex items-center text-blue ml-10" onClick={ () => dispatch(openModalSignin(true)) }>
+          <button className="flex items-center text-blue ml-10" onClick={ () => dispatch(openModalSignup(true)) }>
             <Icon name="user" size={ 12 } color="#20BFEF" className="mr-2" />
             Login
           </button>

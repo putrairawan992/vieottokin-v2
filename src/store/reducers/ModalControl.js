@@ -1,14 +1,14 @@
 import {
-  MODAL_SIGNIN
+  MODAL_SIGNUP
 } from '../types';
 
 const initialState = {
-  showModalSignin: false
+  showModalSignup: false
 };
 
 export default function index(state = initialState, action = null) {
   switch (action.type) {
-    case MODAL_SIGNIN:
+    case MODAL_SIGNUP:
       return { ...state, showModalSignin: action.payload };
     default:
       return state;

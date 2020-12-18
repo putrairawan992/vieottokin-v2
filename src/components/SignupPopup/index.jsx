@@ -1,5 +1,5 @@
 import React from 'react';
-import { openModalSignin } from 'store/actions/ModalControl';
+import { openModalSignup } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import Icon from 'icon';
 
@@ -8,7 +8,7 @@ const SigninPopup = ({ dispatch }) => {
     <div className="h-screen w-full fixed left-0 top-0 flex z-50 justify-center items-center bg-black bg-opacity-50">
       <div className="bg-white rounded-sm w-full m-2 md:w-6/12 lg:w-4/12">
         <div className="text-center p-6 pb-0">
-          <button className="ml-auto block" onClick={ () => dispatch(openModalSignin(false)) }>
+          <button className="ml-auto block" onClick={ () => dispatch(openModalSignup(false)) }>
             <Icon name="close" color="#333" />
           </button>
         </div>
