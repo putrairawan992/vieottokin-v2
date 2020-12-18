@@ -23,7 +23,7 @@ const RouterManager = props => (
 
     { props.showModalSignup && <SignupPopup /> }
     { props.showModalSignin && <SigninPopup /> }
-    { props.showModalOffer && <OfferPopup /> }
+    { <OfferPopup /> }
   </Fragment>
 );
 
