@@ -21,7 +21,7 @@ const whatWeBelieve = [
 const AboutUs = () => {
   return (
     <Fragment>
-      <Container fluid className="md:px-6 lg:px-8 relative py-20">
+      <Container fluid className="md:px-6 lg:px-8 relative py-24">
         <Container>
           <div className="relative text-white z-10 md:ml-16">
             <h1 className="mb-4 font-bold text-4xl">We make it simpler for you to find</h1>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { openModalSignup } from 'store/actions/ModalControl';
+import { openModalOffer } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import Container from 'components/Container';
 import Icon from 'icon';
@@ -52,7 +52,7 @@ const Navbar = ({ dispatch }) => {
             </Link>
           ))}
 
-          <button className="flex items-center text-blue ml-10" onClick={ () => dispatch(openModalSignup(true)) }>
+          <button className="flex items-center text-blue ml-10" onClick={ () => dispatch(openModalOffer(true)) }>
             <Icon name="user" size={ 12 } color="#20BFEF" className="mr-2" />
             Login
           </button>

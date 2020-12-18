@@ -2,14 +2,15 @@ import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import SignupPopup from 'components/AuthPopup/Signup';
-import SigninPopup from 'components/AuthPopup/Signin';
+import SignupPopup from 'components/Popup/Signup';
+import SigninPopup from 'components/Popup/Signin';
+import OfferPopup from 'components/Popup/Offer';
 import Navbar from 'components/Navbar';
 import Footer from 'components/Footer';
 import AboutUs from 'pages/AboutUs';
 import LandingPage from 'pages/LandingPage';
 
-const RouterManager = ({ showModalSignup, showModalSignin }) => (
+const RouterManager = props => (
   <Fragment>
     <Navbar />
 
@@ -20,8 +21,9 @@ const RouterManager = ({ showModalSignup, showModalSignin }) => (
 
     <Footer />
 
-    { showModalSignup && <SignupPopup /> }
-    { showModalSignin && <SigninPopup /> }
+    { props.showModalSignup && <SignupPopup /> }
+    { props.showModalSignin && <SigninPopup /> }
+    { props.showModalOffer && <OfferPopup /> }
   </Fragment>
 );
 
