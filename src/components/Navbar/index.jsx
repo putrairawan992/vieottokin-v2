@@ -1,25 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { openModalSignin } from 'store/actions/ModalControl';
+import { connect } from 'react-redux';
 import Container from 'components/Container';
 import Icon from 'icon';
 
 const listMenu = [
   {
     label: 'Home',
-    link: '/'
+    link: '/#'
   }, {
     label: 'Service',
-    link: '/'
+    link: '/#'
   }, {
     label: 'How it works',
-    link: '/'
+    link: '/#'
   }, {
     label: 'Help',
-    link: '/'
+    link: '/#'
   }
 ]
 
-const Navbar = () => {
+const Navbar = ({ dispatch }) => {
   return (
     <Container fluid className="py-3 bg-softdrop text-white">
       <Container className="flex flex-col md:items-center md:justify-between md:flex-row">
@@ -50,7 +52,7 @@ const Navbar = () => {
             </Link>
           ))}
 
-          <button className="flex items-center text-blue ml-10">
+          <button className="flex items-center text-blue ml-10" onClick={ () => dispatch(openModalSignin(true)) }>
             <Icon name="user" size={ 12 } color="#20BFEF" className="mr-2" />
             Login
           </button>
@@ -60,4 +62,4 @@ const Navbar = () => {
   );
 }
 
-export default Navbar;
+export default connect()(Navbar);

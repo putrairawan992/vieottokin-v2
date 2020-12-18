@@ -196,6 +196,7 @@ const Home = () => {
       </Container>
 
       <HeroCTA />
+
     </Fragment>
   );
 }

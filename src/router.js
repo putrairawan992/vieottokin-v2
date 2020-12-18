@@ -1,12 +1,14 @@
 import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 
+import SigninPopup from 'components/SigninPopup';
 import Navbar from 'components/Navbar';
 import Footer from 'components/Footer';
 import AboutUs from 'pages/AboutUs';
 import LandingPage from 'pages/LandingPage';
 
-const RouterManager = () => (
+const RouterManager = ({ showModalSignin }) => (
   <Fragment>
     <Navbar />
 
@@ -15,10 +17,14 @@ const RouterManager = () => (
       <Route exact path='/landing-page' component={ LandingPage } />
     </Switch>
 
-    <div className="">
-      <Footer />
-    </div>
+    <Footer />
+
+    { showModalSignin && <SigninPopup /> }
   </Fragment>
 );
 
-export default RouterManager;
+function mapStateToProps(state) {
+  return state.modalControl;
+}
+
+export default connect(mapStateToProps)(RouterManager);

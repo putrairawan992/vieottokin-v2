@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Button = ({ type, children, to, className = '' }) => {
+const Button = ({ type, children, to = '/', className = '' }) => {
   return (
     <Link
       to={ to }
