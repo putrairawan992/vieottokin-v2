@@ -6,7 +6,7 @@ import Icon from 'icon';
 const SigninPopup = ({ dispatch }) => {
   return (
     <div className="h-screen w-full fixed left-0 top-0 flex z-50 justify-center items-center bg-black bg-opacity-50">
-      <div className="bg-white rounded-sm w-full m-2 md:w-6/12 lg:w-4/12">
+      <div className="bg-white rounded-md w-full m-2 md:w-6/12 lg:w-4/12">
         <div className="text-center p-6 pb-0">
           <button className="ml-auto block" onClick={ () => dispatch(openModalSignup(false)) }>
             <Icon name="close" color="#333" />
@@ -105,7 +105,7 @@ const SigninPopup = ({ dispatch }) => {
               </label>
             </div>
 
-            <button className="bg-orange w-full py-3 mt-4 text-white rounded-b-sm">
+            <button className="bg-orange w-full py-3 mt-4 text-white rounded-b-md">
               NEXT
             </button>
           </form>
