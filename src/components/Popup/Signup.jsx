@@ -46,7 +46,7 @@ const SigninPopup = ({ dispatch }) => {
               <span className="mr-5 mb-2 text-sm font-bold">Country</span>
 
               <select className="border p-2 text-xs text-gray-500">
-                <option value="volvo">Select country</option>
+                <option>Select country</option>
               </select>
             </label>
 

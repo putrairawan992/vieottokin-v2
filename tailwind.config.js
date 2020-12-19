@@ -5,6 +5,9 @@ module.exports = {
   },
   purge: ["./src/*.js", "./src/**/*.js", "./src/**/*.jsx"],
   theme: {
+    fontSize: {
+      'xxs': '.5rem'
+    },
     fontFamily: {
       sans: ['Roboto', 'sans-serif']
     },
@@ -21,5 +24,5 @@ module.exports = {
     whitelist: []
   },
   variants: {},
-  plugins: [],
+  plugins: [require("@tailwindcss/custom-forms")],
 };
