@@ -13,7 +13,7 @@ export const Container = ({ children, className = '', fluid }) => {
 export const Row = ({ children, className = ''}) => {
   return (
     <section
-      className={`flex flex-row ${className}`}
+      className={`flex flex-row flex-wrap w-full max-w-full ${className}`}
     >
       { children }
     </section>

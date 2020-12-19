@@ -26,7 +26,7 @@ const listMenu = [
 
 const Footer = () => {
   return (
-    <footer className="bg-softdrop text-white">
+    <footer className="bg-darkdrop text-white">
       <div className="flex items-center max-w-screen-xl mx-auto py-4">
         <img src="images/logo.svg" className="w-32 md:w-52 mr-0 md:mr-12" alt="logo" />
 
@@ -47,7 +47,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <p className="bg-darkdrop py-3 text-center text-gray-400">
+      <p className="bg-darkdrop-1 py-3 text-center text-gray-400">
         ©2020 - Viettonkin JSC
       </p>
     </footer>

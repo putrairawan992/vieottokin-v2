@@ -13,10 +13,11 @@ module.exports = {
     },
     extend: {
       colors: {
-        orange: "#f58120",
-        blue: '#1eb0e0',
-        darkdrop: '#0d3555',
-        softdrop: '#0f4875'
+        'orange': "#f58120",
+        'blue': '#1eb0e0',
+        'darkdrop': '#0d3555',
+        'bg-darkdrop-1': '#062945',
+        'softdrop': '#0f4875',
       }
     },
   },
