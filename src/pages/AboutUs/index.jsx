@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import Container from 'components/Container';
+import { Container } from 'components/Grid';
 import HeroCTA from 'components/HeroCTA';
 
 const whatWeBelieve = [

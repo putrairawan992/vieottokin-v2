@@ -10,6 +10,7 @@ import Footer from 'components/Footer';
 import AboutUs from 'pages/AboutUs';
 import LandingPage from 'pages/LandingPage';
 import ListProvider from 'pages/ListProvider';
+import ProfileProvider from 'pages/ProfileProvider';
 
 const RouterManager = props => (
   <Fragment>
@@ -19,6 +20,7 @@ const RouterManager = props => (
       <Route exact path='/' component={ AboutUs } />
       <Route exact path='/landing-page' component={ LandingPage } />
       <Route exact path='/service-providers' component={ ListProvider } />
+      <Route exact path='/profile-provider' component={ ProfileProvider } />
     </Switch>
 
     <Footer />

@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import Container from 'components/Container';
+import { Container } from 'components/Grid';
 import Icon from 'icon';
 
 import JapanFlag from 'icon/japan-flag.svg';
@@ -10,8 +10,13 @@ const ListProvider = ({ base, current }) => {
       <Container fluid className="md:px-6 lg:px-8 relative shadow py-4">
         <Container className="flex justify-between">
           <div className="text-xs flex items-center">
-            <span>{ base }</span>
-            <Icon name="arrow-row" color="#000" size={ 6 } className="mx-3" />
+            { base.map((item, i) => (
+              <Fragment key={ i }>
+                <span>{ item }</span>
+                <Icon name="arrow-row" color="#000" size={ 6 } className="mx-3" />
+              </Fragment>
+            )) }
+
             <span className="font-bold text-orange">{ current }</span>
           </div>
 

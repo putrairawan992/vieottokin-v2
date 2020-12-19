@@ -2,16 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { openModalOffer } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
-import Container from 'components/Container';
+import { Container } from 'components/Grid';
 import Icon from 'icon';
 
 const listMenu = [
   {
     label: 'Home',
-    link: '/#'
+    link: '/landing-page'
   }, {
     label: 'Service',
-    link: '/#'
+    link: '/service-providers'
   }, {
     label: 'How it works',
     link: '/#'

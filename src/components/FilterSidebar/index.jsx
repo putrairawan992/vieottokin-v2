@@ -26,7 +26,11 @@ const FilterSidebar = () => {
           <h3 className="text-sm">Legal</h3>
 
           <label className="w-full flex mt-2">
-            <input type="checkbox" className="border rounded form-checkbox text-orange" />
+            <input
+              type="checkbox"
+              className="border rounded form-checkbox text-orange"
+            />
+
             <p className="pl-3">Incorporation</p>
           </label>
 
