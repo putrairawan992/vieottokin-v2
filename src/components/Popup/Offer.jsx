@@ -12,12 +12,12 @@ const listOffer = [
     id: 2,
     offer: 'Intellectual Property'
   }
-]
+];
 
 const Offer = ({ dispatch }) => {
   const [selectedOffer, setSelectedOffer ] = useState([]);
   const [keyword, setKeyword] = useState('');
-  const [openOffer, setOpenOffer] = useState(false);
+  const [openOfferList, setOpenOffer] = useState(false);
 
   const addMyOffer = (id, offer) => {
     setSelectedOffer([...selectedOffer, {id, offer}]);
@@ -55,7 +55,7 @@ const Offer = ({ dispatch }) => {
             />
           </div>
 
-          { openOffer && <div className="shadow-md bg-white rounded-md mt-2 absolute w-full">
+          { openOfferList && <div className="shadow-md bg-white rounded-md mt-2 absolute w-full">
             { listOffer
               .filter((find, i) => selectedOffer[i] ? find.id !== selectedOffer[i].id : find)
               .filter(find => find.offer.toLocaleLowerCase().includes(keyword.toLocaleLowerCase()))

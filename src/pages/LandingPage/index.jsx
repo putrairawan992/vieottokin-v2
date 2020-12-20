@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import { Container } from 'components/Grid';
 import HeroCTA from 'components/HeroCTA';
+import Offer from 'components/Popup/Offer';
+import Signup from 'components/Popup/Signup';
 import Icon from 'icon';
 
 const listFeature = [
@@ -196,6 +198,8 @@ const Home = () => {
       </Container>
 
       <HeroCTA />
+      {/* <Offer /> */}
+      {/* <Signup /> */}
 
     </Fragment>
   );
