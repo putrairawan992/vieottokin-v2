@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import iconPath from './library';
 
@@ -16,6 +16,18 @@ const Icon = ({ size, color, name, className }) => (
     )) }
   </svg>
 );
+
+export const IconImage = ({ name, className }) => {
+  const [svgFile, setSvgFile] = useState('');
+
+  import(`./${name}.svg`)
+    .then(file => setSvgFile(file.default))
+    .catch(err => console.log(err));
+
+  return (
+    <img src={svgFile} alt={name} className={className} />
+  )
+};
 
 Icon.defaultProps = {
   size: 16,

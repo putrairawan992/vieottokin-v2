@@ -16,6 +16,7 @@ import CartForm from 'pages/Cart/Form';
 import SuccessCheckout from 'pages/Cart/SuccessCheckout';
 import FAQ from 'pages/FAQ';
 import Contact from 'pages/Contact';
+import Dashboard from 'pages/Dashboard';
 
 const RouterManager = props => (
   <Fragment>
@@ -31,6 +32,7 @@ const RouterManager = props => (
       <Route exact path='/success-checkout' component={ SuccessCheckout } />
       <Route exact path='/faq' component={ FAQ } />
       <Route exact path='/contact' component={ Contact } />
+      <Route exact path='/dashboard' component={ Dashboard } />
     </Switch>
 
     <Footer />
