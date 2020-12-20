@@ -5,18 +5,18 @@ module.exports = {
   },
   purge: ["./src/*.js", "./src/**/*.js", "./src/**/*.jsx"],
   theme: {
-    fontSize: {
-      'xxs': '.5rem'
-    },
     fontFamily: {
       sans: ['Roboto', 'sans-serif']
     },
     extend: {
+      fontSize: {
+        'xxs': '.5rem'
+      },
       colors: {
         'orange': "#f58120",
         'blue': '#1eb0e0',
         'darkdrop': '#0d3555',
-        'bg-darkdrop-1': '#062945',
+        'darkdrop-1': '#062945',
         'softdrop': '#0f4875',
       }
     },

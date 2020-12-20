@@ -13,7 +13,7 @@ const ListProvider = ({ base, current }) => {
             { base.map((item, i) => (
               <Fragment key={ i }>
                 <span>{ item }</span>
-                <Icon name="arrow-row" color="#000" size={ 6 } className="mx-3" />
+                <Icon name="arrow-right" color="#000" size={ 6 } className="mx-3" />
               </Fragment>
             )) }
 

@@ -11,6 +11,9 @@ import AboutUs from 'pages/AboutUs';
 import LandingPage from 'pages/LandingPage';
 import ListProvider from 'pages/ListProvider';
 import ProfileProvider from 'pages/ProfileProvider';
+import Cart from 'pages/Cart';
+import CartForm from 'pages/Cart/Form';
+import SuccessCheckout from 'pages/Cart/SuccessCheckout';
 
 const RouterManager = props => (
   <Fragment>
@@ -21,6 +24,9 @@ const RouterManager = props => (
       <Route exact path='/landing-page' component={ LandingPage } />
       <Route exact path='/service-providers' component={ ListProvider } />
       <Route exact path='/profile-provider' component={ ProfileProvider } />
+      <Route exact path='/cart' component={ Cart } />
+      <Route exact path='/submit-requirements' component={ CartForm } />
+      <Route exact path='/success-checkout' component={ SuccessCheckout } />
     </Switch>
 
     <Footer />

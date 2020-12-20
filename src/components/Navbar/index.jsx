@@ -39,9 +39,12 @@ const Navbar = ({ dispatch }) => {
               >
                 { item.label }
               </Link>
-            ))}
+            )) }
 
-            <button className="flex items-center text-blue ml-10" onClick={ () => dispatch(openModalOffer(true)) }>
+            <button
+              className="flex items-center text-blue ml-10"
+              onClick={ () => dispatch(openModalOffer(true)) }
+            >
               <Icon name="user" size={ 12 } color="#20BFEF" className="mr-2" />
               Login
             </button>

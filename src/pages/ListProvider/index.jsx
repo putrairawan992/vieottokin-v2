@@ -61,35 +61,35 @@ const ListProvider = () => {
             </p>
 
             { listProvider.map((item, i) => (
-                <div
-                  className="bg-white shadow rounded-md px-5 py-4 flex justify-between border-l-4 border-softdrop border mb-5"
-                  key={ i }
-                >
-                  <img src={ item.logo } alt={ item.name } className="rounded-full w-11 h-11" />
+              <div
+                className="bg-white shadow rounded-md px-5 py-4 flex justify-between border-l-4 border-softdrop border mb-5"
+                key={ i }
+              >
+                <img src={ item.logo } alt={ item.name } className="rounded-full w-11 h-11" />
 
-                  <div className="ml-4">
-                    <h2 className="font-bold">{ item.name }</h2>
+                <div className="ml-4">
+                  <h2 className="font-bold">{ item.name }</h2>
 
-                    <small className="text-gray-500">
-                      <span className="text-orange">{ item.category }</span> in { item.location }
-                    </small>
+                  <small className="text-gray-500">
+                    <span className="text-orange">{ item.category }</span> in { item.location }
+                  </small>
 
-                    <p className="text-xs mt-1 text-gray-500">{ item.text }</p>
-                  </div>
-
-                  <div className="w-4/12 text-right">
-                    <small className="text-gray-500 text-xs">starting from</small>
-                    <div className="font-bold text-lg mb-3 leading-none">{ item.price }</div>
-
-                    <Link
-                      to="/profile-provider"
-                      className="border-orange rounded text-orange inline-flex items-center border px-3 py-2 ml-auto font-bold"
-                    >
-                      <span className="mr-3 text-xs">VIEW SERVICE</span>
-                      <Icon name="arrow-row" color="#F58120" size={ 6 } />
-                    </Link>
-                  </div>
+                  <p className="text-xs mt-1 text-gray-500">{ item.text }</p>
                 </div>
+
+                <div className="w-4/12 text-right">
+                  <small className="text-gray-500 text-xs">starting from</small>
+                  <div className="font-bold text-lg mb-3 leading-none">{ item.price }</div>
+
+                  <Link
+                    to="/profile-provider"
+                    className="border-orange rounded text-orange inline-flex items-center border px-3 py-2 ml-auto font-bold"
+                  >
+                    <span className="mr-3 text-xs">VIEW SERVICE</span>
+                    <Icon name="arrow-right" color="#F58120" size={ 6 } />
+                  </Link>
+                </div>
+              </div>
               ))
             }
 
