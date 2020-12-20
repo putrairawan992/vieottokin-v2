@@ -11,7 +11,7 @@ const listMenu = [
     link: '/'
   }, {
     label: 'Contact',
-    link: '/'
+    link: '/contact'
   }, {
     label: 'Service Standard (ISO)',
     link: '/'

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { openModalOffer } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import { Container, Row } from 'components/Grid';
@@ -22,7 +22,7 @@ const listMenu = [
   }
 ]
 
-const Navbar = ({ dispatch }) => {
+const Navbar = ({ dispatch, location }) => {
   return (
     <Container fluid className="py-3 bg-softdrop text-white">
       <Container>
@@ -41,13 +41,20 @@ const Navbar = ({ dispatch }) => {
               </Link>
             )) }
 
-            <button
+            { !location.pathname.includes('dashboard') ? <button
               className="flex items-center text-blue ml-10"
               onClick={ () => dispatch(openModalOffer(true)) }
             >
               <Icon name="user" size={ 12 } color="#20BFEF" className="mr-2" />
               Login
             </button>
+            :
+            <button
+              className="flex items-center ml-10"
+            >
+              <img src="/images/demo-user.png" alt="user" className="w-12" />
+              <Icon name="triangle" size={ 12 } className="ml-10" />
+            </button>}
           </nav>
         </Row>
       </Container>
@@ -55,4 +62,4 @@ const Navbar = ({ dispatch }) => {
   );
 }
 
-export default connect()(Navbar);
+export default withRouter(connect()(Navbar));
