@@ -24,11 +24,11 @@ const StepIndicator = ({ step, backButton, history }) => (
           </div>
 
           <div className="w-60 flex items-center justify-between mr-6">
-            <span className={ `${step === 2 ? 'bg-softdrop' : 'bg-gray-400'} ${badgeStyle}` }>
+            <span className={ `${step === 2 || step === 3 ? 'bg-softdrop' : 'bg-gray-400'} ${badgeStyle}` }>
               2
             </span>
 
-            <p className={ `${step === 2 ? 'text-softdrop' : 'text-gray-400'} text-sm` }>
+            <p className={ `${step === 2 || step === 3 ? 'text-softdrop' : 'text-gray-400'} text-sm` }>
               Submit Requirements
             </p>
 

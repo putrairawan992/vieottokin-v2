@@ -115,9 +115,9 @@ const CartForm = () => {
 
           </Row>
 
-          <button className="w-full bg-orange p-4 rounded-b-md text-white text-center">
+          <a href="/success-checkout" className="w-full block bg-orange p-4 rounded-b-md text-white text-center">
             SUBMIT
-          </button>
+          </a>
         </form>
       </Container>
     </Fragment>
