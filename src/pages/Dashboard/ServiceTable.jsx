@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import Icon from 'icon';
-import { openDeleteConfirm, openNewPartner } from 'store/actions/ModalControl';
+import { openDeleteConfirm, openNewService } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 
 const trBorder = 'border-b border-gray-300';
@@ -25,7 +25,7 @@ const ServiceTable = ({ list, dispatch }) => {
 
           <button
             className="px-5 text-xs h-10 text-white ml-5 font-medium bg-orange rounded"
-            onClick={ () => dispatch(openNewPartner(true)) }
+            onClick={ () => dispatch(openNewService(true)) }
           >
             Add New Services
           </button>

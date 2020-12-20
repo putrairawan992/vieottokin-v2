@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Container, Row } from 'components/Grid';
 import Breadcrumb from 'components/Breadcrumb';
 import Icon from 'icon';
@@ -95,7 +96,7 @@ const ProfileProvider = () => {
                 <div className="font-bold text-lg leading-none">¥ 7440</div>
               </div>
 
-              <button className="bg-orange p-1 flex w-full rounded-b-md h-12 items-center justify-between">
+              <Link to="/cart" className="bg-orange p-1 flex w-full rounded-b-md h-12 items-center justify-between">
                 <div className="bg-white h-10 w-10 flex justify-center items-center rounded-bl-sm">
                   <Icon name="bookmark" color="#f58120" />
                 </div>
@@ -103,7 +104,7 @@ const ProfileProvider = () => {
                 <div className="text-center w-full text-white">
                   ADD TO CART
                 </div>
-              </button>
+              </Link>
             </div>
 
             <p className="px-6 mt-6 text-sm">

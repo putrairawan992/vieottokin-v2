@@ -1,11 +1,12 @@
 import React, { Fragment, useState } from 'react';
 import { Container } from 'components/Grid';
-import DeleteConfirm from 'components/Popup/DeleteConfirm';
 import Navigator from './Navigator';
 import ProviderTable from './ProviderTable';
 import ServiceTable from './ServiceTable';
 import { connect } from 'react-redux';
 import AddNewPartner from 'components/Popup/AddNewPartner';
+import AddNewService from 'components/Popup/AddNewService';
+import DeleteConfirm from 'components/Popup/DeleteConfirm';
 import Icon from 'icon';
 
 const listProvider = [
@@ -48,7 +49,7 @@ const listProvider = [
   },
 ];
 
-const Dashboard = ({ showModalNewPartner, showModalDeleteConfirm }) => {
+const Dashboard = ({ showModalNewPartner, showModalDeleteConfirm, showModalNewService }) => {
   const [showTable, setShowTable] = useState('partner');
 
   return (
@@ -102,6 +103,7 @@ const Dashboard = ({ showModalNewPartner, showModalDeleteConfirm }) => {
 
       { showModalNewPartner && <AddNewPartner /> }
       { showModalDeleteConfirm && <DeleteConfirm /> }
+      { showModalNewService && <AddNewService /> }
     </Fragment>
   );
 }

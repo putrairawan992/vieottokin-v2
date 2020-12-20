@@ -1,14 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
-const Button = ({ type, children, to = '/', className = '' }) => {
+const Button = ({ type, children, className = '', onClick }) => {
   return (
-    <Link
-      to={ to }
+    <button
+      onClick={ onClick }
       className={`${type === 'solid' ? 'bg-orange' : 'border-orange border'} inline-block rounded-sm ${className}`}
     >
       { children }
-    </Link>
+    </button>
   )
 }
 
