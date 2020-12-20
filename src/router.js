@@ -1,29 +1,50 @@
 import React, { Fragment } from 'react';
-import PrivateRoute from 'utils/privateRoute';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import { Navbar } from 'lib/components';
-import ARPage from 'pages/AR';
-import ARCreate from 'pages/ARCreate';
-import ARUpdate from 'pages/ARUpdate';
-import Login from 'pages/Login';
-import MyProject from 'pages/MyProject';
-import SearchResult from 'pages/SearchResult';
+import SignupPopup from 'components/Popup/Signup';
+import SigninPopup from 'components/Popup/Signin';
+import OfferPopup from 'components/Popup/Offer';
+import Navbar from 'components/Navbar';
+import Footer from 'components/Footer';
+import AboutUs from 'pages/AboutUs';
+import LandingPage from 'pages/LandingPage';
+import ListProvider from 'pages/ListProvider';
+import ProfileProvider from 'pages/ProfileProvider';
+import Cart from 'pages/Cart';
+import CartForm from 'pages/Cart/Form';
+import SuccessCheckout from 'pages/Cart/SuccessCheckout';
+import FAQ from 'pages/FAQ';
+import Contact from 'pages/Contact';
+import Dashboard from 'pages/Dashboard';
 
-const RouterManager = withRouter(({ location }) => (
+const RouterManager = props => (
   <Fragment>
-    { location.pathname !== '/login' && <Navbar /> }
-    <Route exact path='/login' component={Login} />
+    <Navbar />
 
     <Switch>
-      <PrivateRoute exact path='/' component={ARPage} />
-      <PrivateRoute path='/ar' component={ARPage} />
-      <PrivateRoute path='/ar-create' component={ARCreate} />
-      <PrivateRoute path='/ar-update' component={ARUpdate} />
-      <PrivateRoute path='/my-project' component={MyProject} />
-      <PrivateRoute path='/search/:term' component={SearchResult} />
+      <Route exact path='/' component={ AboutUs } />
+      <Route exact path='/landing-page' component={ LandingPage } />
+      <Route exact path='/service-providers' component={ ListProvider } />
+      <Route exact path='/profile-provider' component={ ProfileProvider } />
+      <Route exact path='/cart' component={ Cart } />
+      <Route exact path='/submit-requirements' component={ CartForm } />
+      <Route exact path='/success-checkout' component={ SuccessCheckout } />
+      <Route exact path='/faq' component={ FAQ } />
+      <Route exact path='/contact' component={ Contact } />
+      <Route exact path='/dashboard' component={ Dashboard } />
     </Switch>
-  </Fragment>
-));
 
-export default RouterManager;
+    <Footer />
+
+    { props.showModalSignup && <SignupPopup /> }
+    { props.showModalSignin && <SigninPopup /> }
+    { props.showModalOffer && <OfferPopup /> }
+  </Fragment>
+);
+
+function mapStateToProps(state) {
+  return state.modalControl;
+}
+
+export default connect(mapStateToProps)(RouterManager);
