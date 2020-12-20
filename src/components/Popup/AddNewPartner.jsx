@@ -1,5 +1,5 @@
 import React from 'react';
-import { openModalNewPartner } from 'store/actions/ModalControl';
+import { openNewPartner } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import Icon from 'icon';
 import Modal from 'components/Modal';
@@ -10,7 +10,7 @@ const AddNewPartner = ({ dispatch }) => {
       <div className="border-b px-6 py-4 flex items-center">
         <h3 className="font-medium text-xl">Add New Partner</h3>
 
-        <button className="ml-auto block" onClick={ () => dispatch(openModalNewPartner(false)) }>
+        <button className="ml-auto block" onClick={ () => dispatch(openNewPartner(false)) }>
           <Icon name="close" color="#333" />
         </button>
       </div>

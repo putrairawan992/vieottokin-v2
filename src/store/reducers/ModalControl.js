@@ -2,7 +2,8 @@ import {
   MODAL_SIGNUP,
   MODAL_SIGNIN,
   MODAL_OFFER,
-  MODAL_NEWPARTNER
+  MODAL_NEWPARTNER,
+  MODAL_DELETECONFIRM
 } from '../types';
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
   showModalSignin: false,
   showModalOffer: false,
   showModalNewPartner: false,
+  showModalDeleteConfirm: false,
 };
 
 export default function index(state = initialState, action = null) {
@@ -22,6 +24,8 @@ export default function index(state = initialState, action = null) {
       return { ...state, showModalOffer: action.payload };
     case MODAL_NEWPARTNER:
       return { ...state, showModalNewPartner: action.payload };
+    case MODAL_DELETECONFIRM:
+      return { ...state, showModalDeleteConfirm: action.payload };
     default:
       return state;
   }

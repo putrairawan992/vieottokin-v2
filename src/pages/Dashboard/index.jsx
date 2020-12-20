@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
-import { openModalNewPartner } from 'store/actions/ModalControl';
+import { openNewPartner } from 'store/actions/ModalControl';
 import { Container } from 'components/Grid';
+import DeleteConfirm from 'components/Popup/DeleteConfirm';
 import Navigator from './Navigator';
 import ProviderTable from './ProviderTable';
 import { connect } from 'react-redux';
@@ -41,7 +42,7 @@ const listProvider = [
   },
 ]
 
-const Dashboard = ({ showModalNewPartner, dispatch }) => {
+const Dashboard = ({ showModalNewPartner, showModalDeleteConfirm, dispatch }) => {
   return (
     <Fragment>
       <Container className="mb-8 pt-16">
@@ -69,7 +70,7 @@ const Dashboard = ({ showModalNewPartner, dispatch }) => {
 
               <button
                 className="px-5 text-xs h-10 text-white ml-5 font-medium bg-orange rounded"
-                onClick={ () => dispatch(openModalNewPartner(true)) }
+                onClick={ () => dispatch(openNewPartner(true)) }
               >
                 Add New Partner
               </button>
@@ -111,6 +112,7 @@ const Dashboard = ({ showModalNewPartner, dispatch }) => {
       </Container>
 
       { showModalNewPartner && <AddNewPartner /> }
+      { showModalDeleteConfirm && <DeleteConfirm /> }
     </Fragment>
   );
 }

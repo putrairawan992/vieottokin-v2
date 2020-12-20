@@ -1,10 +1,11 @@
 import React from 'react';
 import Icon, { IconImage } from 'icon';
+import { openDeleteConfirm } from 'store/actions/ModalControl';
+import { connect } from 'react-redux';
 
 const trBorder = 'border-b border-gray-300';
 
-const ProviderTable = ({ list }) => {
-
+const ProviderTable = ({ list, dispatch }) => {
   return (
     <table className="table-auto w-full text-left">
       <thead className="bg-gray-50">
@@ -38,11 +39,17 @@ const ProviderTable = ({ list }) => {
 
             <td className={ `${trBorder}` }>
               <div className="flex">
-                <button className="w-8 h-8 rounded bg-darkdrop flex items-center justify-center mr-2">
+                <button
+                  className="w-8 h-8 rounded bg-darkdrop flex items-center justify-center mr-2"
+                  // onClick={ () => dispatch(openDeleteConfirm(true)) }
+                >
                   <Icon name="pen" size={ 13 } />
                 </button>
 
-                <button className="w-8 h-8 rounded bg-red-700 flex items-center justify-center">
+                <button
+                  className="w-8 h-8 rounded bg-red-700 flex items-center justify-center"
+                  onClick={ () => dispatch(openDeleteConfirm(true)) }
+                >
                   <Icon name="trash" size={ 13 } />
                 </button>
               </div>
@@ -54,4 +61,8 @@ const ProviderTable = ({ list }) => {
   );
 }
 
-export default ProviderTable;
+function mapStateToProps(state) {
+  return state.modalControl
+}
+
+export default connect(mapStateToProps)(ProviderTable);

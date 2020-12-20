@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { openModalOffer } from 'store/actions/ModalControl';
+import { openOffer } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import { Container, Row } from 'components/Grid';
 import SearchInput from 'components/SearchInput';
@@ -43,7 +43,7 @@ const Navbar = ({ dispatch, location }) => {
 
             { !location.pathname.includes('dashboard') ? <button
               className="flex items-center text-blue ml-10"
-              onClick={ () => dispatch(openModalOffer(true)) }
+              onClick={ () => dispatch(openOffer(true)) }
             >
               <Icon name="user" size={ 12 } color="#20BFEF" className="mr-2" />
               Login

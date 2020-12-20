@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { openModalSignin } from 'store/actions/ModalControl';
+import { openSignin } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import Icon from 'icon';
 import Modal from 'components/Modal';
@@ -10,7 +10,7 @@ const SigninPopup = ({ dispatch }) => {
   return (
     <Modal>
       <div className="text-center p-6 pb-0">
-        <button className="ml-auto block" onClick={ () => dispatch(openModalSignin(false)) }>
+        <button className="ml-auto block" onClick={ () => dispatch(openSignin(false)) }>
           <Icon name="close" color="#333" />
         </button>
       </div>

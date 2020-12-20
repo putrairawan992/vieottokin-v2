@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { openModalOffer } from 'store/actions/ModalControl';
+import { openOffer } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import Icon from 'icon';
 import Modal from 'components/Modal';
@@ -34,7 +34,7 @@ const Offer = ({ dispatch }) => {
       <div className="p-6 border-b mb-6 pb-4 flex justify-between items-center">
         <h3 className="font-medium text-lg">Services Offered</h3>
 
-        <button className="h-auto" onClick={ () => dispatch(openModalOffer(false)) }>
+        <button className="h-auto" onClick={ () => dispatch(openOffer(false)) }>
           <Icon name="close" color="#333" />
         </button>
       </div>
