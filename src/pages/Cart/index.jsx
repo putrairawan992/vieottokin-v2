@@ -35,7 +35,7 @@ const Cart = () => {
 
   return (
     <Fragment>
-      <StepIndicator step={1} />
+      <StepIndicator step={1} backButton />
 
       <Container className="md:px-6 lg:px-8 relative py-24">
         <Row className="-mx-3">

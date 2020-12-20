@@ -6,7 +6,7 @@ import { Row } from 'components/Grid';
 
 const badgeStyle = 'text-white justify-center items-center w-8 h-8 font-bold rounded-full inline-flex';
 
-const StepIndicator = ({ step, history }) => (
+const StepIndicator = ({ step, backButton, history }) => (
   <Container fluid className="py-6 shadow">
     <Container>
       <Row className="items-center justify-between">
@@ -46,10 +46,10 @@ const StepIndicator = ({ step, history }) => (
           </div>
         </div>
 
-        <button className="flex items-center text-orange text-sm" onClick={ () => history.goBack() }>
+        { backButton && <button className="flex items-center text-orange text-sm" onClick={ () => history.goBack() }>
           <Icon name="arrow-left" color="#F58120" size={ 10 } />
           <span className="ml-3 font-bold">GO BACK</span>
-        </button>
+        </button> }
       </Row>
     </Container>
   </Container>

@@ -6,7 +6,7 @@ const CartForm = () => {
 
   return (
     <Fragment>
-      <StepIndicator step={2} />
+      <StepIndicator step={2} backButton />
 
       <Container className="px-6 md:px-20 lg:px-32 py-24">
         <form className="sm:w-6/12 mx-auto shadow-md rounded-md">

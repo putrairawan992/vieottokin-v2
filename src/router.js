@@ -14,6 +14,7 @@ import ProfileProvider from 'pages/ProfileProvider';
 import Cart from 'pages/Cart';
 import CartForm from 'pages/Cart/Form';
 import SuccessCheckout from 'pages/Cart/SuccessCheckout';
+import FAQ from 'pages/FAQ';
 
 const RouterManager = props => (
   <Fragment>
@@ -27,6 +28,7 @@ const RouterManager = props => (
       <Route exact path='/cart' component={ Cart } />
       <Route exact path='/submit-requirements' component={ CartForm } />
       <Route exact path='/success-checkout' component={ SuccessCheckout } />
+      <Route exact path='/faq' component={ FAQ } />
     </Switch>
 
     <Footer />
