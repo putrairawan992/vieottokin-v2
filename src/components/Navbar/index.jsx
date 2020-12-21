@@ -18,7 +18,7 @@ const listMenu = [
     link: '/#'
   }, {
     label: 'Help',
-    link: '/#'
+    link: '/faq'
   }
 ]
 
