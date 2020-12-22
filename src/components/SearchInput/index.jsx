@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Row } from 'components/Grid';
+import React, { useState, Fragment } from 'react';
+import { Row, Col } from 'components/Grid';
 import { connect } from 'react-redux';
 import Icon from 'icon';
 
@@ -7,27 +7,27 @@ const SearchInput = () => {
   const [showFilter, setShowFilter] = useState(false);
 
   return (
-    <div className="relative w-5/12 md:pl-10">
+    <Fragment>
       <div className="flex items-center justify-between">
-        <div className="bg-white h-10 w-12 flex justify-center items-center rounded-l-sm">
+        <div className="bg-white h-10 md:w-12 w-8 flex justify-center items-center rounded-l-sm">
           <Icon name="search" size={ 12 } color="#333" />
         </div>
 
         <input
-          className="h-10 w-full text-gray-500"
+          className="h-10 w-full text-sm text-gray-500 rounded-r-sm"
           placeholder="What service are you looking for?"
           onFocus={ () => setShowFilter(true) }
           // onBlur={ () => setShowFilter(false) }
         />
 
-        <button className="px-5 text-xs h-10 bg-orange rounded-r-sm">
+        <button className="px-5 text-xs h-10 bg-orange rounded-r-sm hidden md:block">
           Search
         </button>
       </div>
 
       { showFilter && <div className="bg-white text-black py-6 px-3 absolute mt-2 z-20 w-full rounded-md shadow-sm">
         <Row className="flex-wrap">
-          <div className="w-6/12 px-3">
+          <Col xs={12} md={6}>
             <h3 className="w-full font-bold">Country</h3>
 
             <label className="w-full flex items-center mt-2">
@@ -67,9 +67,9 @@ const SearchInput = () => {
                 <option>Select city</option>
               </select>
             </label>
-          </div>
+          </Col>
 
-          <div className="w-6/12 px-3">
+          <Col xs={12} md={6}>
             <h3 className="text-sm font-bold">Legal</h3>
 
             <label className="w-full flex mt-2">
@@ -118,10 +118,10 @@ const SearchInput = () => {
                 <p className="pl-3">Payroll</p>
               </label>
             </div>
-          </div>
+          </Col>
         </Row>
       </div> }
-    </div>
+    </Fragment>
   );
 }
 

@@ -27,7 +27,7 @@ const AboutUs = () => {
             <h1 className="mb-2 font-bold text-4xl">We make it simpler for you to find</h1>
             <h2 className="mb-4 text-4xl text-blue">the best B2B service provider globally.</h2>
 
-            <p className="w-4/6">Ventoorhub is a technology platform providing professional B2B service providers for companies who want to expand their business globally. Ventoorhub is part of Viettonkin Consulting, a foreign direct investment consulting firm based in Hanoi, Vietnam.</p>
+            <p className="md:w-4/6">Ventoorhub is a technology platform providing professional B2B service providers for companies who want to expand their business globally. Ventoorhub is part of Viettonkin Consulting, a foreign direct investment consulting firm based in Hanoi, Vietnam.</p>
           </div>
 
           <div className="absolute inset-0 h-auto z-0">

@@ -86,7 +86,7 @@ const Home = () => {
             <h1 className="mb-4 font-bold text-4xl">We help you find the best service provider</h1>
             <h2 className="mb-4 text-4xl text-blue">with affordable budget in South East Asia</h2>
 
-            <p className="w-4/6">
+            <p className="md:w-4/6 w-full">
               Viettonkin Consulting is a platform to help you minimize risk by finding you the right solution for your business expansion in SouthEast Asia.
             </p>
 
