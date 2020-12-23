@@ -32,7 +32,7 @@ const HeroCTA = ({ showModalOffer, showModalSignup, dispatch }) => {
               <Button
                 type="outline"
                 onClick={ () => dispatch(openSignup(true)) }
-                className="px-12 py-4 mx-3 text-orange"
+                className="px-12 py-4 mx-3 text-orange mt-6 md:mt-0"
               >
                 Join Our Network of Partners
               </Button>

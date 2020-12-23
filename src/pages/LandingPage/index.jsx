@@ -1,20 +1,20 @@
 import React, { Fragment } from 'react';
-import { Container } from 'components/Grid';
+import { Container, Row, Col } from 'components/Grid';
 import HeroCTA from 'components/HeroCTA';
 import Icon from 'icon';
 
 const listFeature = [
   {
     image: '/images/landing-coin.png',
-    title: 'Connect with reliable service providers',
+    title: 'Connect with reliable \n service providers',
     text: 'All of our service provider partners are curated tightly to make sure their reliability to give their best service.'
   }, {
     image: '/images/landing-time.png',
-    title: 'Save your precious time',
+    title: 'Save your \n precious time',
     text: 'We know it’s a long and grueling process for finding the right corporate services. We make it easy and short for you.'
   }, {
     image: '/images/landing-cs.png',
-    title: 'Great customer service',
+    title: 'Great customer \n service',
     text: 'Our customer service will help you through all the process until your request has been finished.'
   }
 ]
@@ -97,7 +97,7 @@ const Home = () => {
               </div>
 
               <input
-                className="h-12 w-4/12 px-3 text-gray-500"
+                className="h-12 w-6/12 md:w-4/12 px-3 text-gray-500"
                 placeholder="What service are you looking for?"
               />
 
@@ -107,17 +107,21 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="flex items-end text-center relative z-20 my-24">
-            { listFeature.map((item, i) => (
-              <div className="shadow-lg h-72 mx-5 px-6 py-12 rounded w-4/12 bg-white flex justify-between flex-col" key={ i }>
-                <img src={ item.image } className="mx-auto" alt={ item.title } />
+          <div className="md:mx-24 mx-auto flex">
+            <Row className="text-center relative z-20 my-24">
+              { listFeature.map((item, i) => (
+                <Col md={4} key={ i }>
+                  <div className="mx-3 mt-4 px-6 py-10 shadow-lg rounded bg-white flex justify-between flex-col">
+                    <img src={ item.image } className="mx-auto" alt={ item.title } />
 
-                <div>
-                  <h3 className="text-xl font-bold">{ item.title }</h3>
-                  <p className="text-sm">{ item.text }</p>
-                </div>
-              </div>
-            )) }
+                    <div>
+                      <h3 className="text-xl font-bold whitespace-pre-line leading-6 py-6">{ item.title }</h3>
+                      <p className="text-sm">{ item.text }</p>
+                    </div>
+                  </div>
+                </Col>
+              )) }
+            </Row>
           </div>
 
           <div className="absolute inset-0 overflow-hidden z-0">
@@ -126,66 +130,72 @@ const Home = () => {
         </Container>
       </Container>
 
-      <Container className="py-20 flex">
-        <div className="w-4/12 px-5">
-          <img src="/images/sign.png" alt="signing" />
-        </div>
+      <Container className="py-20">
+        <Row>
+          <Col md={4} className="px-5">
+            <img src="/images/sign.png" alt="signing" />
+          </Col>
 
-        <div className="w-8/12 px-5">
-          <h2 className="font-bold text-4xl">
-            Services you can expect inside<br/><span className="text-orange">Viettonkin Consulting</span>
-          </h2>
+          <Col md={8} className="px-5">
+            <h2 className="font-bold text-4xl md:mt-0 mt-6">
+              Services you can expect inside<br/><span className="text-orange">Viettonkin Consulting</span>
+            </h2>
 
-          <p className="mt-4 mb-12">Our network of corporate service providers covers everything you need</p>
+            <p className="mt-4 mb-12">Our network of corporate service providers covers everything you need</p>
 
-          <div className="flex -mx-2">
-            <div className="w-6/12 px-2">
-              { listService[0].map((item, i) => (
-                <div className="flex justify-between mb-6" key={ i }>
-                  <img src={ item.image } className="w-10 mr-5 h-full" alt={ item.title } />
+            <Row>
+              <Col md={6}>
+                { listService[0].map((item, i) => (
+                  <div className="flex justify-between mb-6" key={ i }>
+                    <img src={ item.image } className="w-10 mr-5 h-full" alt={ item.title } />
 
-                  <div>
-                    <h3 className="text-xl font-bold">{ item.title }</h3>
-                    <p className="text-xs text-gray-500">{ item.text }</p>
+                    <div>
+                      <h3 className="text-xl font-bold">{ item.title }</h3>
+                      <p className="text-xs text-gray-500">{ item.text }</p>
+                    </div>
                   </div>
-                </div>
-              )) }
-            </div>
+                )) }
+              </Col>
 
-            <div className="w-6/12 px-2">
-              { listService[1].map((item, i) => (
-                <div className="flex justify-between mb-6" key={ i }>
-                  <img src={ item.image } className="w-10 mr-5 h-full" alt={ item.title } />
+              <Col md={6}>
+                { listService[1].map((item, i) => (
+                  <div className="flex justify-between mb-6" key={ i }>
+                    <img src={ item.image } className="w-10 mr-5 h-full" alt={ item.title } />
 
-                  <div>
-                    <h3 className="text-xl font-bold">{ item.title }</h3>
-                    <p className="text-xs text-gray-500">{ item.text }</p>
+                    <div>
+                      <h3 className="text-xl font-bold">{ item.title }</h3>
+                      <p className="text-xs text-gray-500">{ item.text }</p>
+                    </div>
                   </div>
-                </div>
-              )) }
-            </div>
-          </div>
-        </div>
+                )) }
+              </Col>
+            </Row>
+          </Col>
+        </Row>
       </Container>
 
       <Container fluid className="md:px-6 lg:px-8 relative py-24">
         <Container>
           <div className="relative text-white z-10 text-center">
-            <h2 className="mb-4 text-4xl font-bold">
+            <h2 className="text-4xl font-bold">
               It’s an entirely easy process with<br/><span className="text-orange">Viettonkin Consulting</span>
             </h2>
 
-            <div className="flex relative z-20 mt-16">
-              { listProcess.map((item, i) => (
-                <div className="rounded w-4/12 flex justify-between flex-col px-3" key={ i }>
-                  <img src={ item.image } className="mx-auto" alt={ item.title } />
+            <div className="md:mx-20 mx-auto flex">
+              <Row className="relative z-20 mt-6">
+                { listProcess.map((item, i) => (
+                  <Col md={3} className="mt-10" key={ i }>
+                    <div className="rounded flex justify-between flex-col">
+                      <img src={ item.image } className="mx-auto" alt={ item.title } />
 
-                  <div className="mt-">
-                    <h3 className="text-xl font-bold">{ item.title }</h3>
-                    <p className="text-sm">{ item.text }</p>
-                  </div>
-                </div>
-              )) }
+                      <div className="mt-">
+                        <h3 className="text-xl font-bold md:mx-6 py-4 leading-5">{ item.title }</h3>
+                        <p className="text-xs">{ item.text }</p>
+                      </div>
+                    </div>
+                  </Col>
+                )) }
+              </Row>
             </div>
           </div>
 

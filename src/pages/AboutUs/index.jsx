@@ -1,22 +1,20 @@
 import React, { Fragment } from 'react';
-import { Container } from 'components/Grid';
+import { Container, Row, Col } from 'components/Grid';
 import HeroCTA from 'components/HeroCTA';
 
-const whatWeBelieve = [
-  {
-    image: '/images/about-innovation.png',
-    title: 'Innovation',
-    text: 'We leverage technology to improve how we do things to help your company grow in emerging markets.'
-  }, {
-    image: '/images/about-professionalism.png',
-    title: 'Professionalism',
-    text: 'We don’t leave you behind. We stay with you for the entire journey to make sure you get the best service you deserve.'
-  }, {
-    image: '/images/about-transparency.png',
-    title: 'Transparency',
-    text: 'No more vague pricing with vague service. Ventoorhub is designed to give you transparency and an informed decision-making process.'
-  }
-]
+const whatWeBelieve = [{
+  image: '/images/about-innovation.png',
+  title: 'Innovation',
+  text: 'We leverage technology to improve how we do things to help your company grow in emerging markets.'
+}, {
+  image: '/images/about-professionalism.png',
+  title: 'Professionalism',
+  text: 'We don’t leave you behind. We stay with you for the entire journey to make sure you get the best service you deserve.'
+}, {
+  image: '/images/about-transparency.png',
+  title: 'Transparency',
+  text: 'No more vague pricing with vague service. Ventoorhub is designed to give you transparency and an informed decision-making process.'
+}]
 
 const AboutUs = () => {
   return (
@@ -41,9 +39,9 @@ const AboutUs = () => {
           What <span className="text-orange">We Believe</span>
         </h2>
 
-        <div className="flex items-end">
+        <Row className="items-end">
           { whatWeBelieve.map((item, i) => (
-            <div className="mx-5 rounded w-4/12" key={ i }>
+            <Col md={4} className="rounded mt-8" key={ i }>
               <img src={ item.image } className="mx-auto" alt={ item.title } />
 
               <div className="shadow-lg pt-20 -mt-16 h-56 flex items-end flex-wrap">
@@ -57,12 +55,10 @@ const AboutUs = () => {
                   </p>
                 </div>
               </div>
-            </div>
-          ))
-          }
-        </div>
+            </Col>
+          )) }
+        </Row>
       </Container>
-
 
       <HeroCTA />
     </Fragment>

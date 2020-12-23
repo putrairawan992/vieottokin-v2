@@ -27,7 +27,7 @@ const SearchInput = () => {
 
       { showFilter && <div className="bg-white text-black py-6 px-3 absolute mt-2 z-20 w-full rounded-md shadow-sm">
         <Row className="flex-wrap">
-          <Col xs={12} md={6}>
+          <Col md={6}>
             <h3 className="w-full font-bold">Country</h3>
 
             <label className="w-full flex items-center mt-2">
@@ -69,7 +69,7 @@ const SearchInput = () => {
             </label>
           </Col>
 
-          <Col xs={12} md={6}>
+          <Col md={6}>
             <h3 className="text-sm font-bold">Legal</h3>
 
             <label className="w-full flex mt-2">

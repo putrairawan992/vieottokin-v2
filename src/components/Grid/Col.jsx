@@ -14,6 +14,7 @@ const Col = ({ children, xs, md, className}) => {
 
 Col.defaultProps = {
   className: '',
+  xs: 12
 };
 
 Col.propTypes = {
