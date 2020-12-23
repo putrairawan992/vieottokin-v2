@@ -24,15 +24,15 @@ const RouterManager = props => (
 
     <Switch>
       <Route exact path='/' component={ AboutUs } />
-      <Route exact path='/landing-page' component={ LandingPage } />
-      <Route exact path='/service-providers' component={ ServiceProvider } />
-      <Route exact path='/profile-provider' component={ ProfileProvider } />
-      <Route exact path='/cart' component={ Cart } />
-      <Route exact path='/submit-requirements' component={ CartForm } />
-      <Route exact path='/success-checkout' component={ SuccessCheckout } />
-      <Route exact path='/faq' component={ FAQ } />
-      <Route exact path='/contact' component={ Contact } />
-      <Route exact path='/dashboard' component={ Dashboard } />
+      <Route path='/landing-page' component={ LandingPage } />
+      <Route path='/service-providers' component={ ServiceProvider } />
+      <Route path='/profile-provider' component={ ProfileProvider } />
+      <Route path='/cart' component={ Cart } />
+      <Route path='/submit-requirements' component={ CartForm } />
+      <Route path='/success-checkout' component={ SuccessCheckout } />
+      <Route path='/faq' component={ FAQ } />
+      <Route path='/contact' component={ Contact } />
+      <Route path='/dashboard' component={ Dashboard } />
     </Switch>
 
     <Footer />

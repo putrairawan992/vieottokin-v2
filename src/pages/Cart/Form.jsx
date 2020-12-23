@@ -14,105 +14,86 @@ const CartForm = () => {
             Information
           </h1>
 
-          <Row className="mt-6 -mx-2 p-5">
-            <div className="w-6/12 px-2">
-              <label className="w-full flex flex-col mb-5">
-                <span className="mr-5 mb-2 text-sm font-semibold">Company Name</span>
+          <Row className="mt-6 p-5">
+            <label className="w-full md:w-6/12 flex flex-col mb-5">
+              <span className="mr-5 mb-2 text-sm font-semibold">Company Name</span>
 
-                <input
-                  required
-                  className="border py-1 px-2"
-                />
-              </label>
-            </div>
+              <input
+                required
+                className="border py-1 px-2"
+              />
+            </label>
 
-            <div className="w-6/12 px-2">
-              <label className="w-full flex flex-col mb-5">
-                <span className="mr-5 mb-2 text-sm font-semibold">Company Website</span>
+            <label className="w-full md:w-6/12 flex flex-col mb-5">
+              <span className="mr-5 mb-2 text-sm font-semibold">Company Website</span>
 
-                <input
-                  required
-                  className="border py-1 px-2"
-                />
-              </label>
-            </div>
+              <input
+                required
+                className="border py-1 px-2"
+              />
+            </label>
 
-            <div className="w-full px-2">
-              <label className="w-full flex flex-col mb-5">
-                <span className="mr-5 mb-2 text-sm font-bold">Country</span>
+            <label className="w-full flex flex-col mb-5">
+              <span className="mr-5 mb-2 text-sm font-bold">Country</span>
 
-                <select className="border p-2 text-xs text-gray-500">
-                  <option>Select country</option>
-                </select>
-              </label>
-            </div>
+              <select className="border p-2 text-xs text-gray-500">
+                <option>Select country</option>
+              </select>
+            </label>
 
-            <div className="w-6/12 px-2">
-              <label className="w-full flex flex-col mb-5">
-                <span className="mr-5 mb-2 text-sm font-semibold">First Name</span>
+            <label className="w-full md:w-6/12 flex flex-col mb-5">
+              <span className="mr-5 mb-2 text-sm font-semibold">First Name</span>
 
-                <input
-                  required
-                  className="border py-1 px-2"
-                />
-              </label>
-            </div>
+              <input
+                required
+                className="border py-1 px-2"
+              />
+            </label>
 
-            <div className="w-6/12 px-2">
-              <label className="w-full flex flex-col mb-5">
-                <span className="mr-5 mb-2 text-sm font-semibold">Last Name</span>
+            <label className="w-full md:w-6/12 flex flex-col mb-5">
+              <span className="mr-5 mb-2 text-sm font-semibold">Last Name</span>
 
-                <input
-                  required
-                  className="border py-1 px-2"
-                />
-              </label>
-            </div>
+              <input
+                required
+                className="border py-1 px-2"
+              />
+            </label>
 
-            <div className="w-6/12 px-2">
-              <label className="w-full flex flex-col mb-5">
-                <span className="mr-5 mb-2 text-sm font-semibold">Position</span>
+            <label className="w-full md:w-6/12 flex flex-col mb-5">
+              <span className="mr-5 mb-2 text-sm font-semibold">Position</span>
 
-                <input
-                  required
-                  className="border py-1 px-2"
-                />
-              </label>
-            </div>
+              <input
+                required
+                className="border py-1 px-2"
+              />
+            </label>
 
-            <div className="w-6/12 px-2">
-              <label className="w-full flex flex-col mb-5">
-                <span className="mr-5 mb-2 text-sm font-semibold">Email</span>
+            <label className="w-full md:w-6/12 flex flex-col mb-5">
+              <span className="mr-5 mb-2 text-sm font-semibold">Email</span>
 
-                <input
-                  required
-                  className="border py-1 px-2"
-                />
-              </label>
-            </div>
+              <input
+                required
+                className="border py-1 px-2"
+              />
+            </label>
 
-            <div className="w-6/12 px-2">
-              <label className="w-full flex flex-col mb-5">
-                <span className="mr-5 mb-2 text-sm font-semibold">Phone</span>
+            <label className="w-full md:w-6/12 flex flex-col mb-5">
+              <span className="mr-5 mb-2 text-sm font-semibold">Phone</span>
 
-                <input
-                  required
-                  className="border py-1 px-2"
-                />
-              </label>
-            </div>
+              <input
+                required
+                className="border py-1 px-2"
+              />
+            </label>
 
-            <div className="w-6/12 px-2">
-              <label className="w-full flex flex-col mb-5">
-                <span className="mr-5 mb-2 text-sm font-semibold">Industry</span>
+            <label className="w-full md:w-6/12 flex flex-col mb-5">
+              <span className="mr-5 mb-2 text-sm font-semibold">Industry</span>
 
-                <input
-                  required
-                  className="border py-1 px-2"
-                />
-              </label>
-            </div>
-
+              <input
+                required
+                className="border py-1 px-2"
+              />
+            </label>
           </Row>
 
           <a href="/success-checkout" className="w-full block bg-orange p-4 rounded-b-md text-white text-center">

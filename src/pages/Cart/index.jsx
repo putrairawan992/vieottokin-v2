@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Container, Row } from 'components/Grid';
+import { Container, Row, Col } from 'components/Grid';
 import { Link } from 'react-router-dom';
 import Icon from 'icon';
 import StepIndicator from './StepIndicator';
@@ -38,8 +38,8 @@ const Cart = () => {
       <StepIndicator step={1} backButton />
 
       <Container className="md:px-6 lg:px-8 relative py-24">
-        <Row className="-mx-3">
-          <div className="w-8/12 px-4">
+        <Row className="md:justify-evenly">
+          <Col md={7}>
             { listProvider && listProvider.map((item, i) => (
               <div className="rounded-md shadow mb-8">
                 <div className="p-6 pb-2 flex" key={ i }>
@@ -89,10 +89,10 @@ const Cart = () => {
                 </article> }
               </div>
             )) }
-          </div>
+          </Col>
 
-          <div className="w-4/12 px-5">
-            <div className="shadow-lg rounded-md pt-6">
+          <Col md={4}>
+            <div className="shadow-md rounded-md pt-6">
               <h4 className="text-xl px-5">Summary</h4>
 
               <div className="flex justify-between text-gray-500 text-sm mt-5 pb-6 px-5 border-b">
@@ -118,7 +118,7 @@ const Cart = () => {
             </div>
 
             <p className="text-center mt-6 text-sm text-gray-400">You won’t be charged yet</p>
-          </div>
+          </Col>
         </Row>
       </Container>
     </Fragment>
