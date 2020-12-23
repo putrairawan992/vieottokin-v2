@@ -47,6 +47,7 @@ const Navbar = ({ dispatch, location }) => {
           <nav className={ `${mobile ? 'flex' : 'hidden'} ${navStyle.desktop} ${navStyle.mobile}` }>
             { listMenu.map((item, i) => (
               <Link
+                onClick={ () => setMenu(!mobile) }
                 className="md:mx-4 pr-4 md:pr-0 whitespace-nowrap my-1 w-full md:my-0 md:w-auto"
                 to={ item.link } key={ i }
               >

@@ -9,7 +9,7 @@ import Navbar from 'components/Navbar';
 import Footer from 'components/Footer';
 import AboutUs from 'pages/AboutUs';
 import LandingPage from 'pages/LandingPage';
-import ListProvider from 'pages/ListProvider';
+import ServiceProvider from 'pages/ServiceProvider';
 import ProfileProvider from 'pages/ProfileProvider';
 import Cart from 'pages/Cart';
 import CartForm from 'pages/Cart/Form';
@@ -25,7 +25,7 @@ const RouterManager = props => (
     <Switch>
       <Route exact path='/' component={ AboutUs } />
       <Route exact path='/landing-page' component={ LandingPage } />
-      <Route exact path='/service-providers' component={ ListProvider } />
+      <Route exact path='/service-providers' component={ ServiceProvider } />
       <Route exact path='/profile-provider' component={ ProfileProvider } />
       <Route exact path='/cart' component={ Cart } />
       <Route exact path='/submit-requirements' component={ CartForm } />
