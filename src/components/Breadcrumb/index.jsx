@@ -8,7 +8,7 @@ const ListProvider = ({ base, current }) => {
   return (
     <Fragment>
       <Container fluid className="md:px-6 lg:px-8 relative shadow py-4">
-        <Container className="flex justify-between">
+        <Container className="flex md:flex-row flex-col justify-between">
           <div className="text-xs flex items-center">
             { base.map((item, i) => (
               <Fragment key={ i }>
@@ -20,7 +20,7 @@ const ListProvider = ({ base, current }) => {
             <span className="font-bold text-orange">{ current }</span>
           </div>
 
-          <div className="text-xs flex items-center">
+          <div className="text-xs flex items-center mt-3 md:mt-0">
             <div className="flex items-center">
               <img src={ JapanFlag } alt="japan flag" />
               <p className="mx-3">Japan</p>
