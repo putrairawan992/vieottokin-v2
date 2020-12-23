@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Container, Row } from 'components/Grid';
+import { Container, Row, Col } from 'components/Grid';
 import Breadcrumb from 'components/Breadcrumb';
 import Icon from 'icon';
 
@@ -46,6 +46,8 @@ const category = [
   }
 ]
 
+const buttonCategory = "md:block md:w-full text-left border rounded-md px-3 py-2 mr-2 md:px-5 md:py-3 mb-3";
+
 const FAQ = () => {
   const [inCategory, setInCategory] = useState('general');
   const [openAnswer, setOpenAnswer] = useState({});
@@ -62,20 +64,20 @@ const FAQ = () => {
       <Breadcrumb base={[ 'Home' ]} current="FAQ" />
 
       <Container className="py-20">
-        <Row className="-mx-3">
-          <div className="w-3/12 px-8 border-r-2">
+        <Row>
+          <Col md={3} className="md:px-8 md:border-r-2 mb-6 md:m-0">
             { category.map((item, i) => (
               <button
                 onClick={ () => setInCategory(item.id) }
-                className={ `${inCategory === item.id ? 'border-orange' : 'border-gray-300'} block w-full text-left border rounded-md px-5 py-3 mb-3` }
+                className={ `${inCategory === item.id ? 'border-orange' : 'border-gray-300'} ${buttonCategory}` }
                 key={ i }
               >
                 { item.label }
               </button>
             )) }
-          </div>
+          </Col>
 
-          <div className="w-9/12 px-8 min-h-screen">
+          <Col md={9} className="md:px-8 md:min-h-screen">
             { category.filter(find => find.id === inCategory)[0].content.map((item, i) => (
               <div
                 className={ `${openAnswer[i] ? 'border-orange' : 'border-gray-400 mb-2'} border rounded-md mb-3 py-3 px-4` }
@@ -95,7 +97,7 @@ const FAQ = () => {
                 { openAnswer[i] && <p className="mt-3 text-gray-500">{ item.answer }</p> }
               </div>
             )) }
-          </div>
+          </Col>
         </Row>
       </Container>
 
