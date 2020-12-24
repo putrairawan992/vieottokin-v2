@@ -4,24 +4,22 @@ import { Link } from 'react-router-dom';
 import Icon from 'icon';
 import StepIndicator from './StepIndicator';
 
-const listProvider = [
-  {
-    logo: '/images/provider/hnt-law.png',
-    product: 'Litigation Services',
-    name: 'H & T Law',
-    text: '<p className="mb-3">Nowadays there are so many phones that we can find it difficult to choose which one suits us, we have so many choices so little time and knowledge about the brands. Well, thats what Im for, I will try to help you to find your ideal smartphone taking into account what you are looking for, your preferences or what you would use the mobile (to play, just to call or for work) and your budget.</p><p className="mb-3">I will provide the following services:</p><ul className="ml-4 sm:ml-6 list-disc"><li>How to choose the smartphone, Tabs, Desktop & Laptop?</li><li>How to root your smartphone?</li><li>How to unlock the bootloader of your smartphone?</li><li>How to install custom ROMs on your smartphone?</li><li>I will also provide the link from where you can easily download the custom ROMs</li><li>How to install custom recovery on your smartphone?</li><li>How to install custom boot animations on your smartphone?</li></ul>',
-  }, {
-    logo: '/images/provider/risid.png',
-    product: 'Risk Advisory',
-    name: 'Risid',
-    text: '<p className="mb-3">Nowadays there are so many phones that we can find it difficult to choose which one suits us, we have so many choices so little time and knowledge about the brands. Well, thats what Im for, I will try to help you to find your ideal smartphone taking into account what you are looking for, your preferences or what you would use the mobile (to play, just to call or for work) and your budget.</p><p className="mb-3">I will provide the following services:</p><ul className="ml-4 sm:ml-6 list-disc"><li>How to choose the smartphone, Tabs, Desktop & Laptop?</li><li>How to root your smartphone?</li><li>How to unlock the bootloader of your smartphone?</li><li>How to install custom ROMs on your smartphone?</li><li>I will also provide the link from where you can easily download the custom ROMs</li><li>How to install custom recovery on your smartphone?</li><li>How to install custom boot animations on your smartphone?</li></ul>',
-  }, {
-    logo: '/images/provider/paypal.png',
-    product: 'Payroll',
-    name: 'PayPal',
-    text: '<p className="mb-3">Nowadays there are so many phones that we can find it difficult to choose which one suits us, we have so many choices so little time and knowledge about the brands. Well, thats what Im for, I will try to help you to find your ideal smartphone taking into account what you are looking for, your preferences or what you would use the mobile (to play, just to call or for work) and your budget.</p><p className="mb-3">I will provide the following services:</p><ul className="ml-4 sm:ml-6 list-disc"><li>How to choose the smartphone, Tabs, Desktop & Laptop?</li><li>How to root your smartphone?</li><li>How to unlock the bootloader of your smartphone?</li><li>How to install custom ROMs on your smartphone?</li><li>I will also provide the link from where you can easily download the custom ROMs</li><li>How to install custom recovery on your smartphone?</li><li>How to install custom boot animations on your smartphone?</li></ul>'
-  }
-]
+const listProvider = [{
+  logo: '/images/provider/hnt-law.png',
+  product: 'Litigation Services',
+  name: 'H & T Law',
+  text: '<p className="mb-3">Nowadays there are so many phones that we can find it difficult to choose which one suits us, we have so many choices so little time and knowledge about the brands. Well, thats what Im for, I will try to help you to find your ideal smartphone taking into account what you are looking for, your preferences or what you would use the mobile (to play, just to call or for work) and your budget.</p><p className="mb-3">I will provide the following services:</p><ul className="ml-4 sm:ml-6 list-disc"><li>How to choose the smartphone, Tabs, Desktop & Laptop?</li><li>How to root your smartphone?</li><li>How to unlock the bootloader of your smartphone?</li><li>How to install custom ROMs on your smartphone?</li><li>I will also provide the link from where you can easily download the custom ROMs</li><li>How to install custom recovery on your smartphone?</li><li>How to install custom boot animations on your smartphone?</li></ul>',
+}, {
+  logo: '/images/provider/risid.png',
+  product: 'Risk Advisory',
+  name: 'Risid',
+  text: '<p className="mb-3">Nowadays there are so many phones that we can find it difficult to choose which one suits us, we have so many choices so little time and knowledge about the brands. Well, thats what Im for, I will try to help you to find your ideal smartphone taking into account what you are looking for, your preferences or what you would use the mobile (to play, just to call or for work) and your budget.</p><p className="mb-3">I will provide the following services:</p><ul className="ml-4 sm:ml-6 list-disc"><li>How to choose the smartphone, Tabs, Desktop & Laptop?</li><li>How to root your smartphone?</li><li>How to unlock the bootloader of your smartphone?</li><li>How to install custom ROMs on your smartphone?</li><li>I will also provide the link from where you can easily download the custom ROMs</li><li>How to install custom recovery on your smartphone?</li><li>How to install custom boot animations on your smartphone?</li></ul>',
+}, {
+  logo: '/images/provider/paypal.png',
+  product: 'Payroll',
+  name: 'PayPal',
+  text: '<p className="mb-3">Nowadays there are so many phones that we can find it difficult to choose which one suits us, we have so many choices so little time and knowledge about the brands. Well, thats what Im for, I will try to help you to find your ideal smartphone taking into account what you are looking for, your preferences or what you would use the mobile (to play, just to call or for work) and your budget.</p><p className="mb-3">I will provide the following services:</p><ul className="ml-4 sm:ml-6 list-disc"><li>How to choose the smartphone, Tabs, Desktop & Laptop?</li><li>How to root your smartphone?</li><li>How to unlock the bootloader of your smartphone?</li><li>How to install custom ROMs on your smartphone?</li><li>I will also provide the link from where you can easily download the custom ROMs</li><li>How to install custom recovery on your smartphone?</li><li>How to install custom boot animations on your smartphone?</li></ul>'
+}];
 
 const Cart = () => {
   const [openInclude, setOpenInclude] = useState({});

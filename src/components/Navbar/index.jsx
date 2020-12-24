@@ -68,7 +68,7 @@ const Navbar = ({ dispatch, location }) => {
                 Login
               </button> :
               <button className="flex items-center">
-                <img src="/images/demo-user.png" alt="user" className="w-12" />
+                <img src="/images/demo-user.png" alt="user" className="w-10 md:w-12" />
                 <Icon name="triangle" size={ 12 } className="ml-10" />
               </button> }
             </div>
