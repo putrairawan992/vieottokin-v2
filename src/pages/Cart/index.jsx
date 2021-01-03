@@ -39,8 +39,8 @@ const Cart = () => {
         <Row className="md:justify-evenly">
           <Col md={7}>
             { listProvider && listProvider.map((item, i) => (
-              <div className="rounded-md shadow mb-8">
-                <div className="p-6 pb-2 flex" key={ i }>
+              <div className="rounded-md shadow mb-8" key={ i }>
+                <div className="p-6 pb-2 flex">
                   <img src={ item.logo } alt={ item.name } className="mr-5 w-16 h-16 rounded-full" />
 
                   <div className="w-full my-auto">

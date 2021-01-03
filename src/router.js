@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import PrivateRoute from 'utils/privateRoute';
 
 import { Signup, Signin, Offer } from 'lib/components/Popup';
 import Navbar from 'lib/components/Navbar';
@@ -33,12 +34,12 @@ const RouterManager = ({ ...props }) => (
             <Route path='/landing-page' component={ LandingPage } />
             <Route path='/service-providers' component={ ServiceProvider } />
             <Route path='/profile-provider' component={ ProfileProvider } />
-            <Route path='/cart' component={ Cart } />
             <Route path='/submit-requirements' component={ CartForm } />
             <Route path='/success-checkout' component={ SuccessCheckout } />
             <Route path='/faq' component={ FAQ } />
             <Route path='/contact' component={ Contact } />
-            <Route path='/dashboard' component={ Dashboard } />
+            <PrivateRoute path='/cart' component={ Cart } />
+            <PrivateRoute path='/dashboard' component={ Dashboard } />
           </Switch>
 
         </CSSTransition>

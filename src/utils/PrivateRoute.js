@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Loading } from 'lib/elements';
+import Loading from 'lib/elements/Loading';
 
 const PrivateRoute = ({ component: Component, auth, progress, ...rest }) => {
   const appLayout = props => (
@@ -11,7 +11,7 @@ const PrivateRoute = ({ component: Component, auth, progress, ...rest }) => {
       <Loading shown={progress} />
     </Fragment>
   );
-
+console.log(progress)
   return (
     <Route
       {...rest}
@@ -30,7 +30,7 @@ PrivateRoute.propTypes = {
 
 const mapStateToProps = state => ({
   // auth: state.auth,
-  progress: state.loading.isLoading
+  progress: state.isLoading.isLoading
 });
 
 export default connect(mapStateToProps)(PrivateRoute);
