@@ -1,13 +1,10 @@
 import React, { Fragment, useState } from 'react';
-import { Container } from 'components/Grid';
-
+import { Container } from 'lib/elements/Grid';
+import { AddNewPartner, AddNewService, DeleteConfirm } from 'lib/components/Popup';
 import Navigator from './Navigator';
 import ProviderTable from './ProviderTable';
 import ServiceTable from './ServiceTable';
 import { connect } from 'react-redux';
-import AddNewPartner from 'components/Popup/AddNewPartner';
-import AddNewService from 'components/Popup/AddNewService';
-import DeleteConfirm from 'components/Popup/DeleteConfirm';
 import Icon from 'icon';
 
 const listProvider = [

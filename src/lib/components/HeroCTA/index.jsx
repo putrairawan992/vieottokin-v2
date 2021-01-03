@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
-import { Container } from 'components/Grid';
+import { Container } from 'lib/elements/Grid';
 import { connect } from 'react-redux';
-import Button from 'components/Button';
-import Offer from 'components/Popup/Offer';
-import Signup from 'components/Popup/Signup';
+import Button from 'lib/components/Button';
+import Offer from 'lib/components/Popup/Offer';
+import Signup from 'lib/components/Popup/Signup';
 import { openOffer, openSignup } from 'store/actions/ModalControl';
 
 const HeroCTA = ({ showModalOffer, showModalSignup, dispatch }) => {

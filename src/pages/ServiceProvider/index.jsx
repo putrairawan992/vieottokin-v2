@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import { Container, Row, Col } from 'components/Grid';
+import { Container, Row, Col } from 'lib/elements/Grid';
 import { Link } from 'react-router-dom';
-import Breadcrumb from 'components/Breadcrumb';
-import FilterSidebar from 'components/FilterSidebar';
+import Breadcrumb from 'lib/components/Breadcrumb';
+import FilterSidebar from 'lib/components/FilterSidebar';
 import Icon from 'icon';
 
 const listProvider = [

@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import { Row, Col } from 'components/Grid';
+import { Row, Col } from 'lib/elements/Grid';
 import { connect } from 'react-redux';
 import Icon from 'icon';
 

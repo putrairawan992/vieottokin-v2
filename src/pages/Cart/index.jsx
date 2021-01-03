@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Container, Row, Col } from 'components/Grid';
+import { Container, Row, Col } from 'lib/elements/Grid';
 import { Link } from 'react-router-dom';
 import Icon from 'icon';
 import StepIndicator from './StepIndicator';

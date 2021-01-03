@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from 'components/Grid';
+import { Container } from 'lib/elements/Grid';
 import Icon from 'icon';
 
 const Navigator = ({ count, service, switchTable }) => {

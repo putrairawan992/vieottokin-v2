@@ -2,7 +2,7 @@ import React from 'react';
 import { openDeleteConfirm } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import Icon from 'icon';
-import Modal from 'components/Modal';
+import Modal from 'lib/elements/Modal';
 
 const DeleteConfirm = ({ dispatch }) => {
   return (

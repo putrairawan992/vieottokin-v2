@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Container, Row } from 'components/Grid';
+import { Container, Row } from 'lib/elements/Grid';
 import StepIndicator from './StepIndicator';
 
 const CartForm = () => {

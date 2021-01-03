@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import { Container, Row, Col } from 'components/Grid';
-import HeroCTA from 'components/HeroCTA';
+import { Container, Row, Col } from 'lib/elements/Grid';
+import HeroCTA from 'lib/components/HeroCTA';
 
 const whatWeBelieve = [{
   image: '/images/about-innovation.png',

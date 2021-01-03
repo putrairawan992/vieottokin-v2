@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Container } from 'components/Grid';
+import { Container } from 'lib/elements/Grid';
 import Icon from 'icon';
 import StepIndicator from './StepIndicator';
 

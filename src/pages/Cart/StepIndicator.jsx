@@ -1,8 +1,7 @@
 import React from 'react';
-import { Container } from 'components/Grid';
+import { Container, Row } from 'lib/elements/Grid';
 import { withRouter } from 'react-router-dom';
 import Icon from 'icon';
-import { Row } from 'components/Grid';
 
 const badgeStyle = 'text-white justify-center items-center w-8 h-8 font-bold rounded-full inline-flex';
 

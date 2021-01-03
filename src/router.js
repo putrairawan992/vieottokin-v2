@@ -1,14 +1,11 @@
 import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import { AnimatedSwitch } from 'react-router-transition';
-// import Fade from 'react-reveal/Fade';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import SignupPopup from 'components/Popup/Signup';
-import SigninPopup from 'components/Popup/Signin';
-import OfferPopup from 'components/Popup/Offer';
-import Navbar from 'components/Navbar';
-import Footer from 'components/Footer';
+
+import { Signup, Signin, Offer } from 'lib/components/Popup';
+import Navbar from 'lib/components/Navbar';
+import Footer from 'lib/components/Footer';
 import AboutUs from 'pages/AboutUs';
 import LandingPage from 'pages/LandingPage';
 import ServiceProvider from 'pages/ServiceProvider';
@@ -50,9 +47,9 @@ const RouterManager = ({ ...props }) => (
 
     <Footer />
 
-    { props.showModalSignup && <SignupPopup /> }
-    { props.showModalSignin && <SigninPopup /> }
-    { props.showModalOffer && <OfferPopup /> }
+    { props.showModalSignup && <Signup /> }
+    { props.showModalSignin && <Signin /> }
+    { props.showModalOffer && <Offer /> }
   </Fragment>
 );
 

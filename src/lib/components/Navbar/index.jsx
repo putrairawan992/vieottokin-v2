@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { openSignin } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
-import { Container, Row } from 'components/Grid';
-import SearchInput from 'components/SearchInput';
+import { Container, Row } from 'lib/elements/Grid';
+import SearchInput from 'lib/components/SearchInput';
 import Icon from 'icon';
 
 const listMenu = [

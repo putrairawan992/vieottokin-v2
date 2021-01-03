@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container } from 'components/Grid';
+import { Container } from 'lib/elements/Grid';
 import Icon from 'icon';
 
 const listMenu = [{
