@@ -56,7 +56,7 @@ const Navbar = ({ dispatch, location }) => {
             )) }
 
             <div className="text-blue flex justify-between py-2 px-4 w-full md:ml-10 md:w-auto md:mt-0 mt-3">
-              <div className="block md:hidden relative md:pl-10">
+              <div className="block relative w-full mr-6 md:pl-10 md:hidden md:mr-0">
                 <SearchInput />
               </div>
 
