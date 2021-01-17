@@ -1,11 +1,22 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import Icon, { IconImage } from 'icon';
 import { openDeleteConfirm, openNewPartner } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
+import { read } from 'utils/api';
 
 const trBorder = 'border-b border-gray-300';
 
 const ProviderTable = ({ list, dispatch }) => {
+  useEffect(() => {
+    const fetchData = async () => {
+      const resPartners = await read('admin/partners?page=1&limit=10&sort_by=DESC');
+
+      console.log(resPartners)
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <Fragment>
       <div className="px-5 py-4 flex justify-between items-center">

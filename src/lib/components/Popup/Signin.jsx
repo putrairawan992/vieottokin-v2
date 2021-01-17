@@ -3,9 +3,20 @@ import { openSignin } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import Icon from 'icon';
 import Modal from 'lib/elements/Modal';
+import { loginUser } from 'store/actions/Auth';
 
-const SigninPopup = ({ dispatch }) => {
+const SigninPopup = ({ dispatch, loginUser }) => {
   const [hidePassword, setHidePassword] = useState(true);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const login = e => {
+    e.preventDefault();
+
+    const userData = { email, password };
+
+    loginUser(userData);
+  }
 
   return (
     <Modal>
@@ -24,7 +35,7 @@ const SigninPopup = ({ dispatch }) => {
           </p>
         </div>
 
-        <form>
+        <form onSubmit={ login }>
           <div className="mx-4 flex flex-wrap">
             <label className="w-full px-2 flex flex-col mb-5">
               <span className="mr-5 mb-2 text-sm font-bold">Email</span>
@@ -33,6 +44,7 @@ const SigninPopup = ({ dispatch }) => {
                 required
                 type="email"
                 className="border py-1 px-2"
+                onChange={ e => setEmail(e.target.value) }
               />
             </label>
 
@@ -44,6 +56,7 @@ const SigninPopup = ({ dispatch }) => {
                   required
                   type={ hidePassword ? 'password' : 'text' }
                   className="border py-1 px-2 w-full"
+                  onChange={ e => setPassword(e.target.value) }
                 />
 
                 <button
@@ -65,5 +78,8 @@ const SigninPopup = ({ dispatch }) => {
     </Modal>
   );
 }
+const mapStateToProps = state => ({
+  auth: state.auth
+});
 
-export default connect()(SigninPopup);
+export default connect(mapStateToProps, { loginUser })(SigninPopup);

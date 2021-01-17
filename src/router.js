@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import PrivateRoute from 'utils/privateRoute';
+import Loading from 'lib/elements/Loading';
 
 import { Signup, Signin, Offer } from 'lib/components/Popup';
 import Navbar from 'lib/components/Navbar';
@@ -18,7 +19,7 @@ import FAQ from 'pages/FAQ';
 import Contact from 'pages/Contact';
 import Dashboard from 'pages/Dashboard';
 
-const RouterManager = ({ ...props }) => (
+const RouterManager = ({ progress, ...props }) => (
   <Fragment>
     <Navbar />
 
@@ -51,11 +52,16 @@ const RouterManager = ({ ...props }) => (
     { props.showModalSignup && <Signup /> }
     { props.showModalSignin && <Signin /> }
     { props.showModalOffer && <Offer /> }
+{console.log(progress)}
+    <Loading shown={progress} />
   </Fragment>
 );
 
 function mapStateToProps(state) {
-  return state.modalControl;
+  return {
+    ...state.modalControl,
+    progress: state.isLoading.isLoading
+  };
 }
 
 export default connect(mapStateToProps)(RouterManager);

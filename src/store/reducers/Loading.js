@@ -9,7 +9,7 @@ export default function index(state = initialState, action = null) {
     case LOADING_PROGRESS:
       return {
         ...state,
-        isLoading: true,
+        isLoading: action.payload,
       };
     default:
       return state;

@@ -8,7 +8,7 @@ const axiosInstance = async (method, path, request) => {
   return axios[method](path, request)
     .then(response => {
       store.dispatch(setLoading(false));
-      return response;
+      return response.data;
     })
     .catch(error => error.response)
 };

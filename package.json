@@ -5,6 +5,8 @@
   "dependencies": {
     "autoprefixer": "^10.1.0",
     "axios": "^0.21.1",
+    "is-empty": "^1.2.0",
+    "jwt-decode": "^3.1.2",
     "postcss": "^8.2.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",

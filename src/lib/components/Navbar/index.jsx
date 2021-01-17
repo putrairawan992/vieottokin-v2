@@ -27,7 +27,7 @@ const navStyle = {
   desktop: 'md:static md:flex md:mt-0 md:w-6/12 md:flex-row md:justify-end'
 };
 
-const Navbar = ({ dispatch, location }) => {
+const Navbar = ({ dispatch, location, auth }) => {
   const [mobile, setMenu] = useState(false);
 
   return (
@@ -60,7 +60,7 @@ const Navbar = ({ dispatch, location }) => {
                 <SearchInput />
               </div>
 
-              { !location.pathname.includes('dashboard') ? <button
+              { !auth.isAuthenticated ? <button
                 className="flex items-center"
                 onClick={ () => dispatch(openSignin(true)) }
               >
@@ -79,4 +79,8 @@ const Navbar = ({ dispatch, location }) => {
   );
 }
 
-export default withRouter(connect()(Navbar));
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default withRouter(connect(mapStateToProps)(Navbar));
