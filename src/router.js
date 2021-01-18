@@ -52,7 +52,7 @@ const RouterManager = ({ progress, ...props }) => (
     { props.showModalSignup && <Signup /> }
     { props.showModalSignin && <Signin /> }
     { props.showModalOffer && <Offer /> }
-{console.log(progress)}
+
     <Loading shown={progress} />
   </Fragment>
 );

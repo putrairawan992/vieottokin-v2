@@ -1,54 +1,28 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Container } from 'lib/elements/Grid';
 import { AddNewPartner, AddNewService, DeleteConfirm } from 'lib/components/Popup';
 import Navigator from './Navigator';
 import ProviderTable from './ProviderTable';
 import ServiceTable from './ServiceTable';
+import { read } from 'utils/api';
 import { connect } from 'react-redux';
 import Icon from 'icon';
 
-const listProvider = [
-  {
-    logo: '/images/provider/hnt-law.png',
-    name: 'H & T Law',
-    country: 'vietnam',
-    city: 'Ha Noi',
-    service: 'Litigaion'
-  }, {
-    logo: '/images/provider/trust.png',
-    name: 'Trust',
-    country: 'japan',
-    city: 'tokyo',
-    service: 'Intellectual Propery'
-  }, {
-    logo: '/images/provider/lopez-law.png',
-    name: 'Lopez Law',
-    country: 'vietnam',
-    city: 'Da Nang',
-    service: 'Intellectual Propery'
-  }, {
-    logo: '/images/provider/spirit.png',
-    name: 'Spirit of Justice',
-    country: 'philippines',
-    city: 'Quezon City',
-    service: 'Litigaion'
-  }, {
-    logo: '/images/provider/risid.png',
-    name: 'Risid',
-    country: 'indonesia',
-    city: 'Bandung',
-    service: 'Safety Advisory'
-  }, {
-    logo: '/images/provider/paypal.png',
-    name: 'PayPal',
-    country: 'singapore',
-    city: 'Singapore',
-    service: 'Payroll'
-  },
-];
-
 const Dashboard = ({ showModalNewPartner, showModalDeleteConfirm, showModalNewService }) => {
-  const [showTable, setShowTable] = useState('partner');
+  const [showTable, setShowTable] = useState('partners');
+  const [partners, setPartners] = useState({});
+  const [services, setServices] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const resPartners = await read('admin/partners');
+      const resServices = await read('admin/services');
+      setPartners(resPartners.data.results);
+      setServices(resServices.data.results);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <Fragment>
@@ -56,16 +30,16 @@ const Dashboard = ({ showModalNewPartner, showModalDeleteConfirm, showModalNewSe
         <h1 className="text-darkdrop text-lg font-bold mb-6">Dashboard</h1>
 
         <Navigator
-          count={ listProvider.length }
+          count={ [showTable].count }
           switchTable={ e => setShowTable(e) }
-          service={ showTable }
+          tableType={ showTable }
         />
       </Container>
 
       <Container className="pb-20">
         <div className="border border-gray-300 shadow">
-          { showTable === 'partner' && <ProviderTable list={ listProvider } /> }
-          { showTable === 'service' && <ServiceTable list={ listProvider } /> }
+          { showTable === 'partners' && <ProviderTable list={ partners.rows } /> }
+          { showTable === 'services' && <ServiceTable list={ services.rows } /> }
 
           <div className="flex justify-between p-5">
             <div className="flex items-center text-xs">

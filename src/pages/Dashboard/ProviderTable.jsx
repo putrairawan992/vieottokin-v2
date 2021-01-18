@@ -1,22 +1,11 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import Icon, { IconImage } from 'icon';
 import { openDeleteConfirm, openNewPartner } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
-import { read } from 'utils/api';
 
 const trBorder = 'border-b border-gray-300';
 
 const ProviderTable = ({ list, dispatch }) => {
-  useEffect(() => {
-    const fetchData = async () => {
-      const resPartners = await read('admin/partners?page=1&limit=10&sort_by=DESC');
-
-      console.log(resPartners)
-    };
-
-    fetchData();
-  }, []);
-
   return (
     <Fragment>
       <div className="px-5 py-4 flex justify-between items-center">
@@ -54,12 +43,12 @@ const ProviderTable = ({ list, dispatch }) => {
             </tr>
           </thead>
           <tbody>
-            { list.map((item, i) => (
+            { list && list.map((item, i) => (
               <tr key={ i }>
                 <td className={ `pl-5 p-3 ${trBorder}` }>
                   <div className="flex items-center">
-                    <img src={item.logo} alt={item.name} className="h-7 w-7 hidden md:block" />
-                    <span className="md:ml-3">{ item.name }</span>
+                    <img src={ item.avatar } alt={ item.companyName } className="h-7 w-7 hidden md:block" />
+                    <span className="md:ml-3">{ item.companyName }</span>
                   </div>
                 </td>
 
