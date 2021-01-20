@@ -80,7 +80,7 @@ const ServiceProvider = () => {
                 </Col>
 
                 <Col md={2} className="md:relative flex md:flex-col flex-row text-right md:mt-auto mt-3">
-                  <button className="md:absolute md:-top-7 md:right-0">
+                  <button className="md:absolute md:-top-4 -top-7 md:right-0">
                     <Icon name="bookmark" color="#f58120" />
                   </button>
 

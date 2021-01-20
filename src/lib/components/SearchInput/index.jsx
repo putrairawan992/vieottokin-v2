@@ -25,8 +25,8 @@ const SearchInput = () => {
         </button>
       </div>
 
-      { showFilter && <div className="bg-white text-black py-6 px-3 absolute mt-2 z-20 w-full rounded-md shadow-sm">
-        <Row className="flex-wrap">
+      { showFilter && <div className="bg-white text-black py-6 px-3 absolute mt-4 z-20 w-full rounded-md shadow-md">
+        <Row>
           <Col md={6}>
             <h3 className="w-full font-bold">Country</h3>
 
@@ -92,17 +92,17 @@ const SearchInput = () => {
             </label>
 
             <div className="mt-5">
-            <h3 className="text-sm font-bold">Audit</h3>
+              <h3 className="text-sm font-bold">Audit</h3>
 
-            <label className="w-full flex mt-2">
-              <input type="checkbox" className="border rounded form-checkbox text-orange" />
-              <p className="pl-3">Risk Advisory</p>
-            </label>
+              <label className="w-full flex mt-2">
+                <input type="checkbox" className="border rounded form-checkbox text-orange" />
+                <p className="pl-3">Risk Advisory</p>
+              </label>
 
-            <label className="w-full flex">
-              <input type="checkbox" className="border rounded form-checkbox text-orange" />
-              <p className="pl-3">Valuation</p>
-            </label>
+              <label className="w-full flex">
+                <input type="checkbox" className="border rounded form-checkbox text-orange" />
+                <p className="pl-3">Valuation</p>
+              </label>
             </div>
 
             <div className="mt-5">

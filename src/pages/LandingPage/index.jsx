@@ -82,6 +82,10 @@ const Home = () => {
     <Fragment>
       <Container fluid className="md:px-6 lg:px-8 relative py-20">
         <Container>
+          <div className="absolute inset-0 overflow-hidden z-0">
+            <img src="/images/landing.png" alt="landing page" className="w-full h-full object-cover" />
+          </div>
+
           <div className="relative text-white z-10 md:ml-16">
             <h1 className="mb-4 font-bold text-4xl">We help you find the best service provider</h1>
             <h2 className="mb-4 text-4xl text-blue">with affordable budget in South East Asia</h2>
@@ -107,8 +111,8 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="md:mx-24 mx-auto flex">
-            <Row className="text-center relative z-20 my-24">
+          <div className="md:mx-24 mx-auto flex relative z-5">
+            <Row className="text-center my-24">
               { listFeature.map((item, i) => (
                 <Col md={4} key={ i }>
                   <div className="mx-3 mt-4 px-6 py-10 shadow-lg rounded bg-white flex justify-between flex-col">
@@ -122,10 +126,6 @@ const Home = () => {
                 </Col>
               )) }
             </Row>
-          </div>
-
-          <div className="absolute inset-0 overflow-hidden z-0">
-            <img src="/images/landing.png" alt="landing page" className="w-full h-full object-cover" />
           </div>
         </Container>
       </Container>
@@ -182,7 +182,7 @@ const Home = () => {
             </h2>
 
             <div className="md:mx-20 mx-auto flex">
-              <Row className="relative z-20 mt-6">
+              <Row className="relative z-5 mt-6">
                 { listProcess.map((item, i) => (
                   <Col md={3} className="mt-10" key={ i }>
                     <div className="rounded flex justify-between flex-col">

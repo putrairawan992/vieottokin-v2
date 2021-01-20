@@ -47,6 +47,12 @@ const Navbar = ({ dispatch, location, auth }) => {
           </button>
 
           <nav className={ `${mobile ? 'flex' : 'hidden'} ${navStyle.desktop} ${navStyle.mobile}` }>
+            <div className="px-4 w-full">
+              <div className="relative md:hidden">
+                <SearchInput />
+              </div>
+            </div>
+
             { listMenu.map((item, i) => (
               <Link
                 onClick={ () => setMenu(!mobile) }
@@ -58,10 +64,6 @@ const Navbar = ({ dispatch, location, auth }) => {
             )) }
 
             <div className="text-blue flex justify-between py-2 px-4 w-full md:ml-10 md:w-auto md:mt-0 mt-3">
-              <div className="block relative w-full mr-6 md:pl-10 md:hidden md:mr-0">
-                <SearchInput />
-              </div>
-
               { !auth.isAuthenticated ? <button
                 className="flex items-center"
                 onClick={ () => dispatch(openSignin(true)) }
