@@ -34,7 +34,9 @@ const Navbar = ({ dispatch, location, auth }) => {
     <Container fluid className="py-3 bg-softdrop text-white">
       <Container>
         <Row className="md:text-sm text-md relative items-center justify-between">
-          <img src="images/logo.svg" className="md:w-2/12 w-4/12" alt="logo" />
+          <Link to="/" className="md:w-2/12 w-4/12">
+            <img src="images/logo.svg" alt="logo" />
+          </Link>
 
           <div className="relative md:block hidden w-4/12 md:pl-10">
             <SearchInput />
@@ -68,7 +70,7 @@ const Navbar = ({ dispatch, location, auth }) => {
                 Login
               </button> :
               <button className="flex items-center">
-                <img src="/images/demo-user.png" alt="user" className="w-10 md:w-12" />
+                <img src="/images/demo-user.png" alt="user" className="w-10 object-cover md:w-12" />
                 <Icon name="triangle" size={ 12 } className="ml-10" />
               </button> }
             </div>

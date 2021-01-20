@@ -47,7 +47,7 @@ const ProviderTable = ({ list, dispatch }) => {
               <tr key={ i }>
                 <td className={ `pl-5 p-3 ${trBorder}` }>
                   <div className="flex items-center">
-                    <img src={ item.avatar } alt={ item.companyName } className="h-7 w-7 hidden md:block" />
+                    <img src={ item.avatar } alt={ item.companyName } className="h-7 w-7 hidden md:block object-cover" />
                     <span className="md:ml-3">{ item.companyName }</span>
                   </div>
                 </td>

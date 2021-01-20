@@ -112,7 +112,7 @@ const Home = () => {
               { listFeature.map((item, i) => (
                 <Col md={4} key={ i }>
                   <div className="mx-3 mt-4 px-6 py-10 shadow-lg rounded bg-white flex justify-between flex-col">
-                    <img src={ item.image } className="mx-auto" alt={ item.title } />
+                    <img src={ item.image } className="mx-auto object-cover" alt={ item.title } />
 
                     <div>
                       <h3 className="text-xl font-bold whitespace-pre-line leading-6 py-6">{ item.title }</h3>
@@ -125,7 +125,7 @@ const Home = () => {
           </div>
 
           <div className="absolute inset-0 overflow-hidden z-0">
-            <img src="/images/landing.png" alt="landing page" className="w-full h-full" />
+            <img src="/images/landing.png" alt="landing page" className="w-full h-full object-cover" />
           </div>
         </Container>
       </Container>
@@ -133,7 +133,7 @@ const Home = () => {
       <Container className="py-20">
         <Row>
           <Col md={4} className="px-5">
-            <img src="/images/sign.png" alt="signing" />
+            <img src="/images/sign.png" alt="signing" className="object-cover" />
           </Col>
 
           <Col md={8} className="px-5">
@@ -147,7 +147,7 @@ const Home = () => {
               <Col md={6}>
                 { listService[0].map((item, i) => (
                   <div className="flex justify-between mb-6" key={ i }>
-                    <img src={ item.image } className="w-10 mr-5 h-full" alt={ item.title } />
+                    <img src={ item.image } className="w-10 mr-5 h-full object-cover" alt={ item.title } />
 
                     <div>
                       <h3 className="text-xl font-bold">{ item.title }</h3>
@@ -160,7 +160,7 @@ const Home = () => {
               <Col md={6}>
                 { listService[1].map((item, i) => (
                   <div className="flex justify-between mb-6" key={ i }>
-                    <img src={ item.image } className="w-10 mr-5 h-full" alt={ item.title } />
+                    <img src={ item.image } className="w-10 mr-5 h-full object-cover" alt={ item.title } />
 
                     <div>
                       <h3 className="text-xl font-bold">{ item.title }</h3>
@@ -186,7 +186,7 @@ const Home = () => {
                 { listProcess.map((item, i) => (
                   <Col md={3} className="mt-10" key={ i }>
                     <div className="rounded flex justify-between flex-col">
-                      <img src={ item.image } className="mx-auto" alt={ item.title } />
+                      <img src={ item.image } className="mx-auto object-cover" alt={ item.title } />
 
                       <div className="mt-">
                         <h3 className="text-xl font-bold md:mx-6 py-4 leading-5">{ item.title }</h3>
@@ -200,7 +200,7 @@ const Home = () => {
           </div>
 
           <div className="absolute inset-0 h-auto z-0">
-            <img src="/images/bg.png" alt="about" className="h-full w-full object-fit-cover" />
+            <img src="/images/bg.png" alt="about" className="h-full w-full object-cover" />
           </div>
         </Container>
       </Container>

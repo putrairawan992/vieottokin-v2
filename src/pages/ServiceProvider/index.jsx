@@ -66,7 +66,7 @@ const ServiceProvider = () => {
                 key={ i }
               >
                 <Col xs={2} md={1}>
-                  <img src={ item.logo } alt={ item.name } className="rounded-full w-11 h-11" />
+                  <img src={ item.logo } alt={ item.name } className="rounded-full w-11 h-11 object-cover" />
                 </Col>
 
                 <Col md={9}>

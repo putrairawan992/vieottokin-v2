@@ -18,7 +18,7 @@ const ProfileProvider = () => {
               <img
                 src="/images/tech-dojo.jpg"
                 alt="tech dojo"
-                className="mr-1 md:mr-5 rounded-l-md"
+                className="mr-1 md:mr-5 rounded-l-md object-cover"
               />
 
               <div className="w-full my-auto md:p-0 p-2">

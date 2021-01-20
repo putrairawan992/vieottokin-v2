@@ -28,7 +28,7 @@ const AboutUs = () => {
             <p className="md:w-4/6">Ventoorhub is a technology platform providing professional B2B service providers for companies who want to expand their business globally. Ventoorhub is part of Viettonkin Consulting, a foreign direct investment consulting firm based in Hanoi, Vietnam.</p>
           </div>
 
-          <div className="absolute inset-0 h-auto z-0">
+          <div className="absolute inset-0 h-auto z-0 object-cover">
             <img src="/images/bg-about.jpg" alt="about" className="h-full w-full object-fit-cover" />
           </div>
         </Container>
@@ -42,7 +42,7 @@ const AboutUs = () => {
         <Row className="items-end">
           { whatWeBelieve.map((item, i) => (
             <Col md={4} className="rounded mt-8" key={ i }>
-              <img src={ item.image } className="mx-auto" alt={ item.title } />
+              <img src={ item.image } className="mx-auto object-cover" alt={ item.title } />
 
               <div className="shadow-lg pt-20 -mt-16 h-56 flex items-end flex-wrap">
                 <div>

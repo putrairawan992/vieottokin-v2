@@ -51,7 +51,7 @@ const ServiceTable = ({ list, dispatch }) => {
 
               <td className={trBorder}>
                 <div className="flex items-center">
-                  <img src={item.logo} alt={item.name} className="h-7 w-7" />
+                  <img src={item.logo} alt={item.name} className="h-7 w-7 object-cover" />
                   <span className="ml-3">{ item.name }</span>
                 </div>
               </td>

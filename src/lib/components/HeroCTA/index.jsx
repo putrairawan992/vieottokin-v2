@@ -39,7 +39,7 @@ const HeroCTA = ({ showModalOffer, showModalSignup, dispatch }) => {
             </div>
           </div>
 
-          <div className="absolute inset-0 overflow-hidden z-0">
+          <div className="absolute inset-0 overflow-hidden z-0 object-cover">
             <img src="/images/about-cta.jpg" alt="contact" className="w-full h-full object-cover" />
           </div>
         </Container>
