@@ -41,7 +41,7 @@ const ServiceTable = ({ list, dispatch }) => {
           </tr>
         </thead>
         <tbody>
-          { list.map((item, i) => (
+          {/* { list.map((item, i) => (
             <tr key={ i }>
               <td className={ `pl-5 p-3 ${trBorder}` }>
                 <div className="flex items-center">
@@ -66,7 +66,7 @@ const ServiceTable = ({ list, dispatch }) => {
 
                   <button
                     className="w-8 h-8 rounded bg-red-700 flex items-center justify-center mr-2"
-                    onClick={ () => dispatch(openDeleteConfirm(true)) }
+                    onClick={ () => dispatch(openDeleteConfirm(item.id)) }
                   >
                     <Icon name="trash" size={ 13 } />
                   </button>
@@ -77,7 +77,7 @@ const ServiceTable = ({ list, dispatch }) => {
                 </div>
               </td>
             </tr>
-          )) }
+          )) } */}
         </tbody>
       </table>
     </Fragment>

@@ -47,7 +47,7 @@ const ProviderTable = ({ list, dispatch }) => {
               <tr key={ i }>
                 <td className={ `pl-5 p-3 ${trBorder}` }>
                   <div className="flex items-center">
-                    <img src={ item.avatar } alt={ item.companyName } className="h-7 w-7 hidden md:block object-cover" />
+                    <img src="/images/provider/lopez-law.png" alt={ item.companyName } className="h-7 w-7 hidden md:block object-cover" />
                     <span className="md:ml-3">{ item.companyName }</span>
                   </div>
                 </td>
@@ -74,7 +74,7 @@ const ProviderTable = ({ list, dispatch }) => {
 
                     <button
                       className="w-8 h-8 rounded bg-red-700 flex items-center justify-center"
-                      onClick={ () => dispatch(openDeleteConfirm(true)) }
+                      onClick={ () => dispatch(openDeleteConfirm(item.id)) }
                     >
                       <Icon name="trash" size={ 13 } />
                     </button>

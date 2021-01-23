@@ -13,7 +13,7 @@ const initialState = {
   showModalOffer: false,
   showModalNewPartner: false,
   showModalNewService: false,
-  showModalDeleteConfirm: false,
+  showModalDeleteConfirm: null,
 };
 
 export default function index(state = initialState, action = null) {

@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { openNewService } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import Icon from 'icon';
 import Modal from 'lib/elements/Modal';
+import { create } from 'utils/api';
 
 const AddNewService = ({ dispatch }) => {
+  const [serviceName, setServiceName] = useState('');
+  const [partnerId, setPartnerId] = useState('');
+  const [description, setDescription] = useState('');
+  const [minimumPrice, setMinimumPrice] = useState('');
+
+  const submit = e => {
+    e.preventDefault();
+    create('admin/services');
+  };
+
+  useEffect(() => {
+
+  }, []);
+
   return (
     <Modal>
       <div className="border-b px-6 py-4 flex items-center">
@@ -16,7 +31,7 @@ const AddNewService = ({ dispatch }) => {
       </div>
 
       <div className="flex flex-col mt-6">
-        <form>
+        <form onSubmit={ submit }>
           <div className="mx-3 flex flex-wrap">
             <label className="w-full px-2 flex flex-col mb-5">
               <span className="mr-5 mb-2 text-sm font-bold">Service Name</span>
@@ -76,6 +91,6 @@ const AddNewService = ({ dispatch }) => {
       </div>
     </Modal>
   );
-}
+};
 
 export default connect()(AddNewService);

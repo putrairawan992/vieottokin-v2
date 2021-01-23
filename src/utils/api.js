@@ -10,21 +10,24 @@ const axiosInstance = async (method, path, request) => {
       store.dispatch(setLoading(false));
       return response.data;
     })
-    .catch(error => error.response)
+    .catch(error => {
+      store.dispatch(setLoading(false));
+      return error.response;
+    })
 };
 
 export const read = (url, request) => {
   return axiosInstance('get', url, request)
-}
+};
 
 export const remove = (url, request) => {
   return axiosInstance('delete', url, request)
-}
+};
 
 export const create = (url, request) => {
   return axiosInstance('post', url, request)
-}
+};
 
 export const update = (url, request) => {
   return axiosInstance('put', url, request)
-}
+};

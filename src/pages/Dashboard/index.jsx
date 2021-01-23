@@ -19,6 +19,7 @@ const Dashboard = ({ showModalNewPartner, showModalDeleteConfirm, showModalNewSe
       const resServices = await read('admin/services');
       setPartners(resPartners.data.results);
       setServices(resServices.data.results);
+      console.log(resPartners)
     };
 
     fetchData();

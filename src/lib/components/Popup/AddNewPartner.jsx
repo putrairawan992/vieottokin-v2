@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { openNewPartner } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import Icon from 'icon';
 import Modal from 'lib/elements/Modal';
+import { create, read } from 'utils/api';
 
 const AddNewPartner = ({ dispatch }) => {
+  const [preview, setPreview] = useState([]);
+  const [companyName, setCompanyName] = useState([]);
+  const [country, setCountry] = useState('');
+  const [city, setCity] = useState('');
+  const [categoryId, setCategoryId] = useState('');
+
+  const submit = e => {
+    e.preventDefault();
+    create('admin/services');
+  };
+
+  useEffect(() => {
+
+  }, []);
+
   return (
     <Modal>
       <div className="border-b px-6 py-4 flex items-center">
@@ -33,7 +49,7 @@ const AddNewPartner = ({ dispatch }) => {
           </div>
         </div>
 
-        <form>
+        <form onSubmit={ submit }>
           <div className="mx-3 flex flex-wrap">
             <label className="w-full px-2 flex flex-col mb-5">
               <span className="mr-5 mb-2 text-sm font-bold">Company Name</span>
