@@ -9,7 +9,6 @@ const DeleteConfirm = ({ dispatch, showModalDeleteConfirm }) => {
   const Remove = async () => {
     const w = await remove(`admin/partners/${showModalDeleteConfirm}`);
     console.log(w);
-    // dispatch(openDeleteConfirm(null));
   };
 
   return (

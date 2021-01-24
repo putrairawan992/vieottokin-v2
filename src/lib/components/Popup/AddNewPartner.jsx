@@ -6,11 +6,18 @@ import Modal from 'lib/elements/Modal';
 import { create, read } from 'utils/api';
 
 const AddNewPartner = ({ dispatch }) => {
-  const [preview, setPreview] = useState([]);
+  const [preview, setPreview] = useState(null);
   const [companyName, setCompanyName] = useState([]);
   const [country, setCountry] = useState('');
   const [city, setCity] = useState('');
   const [categoryId, setCategoryId] = useState('');
+  const [listCategory, setListCategory] = useState([]);
+
+  const onChangeImage = e => {
+    e.preventDefault();
+    setPreview(URL.createObjectURL(e.target.files[0]));
+    console.log(e.target.files[0])
+  }
 
   const submit = e => {
     e.preventDefault();
@@ -18,7 +25,13 @@ const AddNewPartner = ({ dispatch }) => {
   };
 
   useEffect(() => {
+    const fetchData = async () => {
+      setListCategory([]);
+      const resCategory = await read('categories');
+      resCategory.data.map(({ SubCategory }) => setListCategory(state => [...state, ...SubCategory]));
+    };
 
+    fetchData();
   }, []);
 
   return (
@@ -34,13 +47,18 @@ const AddNewPartner = ({ dispatch }) => {
       <div className="flex flex-col">
         <div className="mx-3 py-5 px-2 mb-4 flex items-center">
           <label className="w-24 h-24 text-center flex flex-col cursor-pointer rounded-full justify-center border-2 border-dashed">
-            <Icon name="image" size={30} className="mx-auto" color="#6493b9" />
+            { preview ? <img src={ preview } /> : <Icon name="image" size={30} className="mx-auto" color="#6493b9" /> }
 
-            <small className="text-xxs text-blue">
+            { !preview && <small className="text-xxs text-blue">
               Add file or drag<br/>& drop here
-            </small>
+            </small> }
 
-            <input type="file" accept=".jpg,.jpeg,.png,.gif" className="hidden" />
+            <input
+              type="file"
+              accept=".jpg,.jpeg,.png,.gif"
+              className="hidden"
+              onChange={onChangeImage}
+            />
           </label>
 
           <div className="ml-5">
@@ -91,6 +109,9 @@ const AddNewPartner = ({ dispatch }) => {
 
               <select className="border p-2 text-xs text-gray-500">
                 <option>Select country</option>
+                { listCategory.map(el => (
+                  <option key={ el.id } value={ el.id }>{ el.name }</option>
+                )) }
               </select>
             </label>
           </div>
