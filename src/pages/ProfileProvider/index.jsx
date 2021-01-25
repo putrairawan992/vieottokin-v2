@@ -1,12 +1,28 @@
-import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment, useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'lib/elements/Grid';
 import Breadcrumb from 'lib/components/Breadcrumb';
+import PriceTagPanel from './PriceTagPanel';
 import Icon from 'icon';
+import { read } from 'utils/api';
 
 const ProfileProvider = () => {
   const [showTab, setShowTab] = useState({service: true, tips: false});
+  const [service, setService] = useState([]);
+  const [category, setCategory] = useState([]);
+  const { id } = useParams();
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const resService = await read(`services/${id}`);
+      const resCategory = await read('categories');
+      resCategory.data.map(({ SubCategory }) => setCategory(state => [...state, ...SubCategory]));
+      setService(resService.data);
+    };
+
+    fetchData();
+  }, []);
+// console.log()
   return (
     <Fragment>
       <Breadcrumb base={[ 'Home', 'Services', 'IT Advisory' ]} current="Search" />
@@ -23,20 +39,18 @@ const ProfileProvider = () => {
 
               <div className="w-full my-auto md:p-0 p-2">
                 <div className="flex justify-between w-full">
-                  <h1 className="font-bold text-lg">
-                    Tech Dojo
-                  </h1>
+                  <h1 className="font-bold text-lg capitalize">{ service.partner?.companyName }</h1>
 
-                  <button className="bg-orange py-1 px-4 text-xs text-white">
-                    IT ADVISORY
-                  </button>
+                  <span className="bg-orange py-1 px-4 text-xs text-white flex items-center uppercase">
+                    { category.filter(find => find.id === service.categoryId)[0].name }
+                  </span>
                 </div>
 
                 <div className="flex w-full items-center my-4">
                   <Icon name="badge" color="#f5821f" />
 
                   <span className="text-gray-500 text-xs ml-3">
-                    <b>145</b> business trusted Viettonkin for this service
+                    <b>{ service.trustedBy || 0 }</b> business trusted Viettonkin for this service
                   </span>
                 </div>
 
@@ -87,33 +101,11 @@ const ProfileProvider = () => {
           </Col>
 
           <Col md={4} className="md:mt-0 mt-8">
-            <div className="shadow-lg rounded-md pt-6">
-              <h4 className="text-lg px-5">Selected Service</h4>
-
-              <div className="flex justify-between text-gray-500 text-sm mt-5 pb-6 px-5 border-b">
-                <span>IT Advisory</span>
-                <span>¥ 7440 <i className="text-orange">*</i></span>
-              </div>
-
-              <div className="px-5 text-right mb-6 mt-3">
-                <small className="text-xs text-gray-500">starting from</small>
-                <div className="font-bold text-lg leading-none">¥ 7440</div>
-              </div>
-
-              <Link to="/cart" className="bg-orange p-1 flex w-full rounded-b-md h-12 items-center justify-between">
-                <div className="bg-white h-10 w-10 flex justify-center items-center rounded-bl-sm">
-                  <Icon name="bookmark" color="#f58120" />
-                </div>
-
-                <div className="text-center w-full text-white">
-                  ADD TO CART
-                </div>
-              </Link>
-            </div>
-
-            <p className="px-6 mt-6 text-sm">
-              <b className="text-orange">*</b> The rate provided is the cheapest estimate for this service. Final rate will depend on the needed service.
-            </p>
+            <PriceTagPanel
+              currency={service.currencySymbol}
+              price={service.minimumPrice}
+              category={category.filter(find => find.id === service.categoryId)[0].name}
+            />
           </Col>
         </Row>
       </Container>

@@ -33,7 +33,7 @@ const AddNewPartner = ({ dispatch }) => {
     formData.append('category_id', categoryId);
 
     create('admin/partners', formData)
-    .then(res => console.log(res))
+    .then(() => window.location.reload());
   };
 
   useEffect(() => {

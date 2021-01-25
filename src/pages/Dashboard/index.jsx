@@ -30,7 +30,7 @@ const Dashboard = ({ showModalNewPartner, showModalDeleteConfirm, showModalNewSe
         <h1 className="text-darkdrop text-lg font-bold mb-6">Dashboard</h1>
 
         <Navigator
-          count={ [showTable].count }
+          count={ showTable === 'partners' ? partners.count : services.count }
           switchTable={ e => setShowTable(e) }
           tableType={ showTable }
         />

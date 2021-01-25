@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import Icon from 'icon';
+import { Link } from 'react-router-dom';
 import { openDeleteConfirm, openNewService } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 
@@ -41,11 +42,11 @@ const ServiceTable = ({ list, dispatch }) => {
           </tr>
         </thead>
         <tbody>
-          {/* { list.map((item, i) => (
-            <tr key={ i }>
+          { list.map(item => (
+            <tr key={ item.id }>
               <td className={ `pl-5 p-3 ${trBorder}` }>
                 <div className="flex items-center">
-                  <span>{ item.service }</span>
+                  <span>{ item.name }</span>
                 </div>
               </td>
 
@@ -71,13 +72,16 @@ const ServiceTable = ({ list, dispatch }) => {
                     <Icon name="trash" size={ 13 } />
                   </button>
 
-                  <button className="px-3 text-xs rounded text-blue border border-blue">
+                  <Link
+                    to={ `profile-provider/${item.id}` }
+                    className="px-3 text-xs rounded text-blue border border-blue flex align-center"
+                  >
                     View Service
-                  </button>
+                  </Link>
                 </div>
               </td>
             </tr>
-          )) } */}
+          )) }
         </tbody>
       </table>
     </Fragment>

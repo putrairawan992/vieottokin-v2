@@ -34,7 +34,7 @@ const RouterManager = ({ progress, ...props }) => (
             <Route exact path='/' component={ AboutUs } />
             <Route path='/landing-page' component={ LandingPage } />
             <Route path='/service-providers' component={ ServiceProvider } />
-            <Route path='/profile-provider' component={ ProfileProvider } />
+            <Route path='/profile-provider/:id' component={ ProfileProvider } />
             <Route path='/submit-requirements' component={ CartForm } />
             <Route path='/success-checkout' component={ SuccessCheckout } />
             <Route path='/faq' component={ FAQ } />
