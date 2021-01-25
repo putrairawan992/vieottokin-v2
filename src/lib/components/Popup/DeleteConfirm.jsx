@@ -7,8 +7,8 @@ import { remove } from 'utils/api';
 
 const DeleteConfirm = ({ dispatch, showModalDeleteConfirm }) => {
   const Remove = async () => {
-    const w = await remove(`admin/partners/${showModalDeleteConfirm}`);
-    console.log(w);
+    const deleteProcess = await remove(`admin/partners/${showModalDeleteConfirm}`);
+    deleteProcess && window.location.reload();
   };
 
   return (

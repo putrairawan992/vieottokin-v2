@@ -1,10 +1,12 @@
 import React from 'react';
 import { openSignup } from 'store/actions/ModalControl';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Icon from 'icon';
 import Modal from 'lib/elements/Modal';
 
-const SigninPopup = ({ dispatch }) => {
+const SigninPopup = () => {
+  const dispatch = useDispatch();
+
   return (
     <Modal>
       <div className="text-center p-6 pb-0">
@@ -114,4 +116,4 @@ const SigninPopup = ({ dispatch }) => {
   );
 }
 
-export default connect()(SigninPopup);
+export default SigninPopup;

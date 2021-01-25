@@ -6,8 +6,8 @@ import store from 'store';
 import jwtDecode from 'jwt-decode';
 import setAuthToken from 'utils/setAuthToken';
 
-if (localStorage.jwtToken) {
-  const token = localStorage.jwtToken;
+if (localStorage.getItem('@viettonkin:token')) {
+  const token = localStorage.getItem('@viettonkin:token');
   setAuthToken(token);
 
   const decoded = jwtDecode(token);

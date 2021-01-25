@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { openSignin } from 'store/actions/ModalControl';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import Icon from 'icon';
 import Modal from 'lib/elements/Modal';
 import { loginUser } from 'store/actions/Auth';
 
-const SigninPopup = ({ dispatch, loginUser }) => {
+const SigninPopup = ({ loginUser }) => {
   const [hidePassword, setHidePassword] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
 
   const login = e => {
     e.preventDefault();
