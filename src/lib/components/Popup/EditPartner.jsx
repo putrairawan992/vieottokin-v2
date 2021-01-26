@@ -28,7 +28,7 @@ const EditPartner = ({ dispatch, showModalEditPartner }) => {
   const edit = e => {
     e.preventDefault();
     const formData = new FormData();
-console.log('sdgds')
+
     formData.append('file', file);
     formData.append('company_name', companyName);
     formData.append('description', description);
@@ -39,7 +39,7 @@ console.log('sdgds')
     formData.append('category_id', categoryId);
 
     update(`admin/partners/${showModalEditPartner}`, formData)
-    .then(res => console.log(res));
+    .then(() => window.location.reload());
   };
 
   useEffect(() => {
