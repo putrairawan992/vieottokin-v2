@@ -30,19 +30,21 @@ const ProfileProvider = () => {
       <Container className="py-20">
         <Row>
           <Col md={8}>
-            <div className="shadow-lg rounded-md md:p-6 flex">
-              <img
-                src="/images/tech-dojo.jpg"
-                alt="tech dojo"
-                className="mr-1 md:mr-5 rounded-l-md object-cover"
-              />
+            <Row className="shadow-lg rounded-md md:p-6 flex mx-0">
+              <Col md={3}>
+                <img
+                  src={ service.partner?.avatar }
+                  alt="tech dojo"
+                  className="rounded-l-md object-cover w-full"
+                />
+              </Col>
 
-              <div className="w-full my-auto md:p-0 p-2">
+              <Col md={9} className="my-auto md:pl-3 pl-0">
                 <div className="flex justify-between w-full">
                   <h1 className="font-bold text-lg capitalize">{ service.partner?.companyName }</h1>
 
                   <span className="bg-orange py-1 px-4 text-xs text-white flex items-center uppercase">
-                    { category && category.filter(find => find.id === service.categoryId)[0].name }
+                    { service.categoryId && category?.filter(find => find.id === service.categoryId)[0].name }
                   </span>
                 </div>
 
@@ -54,11 +56,9 @@ const ProfileProvider = () => {
                   </span>
                 </div>
 
-                <p className="text-xs text-gray-500">
-                  Wild Goat Studio is an experienced team of developers, designers and stuntmen, committed to equitable tech. We put an obsessive team, clean code and battle-tested strategies to work in building your digital product. Find your sound footing with us.
-                </p>
-              </div>
-            </div>
+                <p className="text-xs text-gray-500">{ service.partner?.description }</p>
+              </Col>
+            </Row>
 
             <div className="shadow-lg rounded-md bg-white py-6 mt-6">
               <div className="border-b-2 border-gray-200">
@@ -80,18 +80,7 @@ const ProfileProvider = () => {
               </div>
 
               { showTab.service && <article className="px-6 py-10 text-sm leading-5 text-gray-700">
-                <p className="mb-3">Nowadays there are so many phones that we can find it difficult to choose which one suits us, we have so many choices so little time and knowledge about the brands. Well, that's what I'm for, I will try to help you to find your ideal smartphone taking into account what you are looking for, your preferences or what you would use the mobile (to play, just to call or for work) and your budget.</p>
-                <p className="mb-3">I will provide the following services:</p>
-
-                <ul className="ml-4 sm:ml-6 list-disc">
-                  <li>How to choose the smartphone, Tabs, Desktop & Laptop?</li>
-                  <li>How to root your smartphone?</li>
-                  <li>How to unlock the bootloader of your smartphone?</li>
-                  <li>How to install custom ROMs on your smartphone?</li>
-                  <li>I will also provide the link from where you can easily download the custom ROMs</li>
-                  <li>How to install custom recovery on your smartphone?</li>
-                  <li>How to install custom boot animations on your smartphone?</li>
-                </ul>
+                <p>{ service.description }</p>
               </article> }
 
               { showTab.tips && <article className="px-6 py-10 text-sm leading-5 text-gray-700">
@@ -104,7 +93,7 @@ const ProfileProvider = () => {
             <PriceTagPanel
               currency={service.currencySymbol}
               price={service.minimumPrice}
-              category={category && category.filter(find => find.id === service.categoryId)[0].name}
+              category={ service.categoryId && category?.filter(find => find.id === service.categoryId)[0].name}
             />
           </Col>
         </Row>
