@@ -1,11 +1,24 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import Icon, { IconImage } from 'icon';
 import { openDeleteConfirm, openNewPartner } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
+import { read } from 'utils/api';
 
 const trBorder = 'border-b border-gray-300';
 
-const ProviderTable = ({ list, dispatch }) => {
+const ProviderTable = ({ setCount, dispatch }) => {
+  const [partners, setPartners] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const resPartners = await read('admin/partners');
+      setCount(resPartners.data.results.count);
+      setPartners(resPartners.data.results);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <Fragment>
       <div className="px-5 py-4 flex justify-between items-center">
@@ -43,11 +56,11 @@ const ProviderTable = ({ list, dispatch }) => {
             </tr>
           </thead>
           <tbody>
-            { list && list.map((item, i) => (
+            { partners?.rows.map((item, i) => (
               <tr key={ i }>
                 <td className={ `pl-5 p-3 ${trBorder}` }>
                   <div className="flex items-center">
-                    <img src="/images/provider/lopez-law.png" alt={ item.companyName } className="h-7 w-7 hidden md:block object-cover" />
+                    <img src={ item.avatar } alt={ item.companyName } className="h-7 w-7 hidden md:block object-cover" />
                     <span className="md:ml-3">{ item.companyName }</span>
                   </div>
                 </td>

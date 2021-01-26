@@ -22,7 +22,7 @@ const ProfileProvider = () => {
 
     fetchData();
   }, []);
-// console.log()
+
   return (
     <Fragment>
       <Breadcrumb base={[ 'Home', 'Services', 'IT Advisory' ]} current="Search" />
@@ -42,7 +42,7 @@ const ProfileProvider = () => {
                   <h1 className="font-bold text-lg capitalize">{ service.partner?.companyName }</h1>
 
                   <span className="bg-orange py-1 px-4 text-xs text-white flex items-center uppercase">
-                    { category.filter(find => find.id === service.categoryId)[0].name }
+                    { category && category.filter(find => find.id === service.categoryId)[0].name }
                   </span>
                 </div>
 
@@ -104,7 +104,7 @@ const ProfileProvider = () => {
             <PriceTagPanel
               currency={service.currencySymbol}
               price={service.minimumPrice}
-              category={category.filter(find => find.id === service.categoryId)[0].name}
+              category={category && category.filter(find => find.id === service.categoryId)[0].name}
             />
           </Col>
         </Row>

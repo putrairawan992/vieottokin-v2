@@ -1,12 +1,28 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import Icon from 'icon';
 import { Link } from 'react-router-dom';
 import { openDeleteConfirm, openNewService } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
+import { read } from 'utils/api';
 
 const trBorder = 'border-b border-gray-300';
 
-const ServiceTable = ({ list, dispatch }) => {
+const ServiceTable = ({ setCount, dispatch }) => {
+  const [services, setServices] = useState([]);
+  const [avatar, setAvatar] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const resServices = await read('admin/services');
+      const resPartner = await read(`admin/partners`);
+      setAvatar(resPartner.data.results.rows);
+      setCount(resServices.data.results.count);
+      setServices(resServices.data.results);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <Fragment>
       <div className="px-5 py-4 flex justify-between items-center">
@@ -42,7 +58,7 @@ const ServiceTable = ({ list, dispatch }) => {
           </tr>
         </thead>
         <tbody>
-          { list.map(item => (
+          { services.rows && services.rows.map(item => (
             <tr key={ item.id }>
               <td className={ `pl-5 p-3 ${trBorder}` }>
                 <div className="flex items-center">
@@ -52,7 +68,11 @@ const ServiceTable = ({ list, dispatch }) => {
 
               <td className={trBorder}>
                 <div className="flex items-center">
-                  <img src={item.logo} alt={item.name} className="h-7 w-7 object-cover" />
+                  <img
+                    src={ avatar && avatar.filter(find => find.id === item.id)[0].avatar } alt={item.name}
+                    className="h-7 w-7 object-cover"
+                  />
+
                   <span className="ml-3">{ item.name }</span>
                 </div>
               </td>
@@ -74,7 +94,7 @@ const ServiceTable = ({ list, dispatch }) => {
 
                   <Link
                     to={ `profile-provider/${item.id}` }
-                    className="px-3 text-xs rounded text-blue border border-blue flex align-center"
+                    className="px-3 text-xs rounded text-blue border border-blue flex items-center"
                   >
                     View Service
                   </Link>
@@ -89,7 +109,7 @@ const ServiceTable = ({ list, dispatch }) => {
 }
 
 function mapStateToProps(state) {
-  return state.modalControl
+  return state.modalControl;
 }
 
 export default connect(mapStateToProps)(ServiceTable);

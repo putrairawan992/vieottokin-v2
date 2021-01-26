@@ -4,25 +4,13 @@ import { AddNewPartner, AddNewService, DeleteConfirm } from 'lib/components/Popu
 import Navigator from './Navigator';
 import ProviderTable from './ProviderTable';
 import ServiceTable from './ServiceTable';
-import { read } from 'utils/api';
 import { connect } from 'react-redux';
 import Icon from 'icon';
 
 const Dashboard = ({ showModalNewPartner, showModalDeleteConfirm, showModalNewService }) => {
   const [showTable, setShowTable] = useState('partners');
-  const [partners, setPartners] = useState({});
-  const [services, setServices] = useState({});
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const resPartners = await read('admin/partners');
-      const resServices = await read('admin/services');
-      setPartners(resPartners.data.results);
-      setServices(resServices.data.results);
-    };
-
-    fetchData();
-  }, []);
+  const [partnerCount, setPartnerCount] = useState(0);
+  const [serviceCount, setServiceCount] = useState(0);
 
   return (
     <Fragment>
@@ -30,7 +18,7 @@ const Dashboard = ({ showModalNewPartner, showModalDeleteConfirm, showModalNewSe
         <h1 className="text-darkdrop text-lg font-bold mb-6">Dashboard</h1>
 
         <Navigator
-          count={ showTable === 'partners' ? partners.count : services.count }
+          count={ showTable === 'partners' ? partnerCount : serviceCount }
           switchTable={ e => setShowTable(e) }
           tableType={ showTable }
         />
@@ -38,8 +26,8 @@ const Dashboard = ({ showModalNewPartner, showModalDeleteConfirm, showModalNewSe
 
       <Container className="pb-20">
         <div className="border border-gray-300 shadow">
-          { showTable === 'partners' && <ProviderTable list={ partners.rows } /> }
-          { showTable === 'services' && <ServiceTable list={ services.rows } /> }
+          { showTable === 'partners' && <ProviderTable setCount={ e => setPartnerCount(e) } /> }
+          { showTable === 'services' && <ServiceTable setCount={ e => setServiceCount(e) } /> }
 
           <div className="flex justify-between p-5">
             <div className="flex items-center text-xs">
