@@ -87,7 +87,7 @@ const ServiceTable = ({ setCount, dispatch }) => {
 
                   <button
                     className="w-8 h-8 rounded bg-red-700 flex items-center justify-center mr-2"
-                    onClick={ () => dispatch(openDeleteConfirm(item.id)) }
+                    onClick={ () => dispatch(openDeleteConfirm({id: item.id, data: 'service'})) }
                   >
                     <Icon name="trash" size={ 13 } />
                   </button>

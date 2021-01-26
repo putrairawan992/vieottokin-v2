@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import Icon, { IconImage } from 'icon';
+import Icon from 'icon';
 import { openDeleteConfirm, openNewPartner } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import { read } from 'utils/api';
@@ -8,10 +8,14 @@ const trBorder = 'border-b border-gray-300';
 
 const ProviderTable = ({ setCount, dispatch }) => {
   const [partners, setPartners] = useState(null);
+  const [country, setCountry] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       const resPartners = await read('admin/partners');
+      const resCountry = await read('countries');
+      setCountry(resCountry.data);
+      console.log(resCountry.data)
       setCount(resPartners.data.results.count);
       setPartners(resPartners.data.results);
     };
@@ -67,7 +71,10 @@ const ProviderTable = ({ setCount, dispatch }) => {
 
                 <td className={ `${trBorder}` }>
                   <div className="flex items-center">
-                    <IconImage name={ `${item.country}-flag` } />
+                    <img
+                      src={ country.filter(find => find.name === item.country)[0]?.logo || '' }
+                      alt={ item.country }
+                    />
                     <span className="ml-3">{ item.country }</span>
                   </div>
                 </td>
@@ -87,7 +94,7 @@ const ProviderTable = ({ setCount, dispatch }) => {
 
                     <button
                       className="w-8 h-8 rounded bg-red-700 flex items-center justify-center"
-                      onClick={ () => dispatch(openDeleteConfirm(item.id)) }
+                      onClick={ () => dispatch(openDeleteConfirm({id: item.id, data: 'partner'})) }
                     >
                       <Icon name="trash" size={ 13 } />
                     </button>

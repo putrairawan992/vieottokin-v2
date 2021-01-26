@@ -6,8 +6,8 @@ import Modal from 'lib/elements/Modal';
 import { remove } from 'utils/api';
 
 const DeleteConfirm = ({ dispatch, showModalDeleteConfirm }) => {
-  const Remove = async () => {
-    const deleteProcess = await remove(`admin/partners/${showModalDeleteConfirm}`);
+  const Remove = async data => {
+    const deleteProcess = await remove(`admin/${showModalDeleteConfirm.data}s/${showModalDeleteConfirm.id}`);
     deleteProcess && window.location.reload();
   };
 
@@ -21,7 +21,7 @@ const DeleteConfirm = ({ dispatch, showModalDeleteConfirm }) => {
         <h1 className="text-2xl py-5 font-bold">Confirm Deletion</h1>
 
         <article className="text-gray-500 mb-8">
-          <p>Are you sure you want to delete this partner?</p>
+          <p>Are you sure you want to delete this {showModalDeleteConfirm.data}?</p>
           <p>This cannot undone.</p>
         </article>
 
