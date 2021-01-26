@@ -8,12 +8,16 @@ import { create, read } from 'utils/api';
 const AddNewPartner = ({ dispatch }) => {
   const [preview, setPreview] = useState(null);
   const [companyName, setCompanyName] = useState('');
+  const [description, setDescription] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [country, setCountry] = useState('');
-  const [city, setCity] = useState('');
   const [categoryId, setCategoryId] = useState('');
+  const [country, setCountry] = useState({id: '', name: ''});
+  const [city, setCity] = useState('');
+
   const [listCategory, setListCategory] = useState([]);
+  const [countryList, setCountryList] = useState([]);
+  const [cityList, setCityList] = useState([]);
 
   const onChangeImage = e => {
     e.preventDefault();
@@ -26,10 +30,11 @@ const AddNewPartner = ({ dispatch }) => {
 
     formData.append('file', preview);
     formData.append('company_name', companyName);
+    formData.append('description', description);
     formData.append('email', email);
     formData.append('password', password);
-    formData.append('country', 'Vietnam');
-    formData.append('city', 'Hanoi');
+    formData.append('country', country.name);
+    formData.append('city', city);
     formData.append('category_id', categoryId);
 
     create('admin/partners', formData)
@@ -40,11 +45,18 @@ const AddNewPartner = ({ dispatch }) => {
     const fetchData = async () => {
       setListCategory([]);
       const resCategory = await read('categories');
+      const resCountry = await read('countries');
       resCategory.data.map(({ SubCategory }) => setListCategory(state => [...state, ...SubCategory]));
+      setCountryList(resCountry.data);
+
+      if (country.id) {
+        const resCity = await read(`countries/${country.id}/cities`);
+        setCityList(resCity.data)
+      }
     };
 
     fetchData();
-  }, []);
+  }, [country]);
 
   return (
     <Modal>
@@ -93,6 +105,16 @@ const AddNewPartner = ({ dispatch }) => {
             </label>
 
             <label className="w-full px-2 flex flex-col mb-5">
+              <span className="mr-5 mb-2 text-sm font-bold">Description</span>
+
+              <textarea
+                required
+                className="border py-1 px-2"
+                onChange={ e => setDescription(e.target.value) }
+              ></textarea>
+            </label>
+
+            <label className="w-6/12 px-2 flex flex-col mb-5">
               <span className="mr-5 mb-2 text-sm font-bold">Email Address</span>
 
               <input
@@ -103,7 +125,7 @@ const AddNewPartner = ({ dispatch }) => {
               />
             </label>
 
-            <label className="w-full px-2 flex flex-col mb-5">
+            <label className="w-6/12 px-2 flex flex-col mb-5">
               <span className="mr-5 mb-2 text-sm font-bold">Password</span>
 
               <input
@@ -114,21 +136,32 @@ const AddNewPartner = ({ dispatch }) => {
               />
             </label>
 
-            <label className="w-full px-2 flex flex-col mb-5">
+            <label className="w-6/12 px-2 flex flex-col mb-5">
               <span className="mr-5 mb-2 text-sm font-bold">Country</span>
 
-              <select className="border p-2 text-xs text-gray-500">
-                <option>Select country</option>
+              <select
+                className="border p-2 text-xs text-gray-500"
+                onChange={ e => setCountry(JSON.parse(e.target.value)) }
+              >
+                <option value="{'id': '', 'name': ''}">Select country</option>
+                { countryList.map(el => (
+                  <option key={el.id} value={`{"id": "${el.id}", "name": "${el.name}"}`}>{ el.name }</option>
+                )) }
               </select>
             </label>
 
-            <label className="w-full px-2 flex flex-col mb-5">
+            <label className="w-6/12 px-2 flex flex-col mb-5">
               <span className="mr-5 mb-2 text-sm font-bold">City</span>
 
-              <input
-                required
-                className="border py-1 px-2"
-              />
+              <select
+                className="border p-2 text-xs text-gray-500"
+                onChange={ e => setCity(e.target.value) }
+              >
+                <option value="">Select city</option>
+                { cityList && cityList.map(el => (
+                  <option key={ el.id } value={ el.name }>{ el.name }</option>
+                )) }
+              </select>
             </label>
 
             <label className="w-full px-2 flex flex-col mb-5">

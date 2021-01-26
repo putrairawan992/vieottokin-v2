@@ -15,7 +15,6 @@ const ProviderTable = ({ setCount, dispatch }) => {
       const resPartners = await read('admin/partners');
       const resCountry = await read('countries');
       setCountry(resCountry.data);
-      console.log(resCountry.data)
       setCount(resPartners.data.results.count);
       setPartners(resPartners.data.results);
     };
