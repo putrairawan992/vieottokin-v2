@@ -6,7 +6,7 @@ import Modal from 'lib/elements/Modal';
 import { remove } from 'utils/api';
 
 const DeleteConfirm = ({ dispatch, showModalDeleteConfirm }) => {
-  const Remove = async data => {
+  const Remove = async () => {
     const deleteProcess = await remove(`admin/${showModalDeleteConfirm.data}s/${showModalDeleteConfirm.id}`);
     deleteProcess && window.location.reload();
   };

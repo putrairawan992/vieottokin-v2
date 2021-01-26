@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Icon from 'icon';
-import { openDeleteConfirm, openNewPartner } from 'store/actions/ModalControl';
+import { openDeleteConfirm, openNewPartner, openEditPartner } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import { read } from 'utils/api';
 
@@ -86,7 +86,7 @@ const ProviderTable = ({ setCount, dispatch }) => {
                   <div className="flex">
                     <button
                       className="w-8 h-8 rounded bg-darkdrop flex items-center justify-center mr-2"
-                      // onClick={ () => dispatch(openDeleteConfirm(true)) }
+                      onClick={ () => dispatch(openEditPartner(item.id)) }
                     >
                       <Icon name="pen" size={ 13 } />
                     </button>

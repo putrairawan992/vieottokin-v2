@@ -3,6 +3,7 @@ import {
   MODAL_SIGNIN,
   MODAL_OFFER,
   MODAL_NEWPARTNER,
+  MODAL_EDITPARTNER,
   MODAL_NEWSERVICE,
   MODAL_DELETECONFIRM
 } from '../types';
@@ -12,6 +13,7 @@ const initialState = {
   showModalSignin: false,
   showModalOffer: false,
   showModalNewPartner: false,
+  showModalEditPartner: null,
   showModalNewService: false,
   showModalDeleteConfirm: null,
 };
@@ -26,6 +28,8 @@ export default function index(state = initialState, action = null) {
       return { ...state, showModalOffer: action.payload };
     case MODAL_NEWPARTNER:
       return { ...state, showModalNewPartner: action.payload };
+    case MODAL_EDITPARTNER:
+      return { ...state, showModalEditPartner: action.payload };
     case MODAL_NEWSERVICE:
       return { ...state, showModalNewService: action.payload };
     case MODAL_DELETECONFIRM:

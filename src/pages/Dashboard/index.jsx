@@ -1,13 +1,13 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Container } from 'lib/elements/Grid';
-import { AddNewPartner, AddNewService, DeleteConfirm } from 'lib/components/Popup';
+import { AddNewPartner, AddNewService, EditPartner, DeleteConfirm } from 'lib/components/Popup';
 import Navigator from './Navigator';
 import ProviderTable from './ProviderTable';
 import ServiceTable from './ServiceTable';
 import { connect } from 'react-redux';
 import Icon from 'icon';
 
-const Dashboard = ({ showModalNewPartner, showModalDeleteConfirm, showModalNewService }) => {
+const Dashboard = props => {
   const [showTable, setShowTable] = useState('partners');
   const [partnerCount, setPartnerCount] = useState(0);
   const [serviceCount, setServiceCount] = useState(0);
@@ -61,15 +61,16 @@ const Dashboard = ({ showModalNewPartner, showModalDeleteConfirm, showModalNewSe
         </div>
       </Container>
 
-      { showModalNewPartner && <AddNewPartner /> }
-      { showModalDeleteConfirm && <DeleteConfirm /> }
-      { showModalNewService && <AddNewService /> }
+      { props.showModalNewPartner && <AddNewPartner /> }
+      { props.showModalEditPartner && <EditPartner /> }
+      { props.showModalDeleteConfirm && <DeleteConfirm /> }
+      { props.showModalNewService && <AddNewService /> }
     </Fragment>
   );
 }
 
 function mapStateToProps(state) {
-  return state.modalControl
+  return state.modalControl;
 }
 
 export default connect(mapStateToProps)(Dashboard);
