@@ -9,6 +9,7 @@ const trBorder = 'border-b border-gray-300';
 const ProviderTable = ({ setCount, dispatch }) => {
   const [partners, setPartners] = useState(null);
   const [country, setCountry] = useState(null);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,6 +37,7 @@ const ProviderTable = ({ setCount, dispatch }) => {
             <input
               className="h-10 w-full text-gray-500"
               placeholder="Search"
+              onChange={ e => setSearch(e.target.value) }
             />
           </div>
 
@@ -59,7 +61,7 @@ const ProviderTable = ({ setCount, dispatch }) => {
             </tr>
           </thead>
           <tbody>
-            { partners?.rows.map((item, i) => (
+            { partners?.rows.filter(find => find.companyName.toLowerCase().includes(search.toLowerCase())).map((item, i) => (
               <tr key={ i }>
                 <td className={ `pl-5 p-3 ${trBorder}` }>
                   <div className="flex items-center">

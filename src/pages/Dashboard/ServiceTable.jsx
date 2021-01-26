@@ -10,6 +10,7 @@ const trBorder = 'border-b border-gray-300';
 const ServiceTable = ({ setCount, dispatch }) => {
   const [services, setServices] = useState([]);
   const [avatar, setAvatar] = useState([]);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,6 +38,7 @@ const ServiceTable = ({ setCount, dispatch }) => {
             <input
               className="h-10 w-full text-gray-500"
               placeholder="Search"
+              onChange={ e => setSearch(e.target.value) }
             />
           </div>
 
@@ -58,7 +60,7 @@ const ServiceTable = ({ setCount, dispatch }) => {
           </tr>
         </thead>
         <tbody>
-          { services.rows && services.rows.map(item => (
+          { services.rows?.filter(find => find.name.toLowerCase().includes(search.toLowerCase())).map(item => (
             <tr key={ item.id }>
               <td className={ `pl-5 p-3 ${trBorder}` }>
                 <div className="flex items-center">
