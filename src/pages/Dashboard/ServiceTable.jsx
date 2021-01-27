@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Icon from 'icon';
 import { Link } from 'react-router-dom';
-import { openDeleteConfirm, openNewService } from 'store/actions/ModalControl';
+import { openDeleteConfirm, openNewService, openEditService } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import { read } from 'utils/api';
 
@@ -71,11 +71,11 @@ const ServiceTable = ({ setCount, dispatch }) => {
               <td className={trBorder}>
                 <div className="flex items-center">
                   <img
-                    src={ avatar && avatar.filter(find => find.id === item.id)[0].avatar } alt={item.name}
+                    src={ avatar?.filter(find => find.id === item.id)[0].avatar } alt={item.name}
                     className="h-7 w-7 object-cover"
                   />
 
-                  <span className="ml-3">{ item.name }</span>
+                  <span className="ml-3">{ avatar?.filter(find => find.id === item.id)[0].companyName }</span>
                 </div>
               </td>
 
@@ -83,6 +83,7 @@ const ServiceTable = ({ setCount, dispatch }) => {
                 <div className="flex">
                   <button
                     className="w-8 h-8 rounded bg-darkdrop flex items-center justify-center mr-2"
+                    onClick={ () => dispatch(openEditService(item.id)) }
                   >
                     <Icon name="pen" size={ 13 } />
                   </button>

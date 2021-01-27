@@ -6,9 +6,7 @@ import Modal from 'lib/elements/Modal';
 import AutoComplete from 'lib/components/SearchInput/AutoComplete';
 import { create, read } from 'utils/api';
 
-const countryList = JSON.parse(localStorage.getItem('@viettonkin:countries'));
-
-const AddNewService = ({ dispatch }) => {
+const AddNewService = ({ dispatch, countryList }) => {
   const [serviceName, setServiceName] = useState('');
   const [partnerId, setPartnerId] = useState('');
   const [currencySymbol, setCurrencySymbol] = useState('');
@@ -127,4 +125,8 @@ const AddNewService = ({ dispatch }) => {
   );
 };
 
-export default connect()(AddNewService);
+const mapStateToProps = state => ({
+  countryList: state.globalState.countryList
+});
+
+export default connect(mapStateToProps)(AddNewService);

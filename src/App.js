@@ -19,18 +19,6 @@ if (localStorage.getItem('@viettonkin:token')) {
   }
 };
 
-if (!localStorage.getItem('@viettonkin:categories')) {
-  read('categories').then(res => {
-    let categories = [];
-    res.data.map(({ SubCategory }) => categories.push(...SubCategory));
-    localStorage.setItem('@viettonkin:categories', JSON.stringify(categories));
-  });
-};
-
-if (!localStorage.getItem('@viettonkin:countries')) {
-  read('countries').then(res => localStorage.setItem('@viettonkin:countries', JSON.stringify(res.data)));
-};
-
 const App = () => (
 	<BrowserRouter>
 		<RouterManager />

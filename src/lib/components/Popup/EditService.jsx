@@ -1,48 +1,58 @@
 import React, { useState, useEffect } from 'react';
-import { openNewService } from 'store/actions/ModalControl';
+import { openEditService } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import Icon from 'icon';
 import Modal from 'lib/elements/Modal';
-import { create } from 'utils/api';
+import AutoComplete from 'lib/components/SearchInput/AutoComplete';
+import { create, read } from 'utils/api';
 
-const categoryList = JSON.parse(localStorage.getItem('@viettonkin:categories'));
-
-const EditService = ({ dispatch }) => {
-  const [search, setSearch] = useState('');
+const EditService = ({ dispatch, countryList }) => {
   const [serviceName, setServiceName] = useState('');
   const [partnerId, setPartnerId] = useState('');
   const [currencySymbol, setCurrencySymbol] = useState('');
   const [description, setDescription] = useState('');
+  const [categoryId, setCategoryId] = useState('');
   const [minimumPrice, setMinimumPrice] = useState('');
+  const [partnerList, setPartnerList] = useState([]);
 
   const submit = e => {
     e.preventDefault();
-    const formData = new FormData();
 
-    formData.append('service_name', serviceName);
-    formData.append('partner_id', partnerId);
-    formData.append('currency_symbol', currencySymbol);
-    formData.append('description', description);
-    formData.append('minimum_price', minimumPrice);
+    const data = {
+      'service_name': serviceName,
+      'partner_id': `${partnerId}`,
+      'currency_symbol': currencySymbol,
+      'description': description,
+      'categoryId': categoryId,
+      'minimum_price': minimumPrice
+    }
 
-    create('admin/services', formData)
+    create('admin/services', data)
     .then(() => window.location.reload());
   };
 
   useEffect(() => {
     const fetchData = async () => {
-
+      const resPartners = await read('admin/partners');
+      setPartnerList(resPartners.data.results.rows);
     };
 
     fetchData();
-  }, [search]);
+  }, []);
+
+  const setPartner = data => {
+    const currency = countryList.filter(find => find.name === data.country);
+
+    setPartnerId(data.id);
+    setCurrencySymbol(currency[0].currencySymbol);
+  }
 
   return (
     <Modal>
       <div className="border-b px-6 py-4 flex items-center">
-        <h3 className="font-medium text-xl">Add New Service</h3>
+        <h3 className="font-medium text-xl">Edit Service</h3>
 
-        <button className="ml-auto block" onClick={ () => dispatch(openNewService(false)) }>
+        <button className="ml-auto block" onClick={ () => dispatch(openEditService(false)) }>
           <Icon name="close" color="#333" />
         </button>
       </div>
@@ -63,18 +73,11 @@ const EditService = ({ dispatch }) => {
             <label className="w-full px-2 flex flex-col mb-5">
               <span className="mr-5 mb-2 text-sm font-bold">Partner</span>
 
-              <div className="flex w-full items-center border border-gray-300 justify-between">
-                <div className="bg-white h-10 w-10 flex justify-center items-center rounded-l-sm">
-                  <Icon name="search" size={ 12 } color="#333" />
-                </div>
-
-                <input
-                  className="h-10 w-full text-gray-500"
-                  placeholder="Search partners"
-                  onChange={ e => setSearch(e.target.value) }
-                />
-
-
+              <div className="w-full relative">
+                { partnerList && <AutoComplete
+                  suggestions={ partnerList }
+                  onChange={ e => setPartner(e) }
+                /> }
               </div>
             </label>
 
@@ -88,16 +91,19 @@ const EditService = ({ dispatch }) => {
               ></textarea>
             </label>
 
-            <label className="w-full px-2 flex flex-col mb-5">
+            {/* <label className="w-full px-2 flex flex-col mb-5">
               <span className="mr-5 mb-2 text-sm font-bold">Service Category</span>
 
-              <select className="border p-2 text-xs text-gray-500">
-                <option>Select country</option>
+              <select
+                className="border p-2 text-xs text-gray-500"
+                onChange={ e => setCategoryId(e.target.value) }
+              >
+                <option>Select category</option>
                 { categoryList.map(el => (
                   <option key={ el.id } value={ el.id }>{ el.name }</option>
                 )) }
               </select>
-            </label>
+            </label> */}
 
             <label className="w-full px-2 flex flex-col mb-5">
               <span className="mr-5 mb-2 text-sm font-bold">Minimum Price</span>
@@ -119,4 +125,8 @@ const EditService = ({ dispatch }) => {
   );
 };
 
-export default connect()(EditService);
+const mapStateToProps = state => ({
+  countryList: state.globalState.countryList
+});
+
+export default connect(mapStateToProps)(EditService);

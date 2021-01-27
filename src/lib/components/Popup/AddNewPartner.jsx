@@ -5,10 +5,7 @@ import Icon from 'icon';
 import Modal from 'lib/elements/Modal';
 import { create, read } from 'utils/api';
 
-const categoryList = JSON.parse(localStorage.getItem('@viettonkin:categories'));
-const countryList = JSON.parse(localStorage.getItem('@viettonkin:countries'));
-
-const AddNewPartner = ({ dispatch }) => {
+const AddNewPartner = ({ dispatch, countryList, categoryList }) => {
   const [preview, setPreview] = useState(null);
   const [companyName, setCompanyName] = useState('');
   const [description, setDescription] = useState('');
@@ -187,4 +184,9 @@ const AddNewPartner = ({ dispatch }) => {
   );
 }
 
-export default connect()(AddNewPartner);
+const mapStateToProps = state => ({
+  countryList: state.globalState.countryList,
+  categoryList: state.globalState.categoryList
+});
+
+export default connect(mapStateToProps)(AddNewPartner);

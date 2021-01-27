@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { Container } from 'lib/elements/Grid';
-import { AddNewPartner, AddNewService, EditPartner, DeleteConfirm } from 'lib/components/Popup';
+import { AddNewPartner, AddNewService, EditPartner, DeleteConfirm, EditService } from 'lib/components/Popup';
 import Navigator from './Navigator';
 import ProviderTable from './ProviderTable';
 import ServiceTable from './ServiceTable';
@@ -65,6 +65,7 @@ const Dashboard = props => {
       { props.showModalEditPartner && <EditPartner /> }
       { props.showModalDeleteConfirm && <DeleteConfirm /> }
       { props.showModalNewService && <AddNewService /> }
+      { props.showModalEditService && <EditService /> }
     </Fragment>
   );
 }

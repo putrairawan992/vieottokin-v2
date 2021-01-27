@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import { setCountryList, setCategoryList } from 'store/actions/GlobalState';
 import { openSignin } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import { Container, Row } from 'lib/elements/Grid';
 import SearchInput from 'lib/components/SearchInput';
 import Icon from 'icon';
+import { read } from 'utils/api';
 
 const listMenu = [
   {
@@ -27,8 +29,22 @@ const navStyle = {
   desktop: 'md:static md:flex md:mt-0 md:w-6/12 md:flex-row md:justify-end'
 };
 
-const Navbar = ({ dispatch, location, auth }) => {
+const Navbar = ({ dispatch, auth, countryList, categoryList }) => {
   const [mobile, setMenu] = useState(false);
+
+  useEffect(() => {
+    if (!countryList?.length) {
+      read('countries').then(res => dispatch(setCountryList(res.data)));
+    }
+
+    if (!categoryList?.length) {
+      read('categories').then(res => {
+        let categories = [];
+        res.data.map(({ SubCategory }) => categories.push(...SubCategory));
+        dispatch(setCategoryList(categories));
+      });
+    }
+  }, []);
 
   return (
     <Container fluid className="py-3 bg-softdrop text-white">
@@ -84,7 +100,9 @@ const Navbar = ({ dispatch, location, auth }) => {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  countryList: state.globalState.countryList,
+  categoryList: state.globalState.categoryList
 });
 
 export default withRouter(connect(mapStateToProps)(Navbar));

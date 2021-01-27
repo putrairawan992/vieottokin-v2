@@ -5,10 +5,7 @@ import Icon from 'icon';
 import Modal from 'lib/elements/Modal';
 import { update, read } from 'utils/api';
 
-const categoryList = JSON.parse(localStorage.getItem('@viettonkin:categories'));
-const countryList = JSON.parse(localStorage.getItem('@viettonkin:countries'));
-
-const EditPartner = ({ dispatch, showModalEditPartner }) => {
+const EditPartner = ({ dispatch, showModalEditPartner, countryList, categoryList }) => {
   const [file, setFile] = useState(null);
   const [avatar, setAvatar] = useState('');
   const [companyName, setCompanyName] = useState('');
@@ -215,8 +212,10 @@ const EditPartner = ({ dispatch, showModalEditPartner }) => {
   );
 }
 
-function mapStateToProps(state) {
-  return state.modalControl;
-}
+const mapStateToProps = state => ({
+  showModalEditPartner: state.modalControl.showModalEditPartner,
+  countryList: state.globalState.countryList,
+  categoryList: state.globalState.categoryList
+});
 
 export default connect(mapStateToProps)(EditPartner);
