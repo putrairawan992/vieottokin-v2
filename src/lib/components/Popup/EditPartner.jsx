@@ -5,6 +5,9 @@ import Icon from 'icon';
 import Modal from 'lib/elements/Modal';
 import { update, read } from 'utils/api';
 
+const categoryList = JSON.parse(localStorage.getItem('@viettonkin:categories'));
+const countryList = JSON.parse(localStorage.getItem('@viettonkin:countries'));
+
 const EditPartner = ({ dispatch, showModalEditPartner }) => {
   const [file, setFile] = useState(null);
   const [avatar, setAvatar] = useState('');
@@ -16,8 +19,6 @@ const EditPartner = ({ dispatch, showModalEditPartner }) => {
   const [country, setCountry] = useState({id: '', string: ''});
   const [city, setCity] = useState('');
 
-  const [listCategory, setListCategory] = useState([]);
-  const [countryList, setCountryList] = useState([]);
   const [cityList, setCityList] = useState([]);
 
   const onChangeImage = e => {
@@ -54,24 +55,9 @@ const EditPartner = ({ dispatch, showModalEditPartner }) => {
       setCity(resPartner.data.city);
       setCountry(prev => ({...prev, string: resPartner.data.country}));
 
-      const resCountry = await read('countries');
-      const getCountry = resCountry.data.filter(find => find.name === resPartner.data.country);
+      const getCountry = countryList.filter(find => find.name === resPartner.data.country);
       const resCity = await read(`countries/${getCountry[0].id}/cities`);
       setCityList(resCity.data);
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setListCategory([]);
-
-      const resCategory = await read('categories');
-      resCategory.data.map(({ SubCategory }) => setListCategory(state => [...state, ...SubCategory]));
-
-      const resCountry = await read('countries');
-      setCountryList(resCountry.data);
     };
 
     fetchData();
@@ -102,19 +88,16 @@ const EditPartner = ({ dispatch, showModalEditPartner }) => {
         <form onSubmit={ edit }>
           <div className="mx-3 py-5 px-2 flex items-center">
             <label className="w-24 h-24 text-center flex flex-col cursor-pointer rounded-full justify-center border-2 border-dashed">
-              { file ?
-                  <img src={ URL.createObjectURL(file) } />
-                : avatar ?
-                  <img src={ avatar } />
-                :
-                  <Icon name="image" size={30} className="mx-auto" color="#6493b9" />
+              { file ? <img src={ URL.createObjectURL(file) } />
+                : avatar ? <img src={ avatar } />
+                : <Icon name="image" size={30} className="mx-auto" color="#6493b9" />
               }
 
               { !file && !avatar && <small className="text-xxs text-blue">Add file or drag<br/>& drop here</small> }
 
               <input
                 type="file"
-                required={ file && avatar }
+                required={ file || avatar }
                 accept=".jpg,.jpeg,.png,.gif"
                 className="hidden"
                 onChange={onChangeImage}
@@ -216,7 +199,7 @@ const EditPartner = ({ dispatch, showModalEditPartner }) => {
                 onChange={ e => setCategoryId(e.target.value) }
               >
                 <option value="">Select category</option>
-                { listCategory.map(el => (
+                { categoryList.map(el => (
                   <option key={ el.id } value={ el.id }>{ el.name }</option>
                 )) }
               </select>

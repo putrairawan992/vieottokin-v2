@@ -5,6 +5,9 @@ import Icon from 'icon';
 import Modal from 'lib/elements/Modal';
 import { create, read } from 'utils/api';
 
+const listCategory = JSON.parse(localStorage.getItem('@viettonkin:categories'));
+const countryList = JSON.parse(localStorage.getItem('@viettonkin:countries'));
+
 const AddNewPartner = ({ dispatch }) => {
   const [preview, setPreview] = useState(null);
   const [companyName, setCompanyName] = useState('');
@@ -15,8 +18,6 @@ const AddNewPartner = ({ dispatch }) => {
   const [country, setCountry] = useState({id: '', name: ''});
   const [city, setCity] = useState('');
 
-  const [listCategory, setListCategory] = useState([]);
-  const [countryList, setCountryList] = useState([]);
   const [cityList, setCityList] = useState([]);
 
   const onChangeImage = e => {
@@ -43,12 +44,6 @@ const AddNewPartner = ({ dispatch }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setListCategory([]);
-      const resCategory = await read('categories');
-      const resCountry = await read('countries');
-      resCategory.data.map(({ SubCategory }) => setListCategory(state => [...state, ...SubCategory]));
-      setCountryList(resCountry.data);
-
       if (country.id) {
         const resCity = await read(`countries/${country.id}/cities`);
         setCityList(resCity.data);
