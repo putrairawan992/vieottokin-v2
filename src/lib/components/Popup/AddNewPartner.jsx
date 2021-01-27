@@ -5,7 +5,7 @@ import Icon from 'icon';
 import Modal from 'lib/elements/Modal';
 import { create, read } from 'utils/api';
 
-const listCategory = JSON.parse(localStorage.getItem('@viettonkin:categories'));
+const categoryList = JSON.parse(localStorage.getItem('@viettonkin:categories'));
 const countryList = JSON.parse(localStorage.getItem('@viettonkin:countries'));
 
 const AddNewPartner = ({ dispatch }) => {
@@ -171,7 +171,7 @@ const AddNewPartner = ({ dispatch }) => {
                 onChange={ e => setCategoryId(e.target.value) }
               >
                 <option>Select country</option>
-                { listCategory.map(el => (
+                { categoryList.map(el => (
                   <option key={ el.id } value={ el.id }>{ el.name }</option>
                 )) }
               </select>

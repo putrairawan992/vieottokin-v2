@@ -12,6 +12,7 @@ const axiosInstance = async (method, path, request) => {
     })
     .catch(error => {
       store.dispatch(setLoading(false));
+      console.log(error.response)
       return error.response;
     })
 };
