@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { setCountryList, setCategoryList } from 'store/actions/GlobalState';
+import { setCountryList, setSubCategoryList, setCategoryList } from 'store/actions/GlobalState';
 import { openSignin } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import { Container, Row } from 'lib/elements/Grid';
-import SearchInput from 'lib/components/SearchInput';
+import SearchBar from 'lib/components/SearchInput/SearchBar';
 import Icon from 'icon';
 import { read } from 'utils/api';
 
@@ -29,7 +29,7 @@ const navStyle = {
   desktop: 'md:static md:flex md:mt-0 md:w-6/12 md:flex-row md:justify-end'
 };
 
-const Navbar = ({ dispatch, auth, countryList, categoryList }) => {
+const Navbar = ({ dispatch, auth, countryList, categoryList, subCategoryList }) => {
   const [mobile, setMenu] = useState(false);
 
   useEffect(() => {
@@ -37,11 +37,12 @@ const Navbar = ({ dispatch, auth, countryList, categoryList }) => {
       read('countries').then(res => dispatch(setCountryList(res.data)));
     }
 
-    if (!categoryList?.length) {
+    if (!subCategoryList?.length && !categoryList.length) {
       read('categories').then(res => {
         let categories = [];
         res.data.map(({ SubCategory }) => categories.push(...SubCategory));
-        dispatch(setCategoryList(categories));
+        dispatch(setSubCategoryList(categories));
+        dispatch(setCategoryList(res.data));
       });
     }
   }, []);
@@ -55,7 +56,7 @@ const Navbar = ({ dispatch, auth, countryList, categoryList }) => {
           </Link>
 
           <div className="relative md:block hidden w-4/12 md:pl-10">
-            <SearchInput />
+            <SearchBar />
           </div>
 
           <button className="md:hidden" onClick={ () => setMenu(!mobile) }>
@@ -65,7 +66,7 @@ const Navbar = ({ dispatch, auth, countryList, categoryList }) => {
           <nav className={ `${mobile ? 'flex' : 'hidden'} ${navStyle.desktop} ${navStyle.mobile}` }>
             <div className="px-4 w-full">
               <div className="relative md:hidden">
-                <SearchInput />
+                <SearchBar />
               </div>
             </div>
 
@@ -102,7 +103,8 @@ const Navbar = ({ dispatch, auth, countryList, categoryList }) => {
 const mapStateToProps = state => ({
   auth: state.auth,
   countryList: state.globalState.countryList,
-  categoryList: state.globalState.categoryList
+  categoryList: state.globalState.categoryList,
+  subCategoryList: state.globalState.subCategoryList
 });
 
 export default withRouter(connect(mapStateToProps)(Navbar));

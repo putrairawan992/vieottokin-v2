@@ -5,7 +5,7 @@ import Icon from 'icon';
 import Modal from 'lib/elements/Modal';
 import { create, read } from 'utils/api';
 
-const AddNewPartner = ({ dispatch, countryList, categoryList }) => {
+const AddNewPartner = ({ dispatch, countryList, subCategoryList }) => {
   const [preview, setPreview] = useState(null);
   const [companyName, setCompanyName] = useState('');
   const [description, setDescription] = useState('');
@@ -168,7 +168,7 @@ const AddNewPartner = ({ dispatch, countryList, categoryList }) => {
                 onChange={ e => setCategoryId(e.target.value) }
               >
                 <option>Select country</option>
-                { categoryList.map(el => (
+                { subCategoryList.map(el => (
                   <option key={ el.id } value={ el.id }>{ el.name }</option>
                 )) }
               </select>
@@ -186,7 +186,7 @@ const AddNewPartner = ({ dispatch, countryList, categoryList }) => {
 
 const mapStateToProps = state => ({
   countryList: state.globalState.countryList,
-  categoryList: state.globalState.categoryList
+  subCategoryList: state.globalState.subCategoryList
 });
 
 export default connect(mapStateToProps)(AddNewPartner);
