@@ -11,7 +11,7 @@ const AddNewService = ({ dispatch, countryList }) => {
   const [partnerId, setPartnerId] = useState('');
   const [currencySymbol, setCurrencySymbol] = useState('');
   const [description, setDescription] = useState('');
-  const [categoryId, setCategoryId] = useState('');
+  // const [categoryId, setCategoryId] = useState('');
   const [minimumPrice, setMinimumPrice] = useState('');
   const [partnerList, setPartnerList] = useState([]);
 
@@ -23,7 +23,7 @@ const AddNewService = ({ dispatch, countryList }) => {
       'partner_id': `${partnerId}`,
       'currency_symbol': currencySymbol,
       'description': description,
-      'categoryId': categoryId,
+      // 'categoryId': categoryId,
       'minimum_price': minimumPrice
     }
 

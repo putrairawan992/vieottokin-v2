@@ -71,11 +71,11 @@ const ServiceTable = ({ setCount, dispatch }) => {
               <td className={trBorder}>
                 <div className="flex items-center">
                   <img
-                    src={ avatar?.filter(find => find.id === item.id)[0].avatar } alt={item.name}
+                    src={ avatar?.filter(find => find.id === item.userId)[0].avatar } alt={item.name}
                     className="h-7 w-7 object-cover"
                   />
 
-                  <span className="ml-3">{ avatar?.filter(find => find.id === item.id)[0].companyName }</span>
+                  <span className="ml-3">{ avatar?.filter(find => find.id === item.userId)[0].companyName }</span>
                 </div>
               </td>
 

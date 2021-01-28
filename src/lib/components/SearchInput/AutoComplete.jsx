@@ -2,10 +2,10 @@ import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'icon';
 
-const AutoComplete = ({ suggestions, onChange }) => {
+const AutoComplete = ({ suggestions, onChange, value }) => {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [userInput, setUserInput] = useState('');
+  const [userInput, setUserInput] = useState(value);
 
   const findPartner = e => {
     const userInput = e.target.value;
@@ -54,7 +54,7 @@ const AutoComplete = ({ suggestions, onChange }) => {
         <input
           type="search"
           onChange={findPartner}
-          value={userInput}
+          value={ value || userInput }
           className="h-10 w-full text-gray-500"
           placeholder="Search partners"
         />
@@ -67,7 +67,8 @@ const AutoComplete = ({ suggestions, onChange }) => {
 };
 
 AutoComplete.defaultProps = {
-  suggestions: []
+  suggestions: [],
+  value: ''
 };
 
 AutoComplete.propTypes = {

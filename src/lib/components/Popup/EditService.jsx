@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import Icon from 'icon';
 import Modal from 'lib/elements/Modal';
 import AutoComplete from 'lib/components/SearchInput/AutoComplete';
-import { create, read } from 'utils/api';
+import { update, read } from 'utils/api';
 
-const EditService = ({ dispatch, countryList }) => {
+const EditService = ({ dispatch, countryList, showModalEditService }) => {
   const [serviceName, setServiceName] = useState('');
   const [partnerId, setPartnerId] = useState('');
+  const [companyName, setCompanyName] = useState('');
   const [currencySymbol, setCurrencySymbol] = useState('');
   const [description, setDescription] = useState('');
-  const [categoryId, setCategoryId] = useState('');
   const [minimumPrice, setMinimumPrice] = useState('');
   const [partnerList, setPartnerList] = useState([]);
 
@@ -20,14 +20,13 @@ const EditService = ({ dispatch, countryList }) => {
 
     const data = {
       'service_name': serviceName,
-      'partner_id': `${partnerId}`,
+      'partner_id': partnerId,
       'currency_symbol': currencySymbol,
       'description': description,
-      'categoryId': categoryId,
       'minimum_price': minimumPrice
     }
 
-    create('admin/services', data)
+    update(`admin/services/${showModalEditService}`, data)
     .then(() => window.location.reload());
   };
 
@@ -35,6 +34,14 @@ const EditService = ({ dispatch, countryList }) => {
     const fetchData = async () => {
       const resPartners = await read('admin/partners');
       setPartnerList(resPartners.data.results.rows);
+
+      const resData = await read(`admin/services/${showModalEditService}`);
+      setServiceName(resData.data.name);
+      setPartnerId(resData.data.userId);
+      setCurrencySymbol(resData.data.currencySymbol);
+      setDescription(resData.data.description);
+      setMinimumPrice(resData.data.minimumPrice);
+      setCompanyName(resPartners.data.results.rows.filter(find => find.id === resData.data.userId)[0].companyName);
     };
 
     fetchData();
@@ -66,6 +73,7 @@ const EditService = ({ dispatch, countryList }) => {
               <input
                 required
                 className="border py-1 px-2"
+                value={serviceName || '' }
                 onChange={ e => setServiceName(e.target.value) }
               />
             </label>
@@ -76,6 +84,7 @@ const EditService = ({ dispatch, countryList }) => {
               <div className="w-full relative">
                 { partnerList && <AutoComplete
                   suggestions={ partnerList }
+                  value={ companyName }
                   onChange={ e => setPartner(e) }
                 /> }
               </div>
@@ -87,6 +96,7 @@ const EditService = ({ dispatch, countryList }) => {
               <textarea
                 required
                 className="border py-1 px-2"
+                value={ description || ''}
                 onChange={ e => setDescription(e.target.value) }
               ></textarea>
             </label>
@@ -111,6 +121,7 @@ const EditService = ({ dispatch, countryList }) => {
               <input
                 required
                 className="border py-1 px-2"
+                value={ minimumPrice || 0 }
                 onChange={ e => setMinimumPrice(e.target.value) }
               />
             </label>
@@ -126,7 +137,8 @@ const EditService = ({ dispatch, countryList }) => {
 };
 
 const mapStateToProps = state => ({
-  countryList: state.globalState.countryList
+  countryList: state.globalState.countryList,
+  showModalEditService: state.modalControl.showModalEditService
 });
 
 export default connect(mapStateToProps)(EditService);
