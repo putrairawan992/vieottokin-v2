@@ -45,7 +45,7 @@ const EditService = ({ dispatch, countryList, showModalEditService }) => {
     };
 
     fetchData();
-  }, []);
+  }, [showModalEditService]);
 
   const setPartner = data => {
     const currency = countryList.filter(find => find.name === data.country);

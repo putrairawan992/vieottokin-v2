@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import Icon from 'icon';
-import { Link } from 'react-router-dom';
 import { openDeleteConfirm, openNewService, openEditService } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import { read } from 'utils/api';
+import Icon from 'icon';
+import { Link } from 'react-router-dom';
 
 const trBorder = 'border-b border-gray-300';
 
@@ -22,7 +22,7 @@ const ServiceTable = ({ setCount, dispatch }) => {
     };
 
     fetchData();
-  }, []);
+  }, [setCount]);
 
   return (
     <Fragment>

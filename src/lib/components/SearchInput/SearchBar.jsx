@@ -1,56 +1,45 @@
-import React, { useState, Fragment, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { setFilter } from 'store/actions/ServiceFilter';
+import { useHistory } from 'react-router-dom';
 import { Row, Col } from 'lib/elements/Grid';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import Icon from 'icon';
 import { read } from 'utils/api';
 
-const SearchBar = connect()(({ dispatch }) => {
+const SearchBar = () => {
   const [showFilter, setShowFilter] = useState(false);
-
-  return (
-    <Fragment>
-      <div className="flex items-center justify-between">
-        <div className="bg-white h-10 md:w-12 w-8 flex justify-center items-center rounded-l-sm">
-          <Icon name="search" size={ 12 } color="#333" />
-        </div>
-
-        <input
-          className="h-10 w-full text-sm text-gray-500 rounded-r-sm"
-          placeholder="What service are you looking for?"
-          onChange={ e => dispatch(setFilter({ search: e.target.value })) }
-          onFocus={ () => setShowFilter(true) }
-        />
-
-        <button className="px-5 text-xs h-10 bg-orange rounded-r-sm hidden md:block">
-          Search
-        </button>
-      </div>
-
-      { showFilter && <FilterSection setOut={ e => setShowFilter(e) } />  }
-    </Fragment>
-  );
-})
-
-const mapStateToProps = state => ({
-  countryList: state.globalState.countryList,
-  categoryList: state.globalState.categoryList
-});
-
-const FilterSection = connect(mapStateToProps)(({ dispatch, countryList, categoryList, setOut }) => {
+  const [params, setParams] = useState({search: '', categoryId: '', country: '', city: ''});
+  const history = useHistory();
   const wrapperRef = useRef(null);
-  const [cityList, setCityList] = useState([]);
+  const dispatch = useDispatch();
 
-  const selectCountry = async (id, name) => {
-    dispatch(setFilter({country: name}));
-    const resCity = await read(`countries/${id}/cities`);
-    setCityList(resCity.data);
+  const setFilters = () => {
+    dispatch(setFilter({
+      search: params.search,
+      categoryId: params.categoryId,
+      country: params.country,
+      city: params.city
+    }));
+
+    setShowFilter(false);
+  }
+
+  const redirectEnter = e => {
+    if (e.key === 'Enter') {
+      setFilters();
+      history.push('/service-providers');
+    }
+  };
+
+  const redirectButton = () => {
+    setFilters();
+    history.push('/service-providers');
   }
 
   useEffect(() => {
     function handleOutside(e) {
       if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
-        setOut(false);
+        setShowFilter(false);
       }
     }
 
@@ -59,7 +48,50 @@ const FilterSection = connect(mapStateToProps)(({ dispatch, countryList, categor
   }, [wrapperRef]);
 
   return (
-    <div ref={wrapperRef} className="bg-white text-black py-6 px-3 absolute mt-4 z-20 w-full rounded-md shadow-md">
+    <div ref={wrapperRef}>
+      <div className="flex items-center justify-between">
+        <div className="bg-white h-10 md:w-12 w-8 flex justify-center items-center rounded-l-sm">
+          <Icon name="search" size={ 12 } color="#333" />
+        </div>
+
+        <input
+          className="h-10 w-full text-sm text-gray-500 rounded-r-sm"
+          placeholder="What service are you looking for?"
+          onChange={ e => setParams({ ...params, search: e.target.value }) }
+          onFocus={ () => setShowFilter(true) }
+          onKeyDown={ redirectEnter }
+        />
+
+        <button onClick={ redirectButton } className="px-5 text-xs h-10 bg-orange rounded-r-sm hidden md:block">
+          Search
+        </button>
+      </div>
+
+      { showFilter && <FilterSection
+        // setOut={ e => setShowFilter(e) }
+        setState={ state => setParams({ ...params, ...state}) }
+        wrapperRef={ wrapperRef }
+      />  }
+    </div>
+  );
+};
+
+const mapStateToProps = state => ({
+  countryList: state.globalState.countryList,
+  categoryList: state.globalState.categoryList
+});
+
+const FilterSection = connect(mapStateToProps)(({ countryList, categoryList, setState }) => {
+  const [cityList, setCityList] = useState([]);
+
+  const selectCountry = async (id, name) => {
+    setState({country: name});
+    const resCity = await read(`countries/${id}/cities`);
+    setCityList(resCity.data);
+  }
+
+  return (
+    <div className="bg-white text-black py-6 px-3 absolute mt-4 z-20 w-full rounded-md shadow-md">
       <Row>
         <Col md={6}>
           <h3 className="w-full font-bold">Country</h3>
@@ -82,7 +114,7 @@ const FilterSection = connect(mapStateToProps)(({ dispatch, countryList, categor
           <label className="w-full flex flex-col mb-5">
             <select
               className="border p-2 text-xs text-gray-500"
-              onChange={ e => dispatch(setFilter({city: e.target.value})) }
+              onChange={ e => setState({city: e.target.value}) }
             >
               <option value="">Select city</option>
               { cityList?.map(el => (
@@ -103,7 +135,7 @@ const FilterSection = connect(mapStateToProps)(({ dispatch, countryList, categor
                     type="radio"
                     name="category"
                     className="border rounded form-checkbox text-orange"
-                    onChange={ () => dispatch(setFilter({categoryId: item.id})) }
+                    onChange={ () => setState({categoryId: item.id}) }
                   />
 
                   <p className="pl-3">{ item.name }</p>

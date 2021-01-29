@@ -5,7 +5,6 @@ import { setCurrentUser, logoutUser } from 'store/actions/Auth';
 import store from 'store';
 import jwtDecode from 'jwt-decode';
 import setAuthToken from 'utils/setAuthToken';
-import { read } from 'utils/api';
 
 if (localStorage.getItem('@viettonkin:token')) {
   const token = localStorage.getItem('@viettonkin:token');

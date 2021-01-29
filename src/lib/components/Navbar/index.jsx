@@ -45,7 +45,7 @@ const Navbar = ({ dispatch, auth, countryList, categoryList, subCategoryList }) 
         dispatch(setCategoryList(res.data));
       });
     }
-  }, []);
+  }, [subCategoryList, categoryList, dispatch, countryList]);
 
   return (
     <Container fluid className="py-3 bg-softdrop text-white">

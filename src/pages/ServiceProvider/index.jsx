@@ -8,20 +8,20 @@ import Icon from 'icon';
 import { read } from 'utils/api';
 
 const ServiceProvider = ({ serviceFilter }) => {
-  const { categoryId, country, city } = serviceFilter;
+  const { search, categoryId, country, city } = serviceFilter;
   const [service, setService] = useState([]);
   const [category, setCategory] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const resServices = await read(`services?&category_id=${categoryId}&country=${country}&city=${city}`);
+      const resServices = await read(`services?&search=${search}&category_id=${categoryId}&country=${country}&city=${city}`);
       const resCategory = await read('categories');
       resCategory.data.map(({ SubCategory }) => setCategory(state => [...state, ...SubCategory]));
       setService(resServices.data.results);
     };
 
     fetchData();
-  }, [categoryId, country, city]);
+  }, [categoryId, country, city, search]);
 
   return (
     <Fragment>

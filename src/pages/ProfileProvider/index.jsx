@@ -21,7 +21,7 @@ const ProfileProvider = () => {
     };
 
     fetchData();
-  }, []);
+  }, [id]);
 
   return (
     <Fragment>

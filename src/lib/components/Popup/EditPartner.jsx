@@ -58,7 +58,7 @@ const EditPartner = ({ dispatch, showModalEditPartner, countryList, categoryList
     };
 
     fetchData();
-  }, []);
+  }, [showModalEditPartner, countryList]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -85,8 +85,8 @@ const EditPartner = ({ dispatch, showModalEditPartner, countryList, categoryList
         <form onSubmit={ edit }>
           <div className="mx-3 py-5 px-2 flex items-center">
             <label className="w-24 h-24 text-center flex flex-col cursor-pointer rounded-full justify-center border-2 border-dashed">
-              { file ? <img src={ URL.createObjectURL(file) } />
-                : avatar ? <img src={ avatar } />
+              { file ? <img src={ URL.createObjectURL(file) } alt="avatar" />
+                : avatar ? <img src={ avatar } alt="avatar" />
                 : <Icon name="image" size={30} className="mx-auto" color="#6493b9" />
               }
 

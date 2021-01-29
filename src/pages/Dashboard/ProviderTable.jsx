@@ -21,7 +21,7 @@ const ProviderTable = ({ setCount, dispatch }) => {
     };
 
     fetchData();
-  }, []);
+  }, [setCount]);
 
   return (
     <Fragment>
