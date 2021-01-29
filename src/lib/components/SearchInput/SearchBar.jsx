@@ -68,7 +68,6 @@ const SearchBar = () => {
       </div>
 
       { showFilter && <FilterSection
-        // setOut={ e => setShowFilter(e) }
         setState={ state => setParams({ ...params, ...state}) }
         wrapperRef={ wrapperRef }
       />  }
