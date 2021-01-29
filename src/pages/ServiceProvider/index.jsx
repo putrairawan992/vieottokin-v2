@@ -1,25 +1,27 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Container, Row, Col } from 'lib/elements/Grid';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Breadcrumb from 'lib/components/Breadcrumb';
-import FilterSidebar from 'lib/components/FilterSidebar';
+import FilterSidebar from './FilterSidebar';
 import Icon from 'icon';
 import { read } from 'utils/api';
 
-const ServiceProvider = () => {
+const ServiceProvider = ({ serviceFilter }) => {
+  const { categoryId, country, city } = serviceFilter;
   const [service, setService] = useState([]);
   const [category, setCategory] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const resServices = await read(`services`);
+      const resServices = await read(`services?&category_id=${categoryId}&country=${country}&city=${city}`);
       const resCategory = await read('categories');
       resCategory.data.map(({ SubCategory }) => setCategory(state => [...state, ...SubCategory]));
       setService(resServices.data.results);
     };
 
     fetchData();
-  }, []);
+  }, [categoryId, country, city]);
 
   return (
     <Fragment>
@@ -82,9 +84,7 @@ const ServiceProvider = () => {
                   </Link>
                 </Col>
               </Row>
-              ))
-            }
-
+            )) }
           </Col>
         </Row>
       </Container>
@@ -93,4 +93,10 @@ const ServiceProvider = () => {
   );
 }
 
-export default ServiceProvider;
+const mapStateToProps = state => ({
+  serviceFilter: state.serviceFilter,
+  countryList: state.globalState.countryList,
+  categoryList: state.globalState.categoryList
+});
+
+export default connect(mapStateToProps)(ServiceProvider);
