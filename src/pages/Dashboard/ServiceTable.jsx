@@ -22,7 +22,7 @@ const ServiceTable = ({ setCount, dispatch }) => {
     };
 
     fetchData();
-  }, [setCount]);
+  }, []);
 
   return (
     <Fragment>

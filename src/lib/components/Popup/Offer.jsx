@@ -4,17 +4,7 @@ import { connect } from 'react-redux';
 import Icon from 'icon';
 import Modal from 'lib/elements/Modal';
 
-const listOffer = [
-  {
-    id: 1,
-    offer: 'Incorporation'
-  }, {
-    id: 2,
-    offer: 'Intellectual Property'
-  }
-];
-
-const Offer = ({ dispatch }) => {
+const Offer = ({ dispatch, subCategoryList }) => {
   const [selectedOffer, setSelectedOffer ] = useState([]);
   const [keyword, setKeyword] = useState('');
   const [openOfferList, setOpenOffer] = useState(false);
@@ -27,6 +17,10 @@ const Offer = ({ dispatch }) => {
   const removeMyOffer = index => {
     selectedOffer.splice(index, 1);
     setSelectedOffer([...selectedOffer]);
+  }
+
+  const submit = () => {
+    console.log(selectedOffer)
   }
 
   return (
@@ -48,7 +42,6 @@ const Offer = ({ dispatch }) => {
 
             <input
               onFocus={ () => setOpenOffer(true) }
-              // onBlur={ () => setOpenOffer(false) }
               className="h-10 w-6/12"
               placeholder="What service are you looking for?"
               onChange={ e => setKeyword(e.target.value) }
@@ -56,16 +49,16 @@ const Offer = ({ dispatch }) => {
           </div>
 
           { openOfferList && <div className="shadow-md bg-white rounded-md mt-2 absolute w-full">
-            { listOffer
+            { subCategoryList
               .filter((find, i) => selectedOffer[i] ? find.id !== selectedOffer[i].id : find)
-              .filter(find => find.offer.toLocaleLowerCase().includes(keyword.toLocaleLowerCase()))
+              .filter(find => find.name.toLocaleLowerCase().includes(keyword.toLocaleLowerCase()))
               .map(item => (
                 <div
                   className="cursor-pointer hover:bg-gray-100"
                   key={ item.id }
-                  onClick={ () => addMyOffer(item.id, item.offer) }
+                  onClick={ () => addMyOffer(item.id, item.name) }
                 >
-                  <p className="p-3">{ item.offer }</p>
+                  <p className="p-3">{ item.name }</p>
                 </div>
             )) }
           </div> }
@@ -86,16 +79,26 @@ const Offer = ({ dispatch }) => {
           )) }
         </ul> }
 
-        <button className="text-orange text-sm font-bold mt-24">
+        <button
+          onClick={ () => dispatch(openOffer(false)) }
+          className="text-orange text-sm font-bold mt-24"
+        >
           GO BACK
         </button>
       </div>
 
-      <button className="bg-orange w-full py-3 text-white rounded-b-md">
+      <button
+        onClick={ submit }
+        className="bg-orange w-full py-3 text-white rounded-b-md"
+      >
         SUBMIT
       </button>
     </Modal>
   );
 }
 
-export default connect()(Offer);
+const mapStateToProps = state => ({
+  subCategoryList: state.globalState.subCategoryList
+});
+
+export default connect(mapStateToProps)(Offer);
