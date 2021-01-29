@@ -6,22 +6,20 @@ import { read } from 'utils/api';
 
 const trBorder = 'border-b border-gray-300';
 
-const ProviderTable = ({ setCount, dispatch }) => {
+const ProviderTable = ({ setCount, dispatch, serviceFilter, countryList }) => {
   const [partners, setPartners] = useState(null);
   const [country, setCountry] = useState(null);
   const [search, setSearch] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
-      const resPartners = await read('admin/partners');
-      const resCountry = await read('countries');
-      setCountry(resCountry.data);
+      const resPartners = await read(`admin/partners?limit=${serviceFilter.limit}`);
       setCount(resPartners.data.results.count);
       setPartners(resPartners.data.results);
     };
 
     fetchData();
-  }, []);
+  }, [serviceFilter.limit]);
 
   return (
     <Fragment>
@@ -73,7 +71,7 @@ const ProviderTable = ({ setCount, dispatch }) => {
                 <td className={ `${trBorder}` }>
                   <div className="flex items-center">
                     <img
-                      src={ country.filter(find => find.name === item.country)[0]?.logo || '' }
+                      src={ countryList.filter(find => find.name === item.country)[0]?.logo || '' }
                       alt={ item.country }
                     />
                     <span className="ml-3">{ item.country }</span>
@@ -110,8 +108,10 @@ const ProviderTable = ({ setCount, dispatch }) => {
   );
 }
 
-function mapStateToProps(state) {
-  return state.modalControl
-}
+const mapStateToProps = state => ({
+  ...state.modalControl,
+  serviceFilter: state.serviceFilter,
+  countryList: state.globalState.countryList
+});
 
 export default connect(mapStateToProps)(ProviderTable);

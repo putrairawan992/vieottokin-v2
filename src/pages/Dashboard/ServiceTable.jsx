@@ -111,8 +111,4 @@ const ServiceTable = ({ setCount, dispatch }) => {
   );
 }
 
-function mapStateToProps(state) {
-  return state.modalControl;
-}
-
-export default connect(mapStateToProps)(ServiceTable);
+export default connect()(ServiceTable);

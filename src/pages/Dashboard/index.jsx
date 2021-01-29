@@ -1,13 +1,14 @@
 import React, { Fragment, useState } from 'react';
 import { Container } from 'lib/elements/Grid';
 import { AddNewPartner, AddNewService, EditPartner, DeleteConfirm, EditService } from 'lib/components/Popup';
+import { setFilter } from 'store/actions/ServiceFilter';
 import Navigator from './Navigator';
 import ProviderTable from './ProviderTable';
 import ServiceTable from './ServiceTable';
 import { connect } from 'react-redux';
 import Icon from 'icon';
 
-const Dashboard = props => {
+const Dashboard = ({ serviceFilter, dispatch, ...props }) => {
   const [showTable, setShowTable] = useState('partners');
   const [partnerCount, setPartnerCount] = useState(0);
   const [serviceCount, setServiceCount] = useState(0);
@@ -33,11 +34,14 @@ const Dashboard = props => {
             <div className="flex items-center text-xs">
               <p>Show</p>
 
-              <select className="border p-1 ml-2 font-bold">
-                <option>10</option>
-                <option>20</option>
-                <option>30</option>
-                <option>40</option>
+              <select
+                className="border p-1 ml-2 font-bold"
+                onClick={ e => dispatch(setFilter({limit: e.target.value})) }
+              >
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">40</option>
+                <option value="90">90</option>
               </select>
             </div>
 
@@ -70,8 +74,9 @@ const Dashboard = props => {
   );
 }
 
-function mapStateToProps(state) {
-  return state.modalControl;
-}
+const mapStateToProps = state => ({
+  ...state.modalControl,
+  serviceFilter: state.serviceFilter
+})
 
 export default connect(mapStateToProps)(Dashboard);
