@@ -7,19 +7,19 @@ import { read } from 'utils/api';
 const trBorder = 'border-b border-gray-300';
 
 const ProviderTable = ({ setCount, dispatch, serviceFilter, countryList }) => {
+  const { limit, page } = serviceFilter;
   const [partners, setPartners] = useState(null);
-  const [country, setCountry] = useState(null);
   const [search, setSearch] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
-      const resPartners = await read(`admin/partners?limit=${serviceFilter.limit}`);
-      setCount(resPartners.data.results.count);
+      const resPartners = await read(`admin/partners?page=${page}&limit=${limit}`);
+      setCount({count: resPartners.data.results.count, pages: resPartners.data.lastPage || 1});
       setPartners(resPartners.data.results);
     };
 
     fetchData();
-  }, [serviceFilter.limit]);
+  }, [limit, page]);
 
   return (
     <Fragment>

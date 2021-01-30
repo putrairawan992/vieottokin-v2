@@ -22,3 +22,8 @@
     opacity: 0;
     transition: opacity 200ms linear;
 }
+
+button:disabled,
+button[disabled]{
+    cursor: default;
+}

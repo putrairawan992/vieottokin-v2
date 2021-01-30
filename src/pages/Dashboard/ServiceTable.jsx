@@ -17,7 +17,7 @@ const ServiceTable = ({ setCount, dispatch }) => {
       const resServices = await read('admin/services');
       const resPartner = await read(`admin/partners`);
       setAvatar(resPartner.data.results.rows);
-      setCount(resServices.data.results.count);
+      setCount({count: resServices.data.results.count, pages: resServices.data.lastPage || 1});
       setServices(resServices.data.results);
     };
 

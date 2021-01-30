@@ -31421,6 +31421,11 @@ video {
   transition: opacity 200ms linear;
 }
 
+button:disabled,
+button[disabled]{
+  cursor: default;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
