@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
+import { logoutUser } from 'store/actions/Auth';
 import { Link, withRouter } from 'react-router-dom';
 import { setCountryList, setSubCategoryList, setCategoryList } from 'store/actions/GlobalState';
 import { openSignin } from 'store/actions/ModalControl';
-import { connect } from 'react-redux';
 import { Container, Row } from 'lib/elements/Grid';
 import SearchBar from 'lib/components/SearchInput/SearchBar';
 import Icon from 'icon';
@@ -29,8 +30,10 @@ const navStyle = {
   desktop: 'md:static md:flex md:mt-0 md:w-6/12 md:flex-row md:justify-end'
 };
 
-const Navbar = ({ dispatch, auth, countryList, categoryList, subCategoryList }) => {
+const Navbar = ({ auth, countryList, categoryList, subCategoryList, logoutUser }) => {
+  const [profileMenu, setProfileMenu] = useState(false);
   const [mobile, setMenu] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!countryList?.length) {
@@ -88,18 +91,30 @@ const Navbar = ({ dispatch, auth, countryList, categoryList, subCategoryList }) 
                 <Icon name="user" size={ 12 } color="#20BFEF" className="mr-2" />
                 Login
               </button> :
-              <button className="flex items-center justify-between w-20 ml-auto">
+              <button
+                onClick={ () => setProfileMenu(!profileMenu) }
+                className="flex items-center justify-between w-20 ml-auto"
+              >
                 <img src={ auth.userProfile.avatar } alt="user" className="w-10 object-cover" />
                 <Icon name="triangle" size={ 13 } />
               </button> }
             </div>
+
+            { profileMenu && <div className="w-auto bg-white text-gray-500 mt-24 rounded-sm absolute flex flex-col py-2">
+              <Link to="/dashboard" className="px-6 py-2">Dashboard</Link>
+              <button
+                onClick={ () => logoutUser() }
+                className="px-6 py-2 text-left"
+              >
+                Logout
+              </button>
+            </div> }
           </nav>
         </Row>
       </Container>
     </Container>
   );
 }
-
 const mapStateToProps = state => ({
   auth: state.auth,
   countryList: state.globalState.countryList,
@@ -107,4 +122,4 @@ const mapStateToProps = state => ({
   subCategoryList: state.globalState.subCategoryList
 });
 
-export default withRouter(connect(mapStateToProps)(Navbar));
+export default withRouter(connect(mapStateToProps, { logoutUser })(Navbar));

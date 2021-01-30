@@ -4,7 +4,6 @@ import store from 'store';
 
 const axiosInstance = async (method, path, request) => {
   if (!path.includes('cities')) {
-    console.log(path)
     store.dispatch(setLoading(true));
   }
 

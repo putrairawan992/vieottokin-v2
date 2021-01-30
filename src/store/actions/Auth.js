@@ -29,7 +29,8 @@ export const loginUser = userData => dispatch => {
 };
 
 export const logoutUser = () => dispatch => {
-  localStorage.removeItem('jwtToken');
+  localStorage.removeItem('@viettonkin:token');
   setAuthToken(false);
   dispatch(setCurrentUser({}));
+  window.location.reload();
 };
