@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { Container } from 'lib/elements/Grid';
 import Icon from 'icon';
 
@@ -9,23 +10,33 @@ const Navigator = ({ count, tableType, switchTable }) => (
     </p>
 
     <div className="flex items-center">
-      <button
-        className="flex items-center md:mr-8 mr-4"
-        onClick={ () => switchTable('partners') }
-      >
-        <Icon name="user" color={ tableType === 'partners' ? '#0c4596' : '#333' } />
-        <span className={ `md:ml-3 ml-1 text-sm font-medium ${ tableType === 'partners' ? 'text-darkdrop' : '#999' }` }>Partners</span>
-      </button>
+      { <Fragment>
+        <button
+          className="flex items-center md:mr-8 mr-4"
+          onClick={ () => switchTable('partners') }
+        >
+          <Icon name="user" color={ tableType === 'partners' ? '#0c4596' : '#333' } />
+          <span className={ `md:ml-3 ml-1 text-sm font-medium ${ tableType === 'partners' ? 'text-darkdrop' : '#999' }` }>Partners</span>
+        </button>
 
-      <button
-        className="flex items-center"
-        onClick={ () => switchTable('services') }
-      >
-        <Icon name="suitcase" color={ tableType === 'services' ? '#0c4596' : '#333' } />
-        <span className={ `md:ml-3 ml-1 text-sm font-medium ${ tableType === 'services' ? 'text-darkdrop' : '#999' }` }>Services</span>
-      </button>
+        <button
+          className="flex items-center"
+          onClick={ () => switchTable('services') }
+        >
+          <Icon name="suitcase" color={ tableType === 'services' ? '#0c4596' : '#333' } />
+          <span className={ `md:ml-3 ml-1 text-sm font-medium ${ tableType === 'services' ? 'text-darkdrop' : '#999' }` }>Services</span>
+        </button>
+      </Fragment> }
     </div>
   </Container>
 );
+
+Navigator.defaultProps = {
+  tableType: ''
+};
+
+Navigator.propTypes = {
+  tableType: PropTypes.string.isRequired
+};
 
 export default Navigator;

@@ -9,15 +9,12 @@ const trBorder = 'border-b border-gray-300';
 
 const ServiceTable = ({ setCount, dispatch }) => {
   const [services, setServices] = useState([]);
-  const [avatar, setAvatar] = useState([]);
   const [search, setSearch] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       const resServices = await read('admin/services');
-      const resPartner = await read(`admin/partners`);
-      setAvatar(resPartner.data.results.rows);
-      setCount({count: resServices.data.results.count, pages: resServices.data.lastPage || 1});
+      setCount(resServices.data.results.count);
       setServices(resServices.data.results);
     };
 
@@ -71,11 +68,11 @@ const ServiceTable = ({ setCount, dispatch }) => {
               <td className={trBorder}>
                 <div className="flex items-center">
                   <img
-                    src={ avatar?.filter(find => find.id === item.userId)[0].avatar } alt={item.name}
+                    src={ item.partner?.avatar } alt={item.name}
                     className="h-7 w-7 object-cover"
                   />
 
-                  <span className="ml-3">{ avatar?.filter(find => find.id === item.userId)[0].companyName }</span>
+                  <span className="ml-3">{ item.partner?.companyName }</span>
                 </div>
               </td>
 
