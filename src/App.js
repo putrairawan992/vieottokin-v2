@@ -19,9 +19,9 @@ if (localStorage.getItem('@viettonkin:token')) {
 };
 
 const App = () => (
-	<BrowserRouter>
-		<RouterManager />
-	</BrowserRouter>
+  <BrowserRouter>
+    <RouterManager />
+  </BrowserRouter>
 );
 
 export default App;

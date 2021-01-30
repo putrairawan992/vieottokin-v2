@@ -3,7 +3,10 @@ import setLoading from 'store/actions/Loading';
 import store from 'store';
 
 const axiosInstance = async (method, path, request) => {
-  store.dispatch(setLoading(true));
+  if (!path.includes('cities')) {
+    console.log(path)
+    store.dispatch(setLoading(true));
+  }
 
   return axios[method](process.env.REACT_APP_API_HOST + path, request)
     .then(response => {

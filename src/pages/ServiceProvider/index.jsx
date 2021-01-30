@@ -2,10 +2,10 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { Container, Row, Col } from 'lib/elements/Grid';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { read } from 'utils/api';
 import Breadcrumb from 'lib/components/Breadcrumb';
 import FilterSidebar from './FilterSidebar';
 import Icon from 'icon';
-import { read } from 'utils/api';
 
 const ServiceProvider = ({ serviceFilter }) => {
   const { search, categoryId, country, city } = serviceFilter;
