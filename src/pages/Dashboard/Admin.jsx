@@ -6,7 +6,7 @@ import ServiceTable from './ServiceTable';
 import { connect } from 'react-redux';
 import TableFooter from './TableFooter';
 
-const AdminDashboard = ({ currentPage, dispatch}) => {
+const AdminDashboard = () => {
   const [showTable, setShowTable] = useState('partners');
   const [partnerCount, setPartnerCount] = useState(0);
   const [serviceCount, setServiceCount] = useState(0);
@@ -44,9 +44,4 @@ const AdminDashboard = ({ currentPage, dispatch}) => {
   );
 }
 
-const mapStateToProps = state => ({
-  ...state.modalControl,
-  currentPage: state.serviceFilter.page
-})
-
-export default connect(mapStateToProps)(AdminDashboard);
+export default connect()(AdminDashboard);

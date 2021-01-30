@@ -1,4 +1,5 @@
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const USER_PROFILE = 'USER_PROFILE';
 export const LOADING_PROGRESS = 'LOADING_PROGRESS';
 
 export const MODAL_SIGNUP = 'MODAL_SIGNUP';

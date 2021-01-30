@@ -55,7 +55,7 @@ const SearchBar = () => {
         </div>
 
         <input
-          className="h-10 w-full text-sm text-gray-500 rounded-r-sm"
+          className="h-10 w-full text-sm text-gray-500"
           placeholder="What service are you looking for?"
           onChange={ e => setParams({ ...params, search: e.target.value }) }
           onFocus={ () => setShowFilter(true) }

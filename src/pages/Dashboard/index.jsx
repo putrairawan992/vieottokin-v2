@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import AdminDashboard from './Admin';
 import PartnerDashboard from './Partner';
 
-const Dashboard = ({ currentPage, dispatch, role, ...props }) => {
+const Dashboard = ({ dispatch, role, ...props }) => {
   return (
     <Fragment>
       { role === 'Admin' && <AdminDashboard /> }
@@ -21,8 +21,7 @@ const Dashboard = ({ currentPage, dispatch, role, ...props }) => {
 
 const mapStateToProps = state => ({
   ...state.modalControl,
-  role: state.auth.user.role,
-  currentPage: state.serviceFilter.page
+  role: state.auth.user.role
 })
 
 export default connect(mapStateToProps)(Dashboard);

@@ -1,11 +1,10 @@
 import axios from 'axios';
 import setAuthToken from 'utils/setAuthToken';
 import jwtDecode from 'jwt-decode';
-import { SET_CURRENT_USER } from '../types';
+import { SET_CURRENT_USER, USER_PROFILE } from '../types';
 
-export const setCurrentUser = decoded => ({
-  type: SET_CURRENT_USER, payload: decoded
-});
+export const setCurrentUser = decoded => ({ type: SET_CURRENT_USER, payload: decoded });
+export const setUserProfile = payload => ({ type: USER_PROFILE, payload });
 
 export const loginUser = userData => dispatch => {
   axios.post(`${process.env.REACT_APP_API_HOST}login`, userData)

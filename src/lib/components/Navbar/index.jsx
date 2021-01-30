@@ -25,7 +25,7 @@ const listMenu = [
 ]
 
 const navStyle = {
-  mobile: 'flex-col w-full flex-grow text-right items-center top-12 z-20 bg-softdrop absolute',
+  mobile: 'flex-col w-full flex-grow text-right items-center top-10 z-20 bg-softdrop absolute',
   desktop: 'md:static md:flex md:mt-0 md:w-6/12 md:flex-row md:justify-end'
 };
 
@@ -48,7 +48,7 @@ const Navbar = ({ dispatch, auth, countryList, categoryList, subCategoryList }) 
   }, [subCategoryList, categoryList, dispatch, countryList]);
 
   return (
-    <Container fluid className="py-3 bg-softdrop text-white">
+    <Container fluid className="py-2 bg-softdrop text-white">
       <Container>
         <Row className="md:text-sm text-md relative items-center justify-between">
           <Link to="/" className="md:w-2/12 w-4/12">
@@ -65,7 +65,7 @@ const Navbar = ({ dispatch, auth, countryList, categoryList, subCategoryList }) 
 
           <nav className={ `${mobile ? 'flex' : 'hidden'} ${navStyle.desktop} ${navStyle.mobile}` }>
             <div className="px-4 w-full">
-              <div className="relative md:hidden">
+              <div className="relative md:hidden py-5">
                 <SearchBar />
               </div>
             </div>
@@ -80,17 +80,17 @@ const Navbar = ({ dispatch, auth, countryList, categoryList, subCategoryList }) 
               </Link>
             )) }
 
-            <div className="text-blue flex justify-between py-2 px-4 w-full md:ml-10 md:w-auto md:mt-0 mt-3">
+            <div className="text-blue flex justify-between p-2 w-full md:ml-8 md:w-auto md:mt-0 mt-3">
               { !auth.isAuthenticated ? <button
-                className="flex items-center"
+                className="flex items-center ml-auto"
                 onClick={ () => dispatch(openSignin(true)) }
               >
                 <Icon name="user" size={ 12 } color="#20BFEF" className="mr-2" />
                 Login
               </button> :
-              <button className="flex items-center">
-                <img src="/images/demo-user.png" alt="user" className="w-10 object-cover md:w-12" />
-                <Icon name="triangle" size={ 12 } className="ml-10" />
+              <button className="flex items-center justify-between w-20 ml-auto">
+                <img src={ auth.userProfile.avatar } alt="user" className="w-10 object-cover" />
+                <Icon name="triangle" size={ 13 } />
               </button> }
             </div>
           </nav>

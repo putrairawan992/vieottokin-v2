@@ -5,7 +5,7 @@ import store from 'store';
 const axiosInstance = async (method, path, request) => {
   store.dispatch(setLoading(true));
 
-  return axios[method](path, request)
+  return axios[method](process.env.REACT_APP_API_HOST + path, request)
     .then(response => {
       store.dispatch(setLoading(false));
       return response.data;
