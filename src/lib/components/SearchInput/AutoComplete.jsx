@@ -53,8 +53,8 @@ const AutoComplete = ({ suggestions, onChange, value }) => {
 
         <input
           type="search"
-          onChange={findPartner}
-          value={ value || userInput }
+          onChange={ findPartner }
+          value={ userInput }
           className="h-10 w-full text-gray-500"
           placeholder="Search partners"
         />

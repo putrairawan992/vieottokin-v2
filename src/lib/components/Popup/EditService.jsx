@@ -82,7 +82,7 @@ const EditService = ({ dispatch, countryList, showModalEditService }) => {
               <span className="mr-5 mb-2 text-sm font-bold">Partner</span>
 
               <div className="w-full relative">
-                { partnerList && <AutoComplete
+                { partnerList && companyName && <AutoComplete
                   suggestions={ partnerList }
                   value={ companyName }
                   onChange={ e => setPartner(e) }
