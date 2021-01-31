@@ -34,7 +34,7 @@ const ProfileProvider = () => {
               <Col md={3}>
                 <img
                   src={ service.partner?.avatar }
-                  alt="tech dojo"
+                  alt={ service.partner?.companyName }
                   className="rounded-full object-cover w-full"
                 />
               </Col>

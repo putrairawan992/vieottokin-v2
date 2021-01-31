@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { logoutUser } from 'store/actions/Auth';
 import { Link, withRouter } from 'react-router-dom';
@@ -30,8 +30,27 @@ const navStyle = {
   desktop: 'md:static md:flex md:mt-0 md:w-6/12 md:flex-row md:justify-end'
 };
 
+const AuthMenu = ({ logout }) => (
+  <Fragment>
+    <Link to="/dashboard" className="md:mx-4 pr-4 md:pr-0 my-1 w-full md:my-0 md:w-auto">
+      Dashboard
+    </Link>
+
+    <button className="flex items-center ml-auto text-blue" onClick={ logout } >
+      <Icon name="power-off" size={ 12 } color="#20BFEF" className="mr-2" />
+      Logout
+    </button>
+  </Fragment>
+);
+
+const UnAuthMenu = ({ signin }) => (
+  <button className="flex items-center ml-auto text-blue" onClick={ signin } >
+    <Icon name="user" size={ 12 } color="#20BFEF" className="mr-2" />
+    Login
+  </button>
+);
+
 const Navbar = ({ auth, countryList, categoryList, subCategoryList, logoutUser }) => {
-  const [profileMenu, setProfileMenu] = useState(false);
   const [mobile, setMenu] = useState(false);
   const dispatch = useDispatch();
 
@@ -83,32 +102,9 @@ const Navbar = ({ auth, countryList, categoryList, subCategoryList, logoutUser }
               </Link>
             )) }
 
-            <div className="text-blue flex justify-between p-2 w-full md:ml-8 md:w-auto md:mt-0 mt-3">
-              { !auth.isAuthenticated ? <button
-                className="flex items-center ml-auto"
-                onClick={ () => dispatch(openSignin(true)) }
-              >
-                <Icon name="user" size={ 12 } color="#20BFEF" className="mr-2" />
-                Login
-              </button> :
-              <button
-                onClick={ () => setProfileMenu(!profileMenu) }
-                className="flex items-center justify-between w-20 ml-auto"
-              >
-                <img src={ auth.userProfile.avatar } alt="user" className="w-10 object-cover" />
-                <Icon name="triangle" size={ 13 } />
-              </button> }
+            <div className="flex justify-between p-2 w-full md:ml-7 md:w-auto md:mt-0 mt-3">
+              { !auth ? <UnAuthMenu signin={ () => dispatch(openSignin(true)) } /> : <AuthMenu logout={ () => logoutUser() } /> }
             </div>
-
-            { profileMenu && <div className="w-auto bg-white text-gray-500 mt-24 rounded-sm absolute flex flex-col py-2">
-              <Link to="/dashboard" className="px-6 py-2">Dashboard</Link>
-              <button
-                onClick={ () => logoutUser() }
-                className="px-6 py-2 text-left"
-              >
-                Logout
-              </button>
-            </div> }
           </nav>
         </Row>
       </Container>
@@ -116,7 +112,7 @@ const Navbar = ({ auth, countryList, categoryList, subCategoryList, logoutUser }
   );
 }
 const mapStateToProps = state => ({
-  auth: state.auth,
+  auth: state.auth.isAuthenticated,
   countryList: state.globalState.countryList,
   categoryList: state.globalState.categoryList,
   subCategoryList: state.globalState.subCategoryList
