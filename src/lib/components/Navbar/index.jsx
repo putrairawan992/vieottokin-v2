@@ -102,7 +102,7 @@ const Navbar = ({ auth, countryList, categoryList, subCategoryList, logoutUser }
               </Link>
             )) }
 
-            <div className="flex justify-between p-2 w-full md:ml-7 md:w-auto md:mt-0 mt-3">
+            <div className="flex justify-between p-2 w-full md:ml-5 md:w-auto md:mt-0 mt-3">
               { !auth ? <UnAuthMenu signin={ () => dispatch(openSignin(true)) } /> : <AuthMenu logout={ () => logoutUser() } /> }
             </div>
           </nav>

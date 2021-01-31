@@ -3,9 +3,8 @@ import setLoading from 'store/actions/Loading';
 import store from 'store';
 
 const axiosInstance = async (method, path, request) => {
-  if (['cities', 'categories'].some(slug => !path.includes(slug))) {
-    store.dispatch(setLoading(true));
-  }
+  const noLoading = ['countries', 'cities', 'categories'];
+  noLoading.some(slug => store.dispatch(setLoading(!path.includes(slug))));
 
   return axios[method](process.env.REACT_APP_API_HOST + path, request)
     .then(response => {
