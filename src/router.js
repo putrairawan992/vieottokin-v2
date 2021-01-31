@@ -21,7 +21,9 @@ import Contact from 'pages/Contact';
 import Dashboard from 'pages/Dashboard';
 
 const RouterManager = ({ progress, location, dispatch, ...props }) => {
-  useEffect(() => dispatch(resetFilter()), [location.pathname !== '/service-providers']);
+  useEffect(() => {
+    if (location.pathname !== '/service-providers') dispatch(resetFilter());
+  }, [location.pathname]);
 
   return (
     <Fragment>

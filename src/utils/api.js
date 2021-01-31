@@ -3,7 +3,7 @@ import setLoading from 'store/actions/Loading';
 import store from 'store';
 
 const axiosInstance = async (method, path, request) => {
-  if (!path.includes('cities')) {
+  if (['cities', 'categories'].some(slug => !path.includes(slug))) {
     store.dispatch(setLoading(true));
   }
 
