@@ -55,7 +55,7 @@ const AutoComplete = ({ suggestions, onChange, value }) => {
           type="search"
           onChange={ findPartner }
           value={ userInput }
-          className="h-10 w-full text-gray-500"
+          className="h-10 w-full text-gray-500 pl-2"
           placeholder="Search partners"
         />
       </div>

@@ -33,7 +33,7 @@ const ProviderTable = ({ setCount, dispatch, serviceFilter, countryList }) => {
             </div>
 
             <input
-              className="h-10 w-full text-gray-500"
+              className="h-10 w-full text-gray-500 pl-2"
               placeholder="Search"
               onChange={ e => setSearch(e.target.value) }
             />

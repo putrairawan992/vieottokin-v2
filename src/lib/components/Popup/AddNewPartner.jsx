@@ -63,8 +63,11 @@ const AddNewPartner = ({ dispatch, countryList, subCategoryList }) => {
       <div className="flex flex-col">
         <form onSubmit={ submit }>
           <div className="mx-3 py-5 px-2 flex items-center">
-            <label className="w-24 h-24 text-center flex flex-col cursor-pointer rounded-full justify-center border-2 border-dashed">
-              { preview ? <img src={ URL.createObjectURL(preview) } alt="logo" /> : <Icon name="image" size={30} className="mx-auto" color="#6493b9" /> }
+            <label className="w-24 h-24 text-center flex flex-col cursor-pointer rounded-full overflow-hidden justify-center border-2 border-dashed">
+              {
+                preview ? <img src={ URL.createObjectURL(preview) } className="h-full object-cover" alt="logo" />
+                : <Icon name="image" size={30} className="mx-auto" color="#6493b9" />
+              }
 
               { !preview && <small className="text-xxs text-blue">
                 Add file or drag<br/>& drop here

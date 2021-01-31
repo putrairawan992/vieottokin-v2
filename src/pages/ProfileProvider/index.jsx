@@ -35,7 +35,7 @@ const ProfileProvider = () => {
                 <img
                   src={ service.partner?.avatar }
                   alt="tech dojo"
-                  className="rounded-l-md object-cover w-full"
+                  className="rounded-full object-cover w-full"
                 />
               </Col>
 
