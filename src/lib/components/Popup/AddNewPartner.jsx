@@ -19,7 +19,13 @@ const AddNewPartner = ({ dispatch, countryList, subCategoryList }) => {
 
   const onChangeImage = e => {
     e.preventDefault();
-    setPreview(e.target.files[0]);
+    const fileSize = ((e.target.files[0].size/1024)/1024).toFixed(4);
+
+    if (fileSize > 2) {
+      alert('Limit 2MB');
+    } else {
+      setPreview(e.target.files[0]);
+    }
   }
 
   const submit = e => {
