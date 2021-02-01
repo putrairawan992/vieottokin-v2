@@ -45,7 +45,7 @@ const RouterManager = ({ progress, location, dispatch, ...props }) => {
               <Route path='/success-checkout' component={ SuccessCheckout } />
               <Route path='/faq' component={ FAQ } />
               <Route path='/contact' component={ Contact } />
-              <PrivateRoute path='/cart' component={ Cart } />
+              <Route path='/cart' component={ Cart } />
               <PrivateRoute path='/dashboard' component={ Dashboard } />
             </Switch>
 

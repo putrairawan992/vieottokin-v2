@@ -57,7 +57,7 @@ const EditService = ({ dispatch, countryList, showModalEditService }) => {
   useEffect(() => {
     const fetchData = async () => {
       if (catPartnerId) {
-        const resCategory = await read(`admin/categories/${catPartnerId}/child`);
+        const resCategory = await read(`categories/${catPartnerId}/child`);
         setSubCategoryList(resCategory.data);
       }
     };

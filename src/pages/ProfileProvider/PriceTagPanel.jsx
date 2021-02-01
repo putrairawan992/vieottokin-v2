@@ -32,7 +32,7 @@ const PriceTagPanel = ({ currency, price, category }) => {
           <div className="font-bold text-lg leading-none">{currency} { price }</div>
         </div>
 
-        <button to="/cart" onClick={ () => addToChart() } className="bg-orange p-1 flex w-full rounded-b-md h-12 items-center justify-between">
+        <button onClick={ addToChart } className="bg-orange p-1 flex w-full rounded-b-md h-12 items-center justify-between">
           <div className="bg-white h-10 w-10 flex justify-center items-center rounded-bl-sm">
             <Icon name="bookmark" color="#f58120" />
           </div>

@@ -15,9 +15,12 @@ const ProfileProvider = () => {
   useEffect(() => {
     const fetchData = async () => {
       const resService = await read(`services/${id}`);
-      const resCategory = await read('categories');
-      resCategory.data.map(({ SubCategory }) => setCategory(state => [...state, ...SubCategory]));
       setService(resService.data);
+
+      if (resService.data.partner.categoryId) {
+        const resCategory = await read(`categories/${resService.data.partner.categoryId}/child`);
+        setCategory(resCategory.data.filter(find => find.id === resService.data.categoryId)[0].name);
+      }
     };
 
     fetchData();
@@ -44,7 +47,7 @@ const ProfileProvider = () => {
                   <h1 className="font-bold text-lg capitalize">{ service.partner?.companyName }</h1>
 
                   <span className="bg-orange py-1 px-4 text-xs text-white flex items-center uppercase">
-                    { service.categoryId && category?.filter(find => find.id === service.categoryId)[0].name }
+                    { category }
                   </span>
                 </div>
 
@@ -91,9 +94,9 @@ const ProfileProvider = () => {
 
           <Col md={4} className="md:mt-0 mt-8">
             <PriceTagPanel
-              currency={service.currencySymbol}
-              price={service.minimumPrice}
-              category={ service.categoryId && category?.filter(find => find.id === service.categoryId)[0].name}
+              currency={ service.currencySymbol }
+              price={ service.minimumPrice }
+              category={ category }
             />
           </Col>
         </Row>

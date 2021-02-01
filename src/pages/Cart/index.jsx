@@ -9,6 +9,7 @@ const Cart = () => {
   const [openInclude, setOpenInclude] = useState({});
   const [services, setServices] = useState([]);
   const [serviceId, setServiceId] = useState([]);
+  const [subtotal, setSubtotal] = useState(0);
   const [getNewList, setNewList] = useState(false);
 
   useEffect(() => {
@@ -20,7 +21,14 @@ const Cart = () => {
       const getDetails = await read(`services/${value}`);
       setServices(state => [...state, getDetails.data]);
     });
+
   }, [getNewList]);
+
+  useEffect(() => {
+    let temp = [];
+    services.forEach(el => temp.push(el.minimumPrice));
+    setSubtotal(temp.reduce((a, b) => a + b, 0));
+  }, [services])
 
   const deleteServiceId = id => {
     const serviceList = serviceId;
@@ -95,12 +103,12 @@ const Cart = () => {
 
               <div className="flex justify-between text-gray-500 text-sm mt-5 pb-6 px-5 border-b">
                 <span>Subtotal</span>
-                <span>¥ 7440</span>
+                <span>{ subtotal }</span>
               </div>
 
               <div className="px-5 flex justify-between mb-6 mt-3">
                 <b className="text-sm">Total</b>
-                <div className="font-bold text-lg leading-none">¥ 7440</div>
+                <div className="font-bold text-lg leading-none">{ subtotal }</div>
               </div>
 
               <div className="px-5 flex justify-between mb-6 mt-3">
