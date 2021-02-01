@@ -5,9 +5,10 @@ import Icon from 'icon';
 import Modal from 'lib/elements/Modal';
 import { remove } from 'utils/api';
 
-const DeleteConfirm = ({ dispatch, showModalDeleteConfirm }) => {
-  const Remove = async () => {
-    const deleteProcess = await remove(`admin/${showModalDeleteConfirm.data}s/${showModalDeleteConfirm.id}`);
+const DeleteConfirm = ({ dispatch, role, showModalDeleteConfirm }) => {
+  const deleteService = async () => {
+    const roles = role === 'Admin' ? 'admin' : 'partners';
+    const deleteProcess = await remove(`${roles}/${showModalDeleteConfirm.data}s/${showModalDeleteConfirm.id}`);
     deleteProcess && window.location.reload();
   };
 
@@ -33,7 +34,7 @@ const DeleteConfirm = ({ dispatch, showModalDeleteConfirm }) => {
         </button>
 
         <button
-          onClick={ () => Remove() }
+          onClick={ () => deleteService() }
           className="w-full bg-orange p-4 rounded-b-md text-white text-center"
         >
           DELETE
@@ -43,8 +44,9 @@ const DeleteConfirm = ({ dispatch, showModalDeleteConfirm }) => {
   );
 };
 
-function mapStateToProps(state) {
-  return state.modalControl;
-};
+const mapStateToProps = state => ({
+  ...state.modalControl,
+  role: state.auth.user.role
+});
 
 export default connect(mapStateToProps)(DeleteConfirm);

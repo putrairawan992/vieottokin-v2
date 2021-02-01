@@ -12,13 +12,23 @@ const AdminDashboard = () => {
   const [serviceCount, setServiceCount] = useState(0);
   const [data, setData] = useState(0);
 
+  const switchTable = state => {
+    setShowTable(state);
+    localStorage.setItem('@viettonkin:tableType', state);
+  }
+
+  useEffect(() => {
+    const setTable = localStorage.getItem('@viettonkin:tableType');
+    setShowTable(setTable || 'partners');
+  }, [])
+
   useEffect(() => {
     if (showTable === 'partners') {
       setData({count: partnerCount.count, page: partnerCount.pages});
     } else {
       setData({count: serviceCount.count, page: serviceCount.pages});
     }
-  }, [showTable, partnerCount, serviceCount])
+  }, [showTable, partnerCount, serviceCount]);
 
   return (
     <Fragment>
@@ -27,7 +37,7 @@ const AdminDashboard = () => {
 
         <Navigator
           count={ data.count }
-          switchTable={ e => setShowTable(e) }
+          switchTable={ e => switchTable(e) }
           tableType={ showTable }
         />
       </Container>
