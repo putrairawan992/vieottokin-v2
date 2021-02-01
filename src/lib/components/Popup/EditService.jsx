@@ -14,6 +14,10 @@ const EditService = ({ dispatch, countryList, showModalEditService }) => {
   const [description, setDescription] = useState('');
   const [minimumPrice, setMinimumPrice] = useState('');
   const [partnerList, setPartnerList] = useState([]);
+  const [categoryId, setCategoryId] = useState('');
+
+  const [catPartnerId, setCatPartnerId] = useState('');
+  const [subCategoryList, setSubCategoryList] = useState([]);
 
   const submit = e => {
     e.preventDefault();
@@ -23,6 +27,7 @@ const EditService = ({ dispatch, countryList, showModalEditService }) => {
       'partner_id': partnerId,
       'currency_symbol': currencySymbol,
       'description': description,
+      'category_id': categoryId,
       'minimum_price': minimumPrice
     }
 
@@ -41,11 +46,24 @@ const EditService = ({ dispatch, countryList, showModalEditService }) => {
       setCurrencySymbol(resData.data.currencySymbol);
       setDescription(resData.data.description);
       setMinimumPrice(resData.data.minimumPrice);
-      setCompanyName(resPartners.data.results.rows.filter(find => find.id === resData.data.userId)[0].companyName);
+      setCategoryId(resData.data.categoryId);
+      setCatPartnerId(resData.data.Category.parentId);
+      setCompanyName(resData.data.partner.companyName);
     };
 
     fetchData();
   }, [showModalEditService]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (catPartnerId) {
+        const resCategory = await read(`admin/categories/${catPartnerId}/child`);
+        setSubCategoryList(resCategory.data);
+      }
+    };
+
+    fetchData();
+  }, [catPartnerId]);
 
   const setPartner = data => {
     const currency = countryList.filter(find => find.name === data.country);
@@ -101,19 +119,20 @@ const EditService = ({ dispatch, countryList, showModalEditService }) => {
               ></textarea>
             </label>
 
-            {/* <label className="w-full px-2 flex flex-col mb-5">
+            <label className="w-full px-2 flex flex-col mb-5">
               <span className="mr-5 mb-2 text-sm font-bold">Service Category</span>
 
               <select
                 className="border p-2 text-xs text-gray-500"
+                value={ categoryId }
                 onChange={ e => setCategoryId(e.target.value) }
               >
                 <option>Select category</option>
-                { categoryList.map(el => (
+                { subCategoryList?.map(el => (
                   <option key={ el.id } value={ el.id }>{ el.name }</option>
                 )) }
               </select>
-            </label> */}
+            </label>
 
             <label className="w-full px-2 flex flex-col mb-5">
               <span className="mr-5 mb-2 text-sm font-bold">Minimum Price</span>
