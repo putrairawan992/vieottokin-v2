@@ -6,24 +6,26 @@ import Modal from 'lib/elements/Modal';
 import AutoComplete from 'lib/components/SearchInput/AutoComplete';
 import { create, read } from 'utils/api';
 
-const AddNewService = ({ dispatch, countryList }) => {
+const AddNewService = ({ dispatch, countryList, categoryList }) => {
   const [serviceName, setServiceName] = useState('');
   const [partnerId, setPartnerId] = useState('');
   const [currencySymbol, setCurrencySymbol] = useState('');
+  const [categoryId, setCategoryId] = useState('');
   const [description, setDescription] = useState('');
-  // const [categoryId, setCategoryId] = useState('');
   const [minimumPrice, setMinimumPrice] = useState('');
   const [partnerList, setPartnerList] = useState([]);
+
+  const [subCategoryList, setSubCategoryList] = useState([]);
 
   const submit = e => {
     e.preventDefault();
 
     const data = {
       'service_name': serviceName,
-      'partner_id': `${partnerId}`,
+      'partner_id': partnerId,
       'currency_symbol': currencySymbol,
       'description': description,
-      // 'categoryId': categoryId,
+      'categoryId': categoryId,
       'minimum_price': minimumPrice
     }
 
@@ -35,10 +37,23 @@ const AddNewService = ({ dispatch, countryList }) => {
     const fetchData = async () => {
       const resPartners = await read('admin/partners');
       setPartnerList(resPartners.data.results.rows);
+      // setSubCategoryList(resCategory.data.results.rows);
     };
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (partnerId) {
+        const resCategory = await read(`admin/categories/${partnerId}/child`);
+        console.log(resCategory.data);
+      }
+      // setSubCategoryList(resCategory.data.results.rows);
+    };
+
+    fetchData();
+  }, [partnerId]);
 
   const setPartner = data => {
     const currency = countryList.filter(find => find.name === data.country);
@@ -91,7 +106,7 @@ const AddNewService = ({ dispatch, countryList }) => {
               ></textarea>
             </label>
 
-            {/* <label className="w-full px-2 flex flex-col mb-5">
+            <label className="w-full px-2 flex flex-col mb-5">
               <span className="mr-5 mb-2 text-sm font-bold">Service Category</span>
 
               <select
@@ -99,11 +114,11 @@ const AddNewService = ({ dispatch, countryList }) => {
                 onChange={ e => setCategoryId(e.target.value) }
               >
                 <option>Select category</option>
-                { categoryList.map(el => (
+                { subCategoryList && categoryList.map(el => (
                   <option key={ el.id } value={ el.id }>{ el.name }</option>
                 )) }
               </select>
-            </label> */}
+            </label>
 
             <label className="w-full px-2 flex flex-col mb-5">
               <span className="mr-5 mb-2 text-sm font-bold">Minimum Price</span>
@@ -126,7 +141,8 @@ const AddNewService = ({ dispatch, countryList }) => {
 };
 
 const mapStateToProps = state => ({
-  countryList: state.globalState.countryList
+  countryList: state.globalState.countryList,
+  categoryList: state.globalState.categoryList
 });
 
 export default connect(mapStateToProps)(AddNewService);

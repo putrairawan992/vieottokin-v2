@@ -1,7 +1,6 @@
 import {
   COUNTRY_LIST,
-  CATEGORY_LIST,
-  SUBCATEGORY_LIST
+  CATEGORY_LIST
 } from '../types';
 
 const initialState = {
@@ -16,8 +15,6 @@ export default function index(state = initialState, action = null) {
       return { ...state, countryList: action.payload };
     case CATEGORY_LIST:
       return { ...state, categoryList: action.payload };
-    case SUBCATEGORY_LIST:
-      return { ...state, subCategoryList: action.payload };
     default:
       return state;
   }

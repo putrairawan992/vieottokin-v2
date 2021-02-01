@@ -50,7 +50,7 @@ const UnAuthMenu = ({ signin }) => (
   </button>
 );
 
-const Navbar = ({ auth, countryList, categoryList, subCategoryList, logoutUser }) => {
+const Navbar = ({ auth, countryList, categoryList, logoutUser }) => {
   const [mobile, setMenu] = useState(false);
   const dispatch = useDispatch();
 
@@ -59,15 +59,10 @@ const Navbar = ({ auth, countryList, categoryList, subCategoryList, logoutUser }
       read('countries').then(res => dispatch(setCountryList(res.data)));
     }
 
-    if (!subCategoryList?.length && !categoryList.length) {
-      read('categories').then(res => {
-        let categories = [];
-        res.data.map(({ SubCategory }) => categories.push(...SubCategory));
-        dispatch(setSubCategoryList(categories));
-        dispatch(setCategoryList(res.data));
-      });
+    if (!categoryList.length) {
+      read('categories').then(res => dispatch(setCategoryList(res.data)));
     }
-  }, [subCategoryList, categoryList, dispatch, countryList]);
+  }, [categoryList, dispatch, countryList]);
 
   return (
     <Container fluid className="py-2 bg-softdrop text-white">
@@ -114,8 +109,7 @@ const Navbar = ({ auth, countryList, categoryList, subCategoryList, logoutUser }
 const mapStateToProps = state => ({
   auth: state.auth.isAuthenticated,
   countryList: state.globalState.countryList,
-  categoryList: state.globalState.categoryList,
-  subCategoryList: state.globalState.subCategoryList
+  categoryList: state.globalState.categoryList
 });
 
 export default withRouter(connect(mapStateToProps, { logoutUser })(Navbar));
