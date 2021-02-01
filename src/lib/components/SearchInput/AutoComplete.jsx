@@ -6,43 +6,51 @@ const AutoComplete = ({ suggestions, onChange, value }) => {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [userInput, setUserInput] = useState(value);
+  const [found, setFound] = useState(false);
 
   const findPartner = e => {
     const userInput = e.target.value;
 
-    const filteredSuggestions = suggestions.filter(
-      find => find.companyName.toLowerCase().indexOf(userInput.toLowerCase()) > -1
-    );
+    if (userInput.length > 1) {
+      const filteredSuggestions = suggestions.filter(
+        find => find.companyName.toLowerCase().indexOf(userInput.toLowerCase()) > -1
+      );
 
-    setFilteredSuggestions(filteredSuggestions);
-    setShowSuggestions(true);
+      if (!!filteredSuggestions?.length) {
+        setFilteredSuggestions(filteredSuggestions);
+        setShowSuggestions(true);
+        setFound(false);
+      } else {
+        setFound(true);
+      }
+    }
+
     setUserInput(userInput);
   };
 
-  const selectPartner = (event, id, country) => {
-    onChange({id, country});
+  const selectPartner = (event, id, country, categoryId) => {
+    onChange({id, country, categoryId});
 
     setFilteredSuggestions([]);
     setShowSuggestions(false);
     setUserInput(event.target.innerText);
+    setFound(false);
   };
 
-  const SuggestionsList = () => {
-    return (
-      <ul className="absolute w-full bg-white z-10 pl-8 text-sm border-l border-r border-b py-2">
-        { filteredSuggestions.map((el, i) => (
-          <li key={ i } className="py-1">
-            <button
-              onClick={ e => selectPartner(e, el.id, el.country) }
-              className="w-full text-left"
-            >
-              { el.companyName }
-            </button>
-          </li>
-        )) }
-      </ul>
-    );
-  }
+  const SuggestionsList = () => (
+    <ul className="absolute w-full bg-white z-10 pl-8 text-sm border-l border-r border-b py-2">
+      { filteredSuggestions.map((el, i) => (
+        <li key={ i } className="py-1">
+          <button
+            onClick={ e => selectPartner(e, el.id, el.country, el.categoryId) }
+            className="w-full text-left"
+          >
+            { el.companyName }
+          </button>
+        </li>
+      )) }
+    </ul>
+  );
 
   return (
     <Fragment>
@@ -60,8 +68,8 @@ const AutoComplete = ({ suggestions, onChange, value }) => {
         />
       </div>
 
-      { showSuggestions && userInput && <SuggestionsList /> }
-      { showSuggestions && userInput && !filteredSuggestions.length && <small>No suggestions</small> }
+      { showSuggestions && <SuggestionsList /> }
+      { found && <small>No suggestions</small> }
     </Fragment>
   );
 };

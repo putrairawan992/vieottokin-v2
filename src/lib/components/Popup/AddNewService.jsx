@@ -15,6 +15,7 @@ const AddNewService = ({ dispatch, countryList, categoryList }) => {
   const [minimumPrice, setMinimumPrice] = useState('');
   const [partnerList, setPartnerList] = useState([]);
 
+  const [catPartnerId, setCatPartnerId] = useState('');
   const [subCategoryList, setSubCategoryList] = useState([]);
 
   const submit = e => {
@@ -25,7 +26,7 @@ const AddNewService = ({ dispatch, countryList, categoryList }) => {
       'partner_id': partnerId,
       'currency_symbol': currencySymbol,
       'description': description,
-      'categoryId': categoryId,
+      'category_id': categoryId,
       'minimum_price': minimumPrice
     }
 
@@ -37,7 +38,6 @@ const AddNewService = ({ dispatch, countryList, categoryList }) => {
     const fetchData = async () => {
       const resPartners = await read('admin/partners');
       setPartnerList(resPartners.data.results.rows);
-      // setSubCategoryList(resCategory.data.results.rows);
     };
 
     fetchData();
@@ -45,21 +45,21 @@ const AddNewService = ({ dispatch, countryList, categoryList }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (partnerId) {
-        const resCategory = await read(`admin/categories/${partnerId}/child`);
-        console.log(resCategory.data);
+      if (catPartnerId) {
+        const resCategory = await read(`admin/categories/${catPartnerId}/child`);
+        setSubCategoryList(resCategory.data);
       }
-      // setSubCategoryList(resCategory.data.results.rows);
     };
 
     fetchData();
-  }, [partnerId]);
+  }, [catPartnerId]);
 
   const setPartner = data => {
     const currency = countryList.filter(find => find.name === data.country);
 
     setPartnerId(data.id);
     setCurrencySymbol(currency[0].currencySymbol);
+    setCatPartnerId(data.categoryId);
   }
 
   return (
@@ -114,7 +114,7 @@ const AddNewService = ({ dispatch, countryList, categoryList }) => {
                 onChange={ e => setCategoryId(e.target.value) }
               >
                 <option>Select category</option>
-                { subCategoryList && categoryList.map(el => (
+                { subCategoryList?.map(el => (
                   <option key={ el.id } value={ el.id }>{ el.name }</option>
                 )) }
               </select>
