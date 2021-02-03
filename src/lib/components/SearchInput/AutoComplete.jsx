@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'icon';
 
-const AutoComplete = ({ suggestions, onChange, value }) => {
+const AutoComplete = ({ suggestions, onChange, value, disabled }) => {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [userInput, setUserInput] = useState(value);
@@ -63,6 +63,7 @@ const AutoComplete = ({ suggestions, onChange, value }) => {
           type="search"
           onChange={ findPartner }
           value={ userInput }
+          disabled={ disabled }
           className="h-10 w-full text-gray-500 pl-2"
           placeholder="Search partners"
         />
@@ -76,11 +77,13 @@ const AutoComplete = ({ suggestions, onChange, value }) => {
 
 AutoComplete.defaultProps = {
   suggestions: [],
-  value: ''
+  value: '',
+  disabled: false
 };
 
 AutoComplete.propTypes = {
-  suggestions: PropTypes.instanceOf(Array)
+  suggestions: PropTypes.instanceOf(Array),
+  disabled: PropTypes.bool
 };
 
 export default AutoComplete;

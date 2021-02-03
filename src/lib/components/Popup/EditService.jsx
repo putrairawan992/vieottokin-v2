@@ -6,7 +6,7 @@ import Modal from 'lib/elements/Modal';
 import AutoComplete from 'lib/components/SearchInput/AutoComplete';
 import { update, read } from 'utils/api';
 
-const EditService = ({ dispatch, countryList, showModalEditService }) => {
+const EditService = ({ dispatch, countryList, showModalEditService, auth }) => {
   const [serviceName, setServiceName] = useState('');
   const [partnerId, setPartnerId] = useState('');
   const [companyName, setCompanyName] = useState('');
@@ -15,7 +15,6 @@ const EditService = ({ dispatch, countryList, showModalEditService }) => {
   const [minimumPrice, setMinimumPrice] = useState('');
   const [partnerList, setPartnerList] = useState([]);
   const [categoryId, setCategoryId] = useState('');
-
   const [catPartnerId, setCatPartnerId] = useState('');
   const [subCategoryList, setSubCategoryList] = useState([]);
 
@@ -31,24 +30,28 @@ const EditService = ({ dispatch, countryList, showModalEditService }) => {
       'minimum_price': minimumPrice
     }
 
-    update(`admin/services/${showModalEditService}`, data)
+    update(`${auth.user.role === 'Admin' ? 'admin' : 'partners'}/services/${showModalEditService}`, data)
     .then(() => window.location.reload());
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const resPartners = await read('admin/partners');
-      setPartnerList(resPartners.data.results.rows);
+    const { user: { role }, userProfile } = auth;
 
-      const resData = await read(`admin/services/${showModalEditService}`);
+    const fetchData = async () => {
+      if (role === 'Admin') {
+        const resPartners = await read('admin/partners');
+        setPartnerList(resPartners.data.results.rows);
+      }
+
+      const resData = await read(`${role === 'Admin' ? 'admin' : 'partners'}/services/${showModalEditService}`);
       setServiceName(resData.data.name);
       setPartnerId(resData.data.userId);
       setCurrencySymbol(resData.data.currencySymbol);
       setDescription(resData.data.description);
       setMinimumPrice(resData.data.minimumPrice);
       setCategoryId(resData.data.categoryId);
-      setCatPartnerId(resData.data.Category.parentId);
-      setCompanyName(resData.data.partner.companyName);
+      setCatPartnerId(role === 'Admin' ? resData.data.Category.parentId : userProfile?.categoryId);
+      setCompanyName(role === 'Admin' ? resData.data.partner.companyName : userProfile?.companyName);
     };
 
     fetchData();
@@ -67,7 +70,6 @@ const EditService = ({ dispatch, countryList, showModalEditService }) => {
 
   const setPartner = data => {
     const currency = countryList.filter(find => find.name === data.country);
-
     setPartnerId(data.id);
     setCurrencySymbol(currency[0].currencySymbol);
   }
@@ -100,11 +102,13 @@ const EditService = ({ dispatch, countryList, showModalEditService }) => {
               <span className="mr-5 mb-2 text-sm font-bold">Partner</span>
 
               <div className="w-full relative">
-                { partnerList && companyName && <AutoComplete
-                  suggestions={ partnerList }
-                  value={ companyName }
-                  onChange={ e => setPartner(e) }
-                /> }
+                { auth.user.role === 'Admin' ? partnerList && companyName && <AutoComplete
+                    suggestions={ partnerList }
+                    value={ companyName }
+                    onChange={ e => setPartner(e) }
+                  />
+                  : <AutoComplete value={ auth.userProfile.companyName } disabled />
+                }
               </div>
             </label>
 
@@ -157,7 +161,8 @@ const EditService = ({ dispatch, countryList, showModalEditService }) => {
 
 const mapStateToProps = state => ({
   countryList: state.globalState.countryList,
-  showModalEditService: state.modalControl.showModalEditService
+  showModalEditService: state.modalControl.showModalEditService,
+  auth: state.auth
 });
 
 export default connect(mapStateToProps)(EditService);

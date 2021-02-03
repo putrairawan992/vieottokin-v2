@@ -6,7 +6,7 @@ import Modal from 'lib/elements/Modal';
 import AutoComplete from 'lib/components/SearchInput/AutoComplete';
 import { create, read } from 'utils/api';
 
-const AddNewService = ({ dispatch, countryList, categoryList }) => {
+const AddNewService = ({ dispatch, countryList, auth }) => {
   const [serviceName, setServiceName] = useState('');
   const [partnerId, setPartnerId] = useState('');
   const [currencySymbol, setCurrencySymbol] = useState('');
@@ -30,7 +30,7 @@ const AddNewService = ({ dispatch, countryList, categoryList }) => {
       'minimum_price': minimumPrice
     }
 
-    create('admin/services', data)
+    create(`${auth.user.role === 'Admin' ? 'admin' : 'partners'}/services`, data)
     .then(() => window.location.reload());
   };
 
@@ -40,7 +40,13 @@ const AddNewService = ({ dispatch, countryList, categoryList }) => {
       setPartnerList(resPartners.data.results.rows);
     };
 
-    fetchData();
+    const getCategory = async () => {
+      const resCategory = await read(`categories/${auth.userProfile.categoryId}/child`);
+      setSubCategoryList(resCategory.data);
+    };
+
+    if (auth.user.role === 'SP') getCategory();
+    if (auth.user.role === 'Admin') fetchData();
   }, []);
 
   useEffect(() => {
@@ -89,10 +95,12 @@ const AddNewService = ({ dispatch, countryList, categoryList }) => {
               <span className="mr-5 mb-2 text-sm font-bold">Partner</span>
 
               <div className="w-full relative">
-                { partnerList && <AutoComplete
+                { partnerList && auth.user.role === 'Admin' ? <AutoComplete
                   suggestions={ partnerList }
                   onChange={ e => setPartner(e) }
-                /> }
+                />
+                  : <AutoComplete value={ auth.userProfile.companyName } disabled />
+                }
               </div>
             </label>
 
@@ -142,6 +150,7 @@ const AddNewService = ({ dispatch, countryList, categoryList }) => {
 
 const mapStateToProps = state => ({
   countryList: state.globalState.countryList,
+  auth: state.auth,
   categoryList: state.globalState.categoryList
 });
 

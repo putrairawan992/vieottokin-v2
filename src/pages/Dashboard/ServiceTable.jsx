@@ -7,13 +7,13 @@ import { Link } from 'react-router-dom';
 
 const trBorder = 'border-b border-gray-300';
 
-const ServiceTable = ({ setCount, dispatch, role }) => {
+const ServiceTable = ({ setCount, dispatch, auth: { user, userProfile } }) => {
   const [services, setServices] = useState([]);
   const [search, setSearch] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
-      const resServices = await read(`${role === 'Admin' ? 'admin' : 'partners'}/services`);
+      const resServices = await read(`${user.role === 'Admin' ? 'admin' : 'partners'}/services`);
       setCount({count: resServices.data.results.count, pages: resServices.data.lastPage || 1});
       setServices(resServices.data.results);
     };
@@ -68,11 +68,11 @@ const ServiceTable = ({ setCount, dispatch, role }) => {
               <td className={trBorder}>
                 <div className="flex items-center">
                   <img
-                    src={ item.partner?.avatar } alt={item.name}
+                    src={ user.role === 'Admin' ? item.partner?.avatar : userProfile.avatar } alt={item.name}
                     className="h-7 w-7 object-cover"
                   />
 
-                  <span className="ml-3">{ item.partner?.companyName }</span>
+                  <span className="ml-3">{ user.role === 'Admin' ? item.partner?.companyName : userProfile.companyName }</span>
                 </div>
               </td>
 
@@ -109,7 +109,7 @@ const ServiceTable = ({ setCount, dispatch, role }) => {
 }
 
 const mapStateToProps = state => ({
-  role: state.auth.user.role
+  auth: state.auth
 })
 
 export default connect(mapStateToProps)(ServiceTable);
