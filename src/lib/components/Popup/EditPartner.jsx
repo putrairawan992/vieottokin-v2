@@ -147,8 +147,8 @@ const EditPartner = ({ dispatch, showModalEditPartner, countryList, categoryList
             <input
               // required
               type="password"
+              autocomplete="new-password"
               className="border py-1 px-2"
-              value={password}
               onChange={ e => setPassword(e.target.value) }
             />
           </label>

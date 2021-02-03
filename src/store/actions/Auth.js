@@ -24,6 +24,7 @@ export const loginUser = userData => dispatch => {
       return true;
     })
     .catch(err => {
+      alert(err.response.data.message);
       console.log(err.response.data);
     });
 };

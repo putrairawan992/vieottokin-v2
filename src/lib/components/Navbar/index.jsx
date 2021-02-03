@@ -1,10 +1,11 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { logoutUser } from 'store/actions/Auth';
-import { Link, withRouter } from 'react-router-dom';
-import { setCountryList, setSubCategoryList, setCategoryList } from 'store/actions/GlobalState';
+import { Link } from 'react-router-dom';
+import { setCountryList, setCategoryList } from 'store/actions/GlobalState';
 import { openSignin } from 'store/actions/ModalControl';
 import { Container, Row } from 'lib/elements/Grid';
+import { Authenticated, UnAuthenticated } from './UserMenu';
 import SearchBar from 'lib/components/SearchInput/SearchBar';
 import Icon from 'icon';
 import { read } from 'utils/api';
@@ -29,26 +30,6 @@ const navStyle = {
   mobile: 'flex-col w-full flex-grow text-right items-center top-10 z-20 bg-softdrop absolute',
   desktop: 'md:static md:flex md:mt-0 md:w-6/12 md:flex-row md:justify-end'
 };
-
-const AuthMenu = ({ logout }) => (
-  <Fragment>
-    <Link to="/dashboard" className="md:mx-4 pr-4 md:pr-0 my-1 w-full md:my-0 md:w-auto">
-      Dashboard
-    </Link>
-
-    <button className="flex items-center ml-auto text-blue" onClick={ logout } >
-      <Icon name="power-off" size={ 12 } color="#20BFEF" className="mr-2" />
-      Logout
-    </button>
-  </Fragment>
-);
-
-const UnAuthMenu = ({ signin }) => (
-  <button className="flex items-center ml-auto text-blue" onClick={ signin } >
-    <Icon name="user" size={ 12 } color="#20BFEF" className="mr-2" />
-    Login
-  </button>
-);
 
 const Navbar = ({ auth, countryList, categoryList, logoutUser }) => {
   const [mobile, setMenu] = useState(false);
@@ -98,7 +79,7 @@ const Navbar = ({ auth, countryList, categoryList, logoutUser }) => {
             )) }
 
             <div className="flex justify-between p-2 w-full md:ml-5 md:w-auto md:mt-0 mt-3">
-              { !auth ? <UnAuthMenu signin={ () => dispatch(openSignin(true)) } /> : <AuthMenu logout={ () => logoutUser() } /> }
+              { !auth ? <UnAuthenticated signin={ () => dispatch(openSignin(true)) } /> : <Authenticated logout={ () => logoutUser() } /> }
             </div>
           </nav>
         </Row>
@@ -112,4 +93,4 @@ const mapStateToProps = state => ({
   categoryList: state.globalState.categoryList
 });
 
-export default withRouter(connect(mapStateToProps, { logoutUser })(Navbar));
+export default connect(mapStateToProps, { logoutUser })(Navbar);
