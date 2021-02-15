@@ -5,11 +5,10 @@ import { connect } from 'react-redux';
 import { Container, Row, Col } from 'lib/elements/Grid';
 import StepIndicator from './StepIndicator';
 
-const CartForm = ({ countryList }) => {
+const CartForm = ({ countryList, wistlist }) => {
   const history = useHistory();
   const [companyName, setCompanyName] = useState('');
-  const [companyWeb, setCompanyWeb] = useState('');
-  const [country, setCountry] = useState('');
+  const [country, setCountry] = useState({currency: '', name: ''});
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [position, setPosition] = useState('');
@@ -17,16 +16,26 @@ const CartForm = ({ countryList }) => {
   const [phone, setPhone] = useState('');
   const [industry, setIndustry] = useState('');
 
-  const submit = () => {
-    const data = {};
+  const submit = e => {
+    e.preventDefault();
 
-    axios.post('', data, {
-      headers: { 'Authorization': 'multipart/form-data'}
+    const data = {
+      Email: email,
+      $currency_symbol: country.currency,
+      Industry: industry,
+      Country: country.name,
+      Phone: phone,
+      Company_Name: companyName,
+      First_Name: firstName,
+      Last_Name: lastName,
+      Position: position,
+      services_ordered: wistlist
+    };
+
+    axios.post('https://www.zohoapis.com/crm/v2/Leads', data, {
+      headers: { 'Authorization': `Zoho-oauthtoken ${process.env.REACT_APP_ZOHO_TOKEN}`}
     })
-      .then(res => {
-        console.log(res);
-        history.push('/success-checkout');
-      })
+      .then(res => console.log(res))
       .catch(err => alert(err));
   }
 
@@ -67,11 +76,16 @@ const CartForm = ({ countryList }) => {
                 <span className="mb-2 text-sm font-bold">Country</span>
 
                 <select
-                  onChange={e => setCountry(e.target.value)}
+                  onChange={e => setCountry({
+                    currency: e.target.value,
+                    name: e.target[e.target.selectedIndex].getAttribute('name')
+                  })}
                   className="border p-2 text-xs text-gray-500 w-full"
                 >
                   <option>Select country</option>
-                  { countryList?.map(({id, name}) => <option key={ id } value={ name }>{ name }</option>) }
+                  { countryList?.map(({id, name, currencySymbol}) => (
+                    <option key={ id } value={ currencySymbol } name={ name }>{ name }</option>
+                  )) }
                 </select>
               </Col>
             </Row>
@@ -154,7 +168,8 @@ const CartForm = ({ countryList }) => {
 }
 
 const mapStateToProps = state => ({
-  countryList: state.globalState.countryList
+  countryList: state.globalState.countryList,
+  wistlist: state.wistlist.wistlist
 });
 
 export default connect(mapStateToProps)(CartForm);

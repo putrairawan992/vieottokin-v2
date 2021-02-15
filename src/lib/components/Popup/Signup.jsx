@@ -9,7 +9,7 @@ import Modal from 'lib/elements/Modal';
 const SigninPopup = ({countryList, dispatch}) => {
   const [companyName, setCompanyName] = useState('');
   const [companyWeb, setCompanyWeb] = useState('');
-  const [country, setCountry] = useState('');
+  const [country, setCountry] = useState({currency: '', name: ''});
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [position, setPosition] = useState('');
@@ -18,10 +18,21 @@ const SigninPopup = ({countryList, dispatch}) => {
   const [industry, setIndustry] = useState('');
 
   const submit = () => {
-    const data = {};
+    const data = {
+      Email: email,
+      $currency_symbol: country.currency,
+      Industry: industry,
+      Country: country.name,
+      Phone: phone,
+      Company_Name: companyName,
+      Website: companyWeb,
+      First_Name: firstName,
+      Full_Name: firstName + lastName,
+      Position: position
+  };
 
-    axios.post('', data, {
-      headers: { 'Authorization': 'multipart/form-data'}
+    axios.post('https://www.zohoapis.com/crm/v2/Lead', data, {
+      headers: { 'Authorization': `Zoho-oauthtoken ${process.env.REACT_APP_ZOHO_TOKEN}`}
     })
       .then(res => console.log(res))
       .catch(err => alert(err));
@@ -73,11 +84,16 @@ const SigninPopup = ({countryList, dispatch}) => {
                 <span className="mb-2 text-sm font-bold">Country</span>
 
                 <select
-                  onChange={e => setCountry(e.target.value)}
+                  onChange={e => setCountry({
+                    currency: e.target.value,
+                    name: e.target[e.target.selectedIndex].getAttribute('name')
+                  })}
                   className="border p-2 text-xs text-gray-500 w-full"
                 >
                   <option>Select country</option>
-                  { countryList?.map(({id, name}) => <option key={ id } value={ name }>{ name }</option>) }
+                  { countryList?.map(({id, name, currencySymbol}) => (
+                    <option key={ id } value={ currencySymbol } name={ name }>{ name }</option>
+                  )) }
                 </select>
               </Col>
             </Row>

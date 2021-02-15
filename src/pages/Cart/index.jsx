@@ -1,12 +1,15 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Container, Row, Col } from 'lib/elements/Grid';
+import { setWistlist } from 'store/actions/Wishlist';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Icon from 'icon';
 import StepIndicator from './StepIndicator';
 import { read } from 'utils/api';
 
 const Cart = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [openInclude, setOpenInclude] = useState({});
   const [services, setServices] = useState([]);
   const [serviceId, setServiceId] = useState([]);
@@ -52,7 +55,13 @@ const Cart = () => {
   };
 
   const orderProcess = () => {
-    console.log(services)
+    let temp = [];
+
+    services.forEach(({id, name, partner}) => {
+      temp.push({ id, name, provider: partner.companyName })
+    })
+
+    dispatch(setWistlist(temp))
     history.push('/submit-requirements');
   }
 
@@ -120,7 +129,7 @@ const Cart = () => {
                 <p>2 - 3 days</p>
               </div>
 
-              <button onClick={ orderProcess } className="bg-orange p-1 flex w-full rounded-b-md h-12 items-center justify-between">
+              <button onClick={ orderProcess } disabled={ !services?.length } className="bg-orange p-1 flex w-full rounded-b-md h-12 items-center justify-between">
                 <div className="text-center w-full text-white">
                   CONTINUE
                 </div>
