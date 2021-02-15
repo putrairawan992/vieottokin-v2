@@ -34,15 +34,15 @@ const ProfileProvider = () => {
         <Row>
           <Col md={8}>
             <Row className="shadow-lg rounded-md md:p-6 flex mx-0">
-              <Col md={3}>
+              <Col md={2}>
                 <img
                   src={ service.partner?.avatar }
                   alt={ service.partner?.companyName }
-                  className="rounded-full object-cover w-full"
+                  className="rounded-full object-cover w-28 h-28"
                 />
               </Col>
 
-              <Col md={9} className="my-auto md:pl-3 pl-0">
+              <Col md={10} className="my-auto md:pl-3 pl-0">
                 <div className="flex justify-between w-full">
                   <h1 className="font-bold text-lg capitalize">{ service.partner?.companyName }</h1>
 

@@ -13,7 +13,7 @@ const Cart = () => {
   const [getNewList, setNewList] = useState(false);
 
   useEffect(() => {
-    const cart = JSON.parse(localStorage.getItem('@viettonkin:cart'));
+    const cart = JSON.parse(localStorage.getItem('@viettonkin:cart')) || [];
     const wishList = cart.filter((item, pos) => cart.indexOf(item) === pos);
     setServiceId(wishList);
 
@@ -57,18 +57,16 @@ const Cart = () => {
       <Container className="md:px-6 lg:px-8 relative py-24">
         <Row className="md:justify-evenly">
           <Col md={7}>
-            { services?.map((item, i) => (
-              <div className="rounded-md shadow mb-8" key={ i }>
+            { services?.length ? services.map(({ partner, name, id, description }) => (
+              <div className="rounded-md shadow mb-8" key={ id }>
                 <div className="p-6 pb-2 flex">
-                  <img src={ item.partner?.avatar } alt={ item.partner?.companyName } className="mr-5 w-16 h-16 rounded-full object-cover" />
+                  <img src={ partner?.avatar } alt={ partner?.companyName } className="mr-5 w-16 h-16 rounded-full object-cover" />
 
                   <div className="w-full my-auto">
                     <div className="flex justify-between w-full">
-                      <h2 className="font-bold text-lg">
-                      { item.name }
-                      </h2>
+                      <h2 className="font-bold text-lg">{ name }</h2>
 
-                      <button onClick={() => deleteServiceId( item.id ) } className="text-xs text-red-500 flex items-center px-2">
+                      <button onClick={() => deleteServiceId( id ) } className="text-xs text-red-500 flex items-center px-2">
                         <Icon name="close" color="#f1333e" size={ 8 } />
                         <span className="ml-3">REMOVE</span>
                       </button>
@@ -76,7 +74,7 @@ const Cart = () => {
 
                     <div className="flex w-full items-center mt-1">
                       <span className="text-gray-500 text-xs">
-                        by <b className="text-orange">{ item.partner?.companyName }</b>
+                        by <b className="text-orange">{ partner?.companyName }</b>
                       </span>
                     </div>
                   </div>
@@ -84,17 +82,17 @@ const Cart = () => {
 
                 <button
                   className="text-darkdrop flex items-center px-6 py-3"
-                  onClick={ () => toggleComment([i]) }
+                  onClick={ () => toggleComment([id]) }
                 >
                   <span className="mr-3">What’s Included</span>
                   <Icon name="triangle" color="#0f4875" size={ 8 } />
                 </button>
 
-                { openInclude[i] && <article className="px-6 py-4 text-sm leading-5 text-gray-700">
-                  { item.description }
+                { openInclude[id] && <article className="px-6 py-4 text-sm leading-5 text-gray-700">
+                  { description }
                 </article> }
               </div>
-            )) }
+            )) : <p>Cart is empty!</p> }
           </Col>
 
           <Col md={4}>
