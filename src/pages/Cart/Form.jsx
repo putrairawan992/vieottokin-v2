@@ -1,108 +1,160 @@
-import React, { Fragment } from 'react';
-import { Container, Row } from 'lib/elements/Grid';
+import React, { Fragment, useState } from 'react';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Container, Row, Col } from 'lib/elements/Grid';
 import StepIndicator from './StepIndicator';
 
-const CartForm = () => {
+const CartForm = ({ countryList }) => {
+  const history = useHistory();
+  const [companyName, setCompanyName] = useState('');
+  const [companyWeb, setCompanyWeb] = useState('');
+  const [country, setCountry] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [position, setPosition] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [industry, setIndustry] = useState('');
+
+  const submit = () => {
+    const data = {};
+
+    axios.post('', data, {
+      headers: { 'Authorization': 'multipart/form-data'}
+    })
+      .then(res => {
+        console.log(res);
+        history.push('/success-checkout');
+      })
+      .catch(err => alert(err));
+  }
 
   return (
     <Fragment>
       <StepIndicator step={2} backButton />
 
-      <Container className="px-6 md:px-20 lg:px-32 py-24">
-        <form className="sm:w-6/12 mx-auto shadow-md rounded-md">
+      <div className="px-6 md:px-20 lg:px-32 py-24">
+        <form onSubmit={ submit } className="sm:w-6/12 mx-auto shadow-md rounded-md">
           <h1 className="text-xl font-bold border-b p-5">
             Information
           </h1>
 
-          <Row className="mt-6 p-5">
-            <label className="w-full md:w-6/12 flex flex-col mb-5">
-              <span className="mr-5 mb-2 text-sm font-semibold">Company Name</span>
+          <Container className="mt-6">
+            <Row className="mb-5">
+              <Col md={6}>
+                <span className="mb-2 text-sm font-semibold">Company Name</span>
 
-              <input
-                required
-                className="border py-1 px-2"
-              />
-            </label>
+                <input
+                  required
+                  className="border w-full py-1 px-2"
+                  onChange={e => setCompanyName(e.target.value)}
+                />
+              </Col>
 
-            <label className="w-full md:w-6/12 flex flex-col mb-5">
-              <span className="mr-5 mb-2 text-sm font-semibold">Company Website</span>
+              <Col md={6}>
+                <span className="mb-2 text-sm font-semibold">Company Website</span>
 
-              <input
-                required
-                className="border py-1 px-2"
-              />
-            </label>
+                <input
+                  required
+                  className="border w-full py-1 px-2"
+                />
+              </Col>
+            </Row>
 
-            <label className="w-full flex flex-col mb-5">
-              <span className="mr-5 mb-2 text-sm font-bold">Country</span>
+            <Row className="mb-5">
+              <Col md={12} className="flex-col">
+                <span className="mb-2 text-sm font-bold">Country</span>
 
-              <select className="border p-2 text-xs text-gray-500">
-                <option>Select country</option>
-              </select>
-            </label>
+                <select
+                  onChange={e => setCountry(e.target.value)}
+                  className="border p-2 text-xs text-gray-500 w-full"
+                >
+                  <option>Select country</option>
+                  { countryList?.map(({id, name}) => <option key={ id } value={ name }>{ name }</option>) }
+                </select>
+              </Col>
+            </Row>
 
-            <label className="w-full md:w-6/12 flex flex-col mb-5">
-              <span className="mr-5 mb-2 text-sm font-semibold">First Name</span>
+            <Row className="mb-5">
+              <Col md={6}>
+                <span className="mr-5 mb-2 text-sm font-bold">First Name</span>
 
-              <input
-                required
-                className="border py-1 px-2"
-              />
-            </label>
+                <input
+                  required
+                  className="border w-full py-1 px-2"
+                  onChange={e => setFirstName(e.target.value)}
+                />
+              </Col>
 
-            <label className="w-full md:w-6/12 flex flex-col mb-5">
-              <span className="mr-5 mb-2 text-sm font-semibold">Last Name</span>
+              <Col md={6}>
+                <span className="mr-5 mb-2 text-sm font-bold">Last Name</span>
 
-              <input
-                required
-                className="border py-1 px-2"
-              />
-            </label>
+                <input
+                  required
+                  className="border w-full py-1 px-2"
+                  onChange={e => setLastName(e.target.value)}
+                />
+              </Col>
+            </Row>
 
-            <label className="w-full md:w-6/12 flex flex-col mb-5">
-              <span className="mr-5 mb-2 text-sm font-semibold">Position</span>
+            <Row className="mb-5">
+              <Col md={6}>
+                <span className="mr-5 mb-2 text-sm font-bold">Position</span>
 
-              <input
-                required
-                className="border py-1 px-2"
-              />
-            </label>
+                <input
+                  required
+                  className="border w-full py-1 px-2"
+                  onChange={e => setPosition(e.target.value)}
+                />
+              </Col>
 
-            <label className="w-full md:w-6/12 flex flex-col mb-5">
-              <span className="mr-5 mb-2 text-sm font-semibold">Email</span>
+              <Col md={6}>
+                <span className="mr-5 mb-2 text-sm font-bold">Email</span>
 
-              <input
-                required
-                className="border py-1 px-2"
-              />
-            </label>
+                <input
+                  required
+                  type="email"
+                  className="border w-full py-1 px-2"
+                  onChange={e => setEmail(e.target.value)}
+                />
+              </Col>
+            </Row>
 
-            <label className="w-full md:w-6/12 flex flex-col mb-5">
-              <span className="mr-5 mb-2 text-sm font-semibold">Phone</span>
+            <Row className="mb-5">
+              <Col md={6}>
+                <span className="mr-5 mb-2 text-sm font-bold">Phone</span>
 
-              <input
-                required
-                className="border py-1 px-2"
-              />
-            </label>
+                <input
+                  required
+                  className="border w-full py-1 px-2"
+                  onChange={e => setPhone(e.target.value)}
+                />
+              </Col>
 
-            <label className="w-full md:w-6/12 flex flex-col mb-5">
-              <span className="mr-5 mb-2 text-sm font-semibold">Industry</span>
+              <Col md={6}>
+                <span className="mr-5 mb-2 text-sm font-bold">Industry</span>
 
-              <input
-                required
-                className="border py-1 px-2"
-              />
-            </label>
-          </Row>
+                <input
+                  required
+                  className="border w-full py-1 px-2"
+                  onChange={e => setIndustry(e.target.value)}
+                />
+              </Col>
+            </Row>
+          </Container>
 
-          <a href="/success-checkout" className="w-full block bg-orange p-4 rounded-b-md text-white text-center">
+          <button className="w-full block bg-orange p-4 rounded-b-md text-white text-center">
             SUBMIT
-          </a>
+          </button>
         </form>
-      </Container>
+      </div>
     </Fragment>
   );
 }
 
-export default CartForm;
+const mapStateToProps = state => ({
+  countryList: state.globalState.countryList
+});
+
+export default connect(mapStateToProps)(CartForm);

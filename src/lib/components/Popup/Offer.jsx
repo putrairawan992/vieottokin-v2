@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { openOffer } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import Icon from 'icon';
 import Modal from 'lib/elements/Modal';
 
@@ -21,6 +22,11 @@ const Offer = ({ dispatch, subCategoryList }) => {
 
   const submit = () => {
     console.log(selectedOffer)
+    axios.post('', selectedOffer, {
+      headers: { 'Authorization': 'multipart/form-data'}
+    })
+      .then(res => console.log(res))
+      .catch(err => alert(err));
   }
 
   return (
@@ -42,7 +48,7 @@ const Offer = ({ dispatch, subCategoryList }) => {
 
             <input
               onFocus={ () => setOpenOffer(true) }
-              className="h-10 w-6/12"
+              className="h-10 w-full pl-2"
               placeholder="What service are you looking for?"
               onChange={ e => setKeyword(e.target.value) }
             />

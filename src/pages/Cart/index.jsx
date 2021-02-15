@@ -1,11 +1,12 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Container, Row, Col } from 'lib/elements/Grid';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Icon from 'icon';
 import StepIndicator from './StepIndicator';
 import { read } from 'utils/api';
 
 const Cart = () => {
+  const history = useHistory();
   const [openInclude, setOpenInclude] = useState({});
   const [services, setServices] = useState([]);
   const [serviceId, setServiceId] = useState([]);
@@ -49,6 +50,11 @@ const Cart = () => {
       [id]: !prevOpenInclude[id]
     }));
   };
+
+  const orderProcess = () => {
+    console.log(services)
+    history.push('/submit-requirements');
+  }
 
   return (
     <Fragment>
@@ -114,11 +120,11 @@ const Cart = () => {
                 <p>2 - 3 days</p>
               </div>
 
-              <Link to="/submit-requirements" className="bg-orange p-1 flex w-full rounded-b-md h-12 items-center justify-between">
+              <button onClick={ orderProcess } className="bg-orange p-1 flex w-full rounded-b-md h-12 items-center justify-between">
                 <div className="text-center w-full text-white">
                   CONTINUE
                 </div>
-              </Link>
+              </button>
             </div>
 
             <p className="text-center mt-6 text-sm text-gray-400">You won’t be charged yet</p>
