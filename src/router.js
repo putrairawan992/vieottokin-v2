@@ -1,15 +1,17 @@
-import React, { Fragment } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, { Fragment, useEffect } from 'react';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import PrivateRoute from 'utils/privateRoute';
+import Loading from 'lib/elements/Loading';
+import { resetFilter } from 'store/actions/ServiceFilter';
 
-import SignupPopup from 'components/Popup/Signup';
-import SigninPopup from 'components/Popup/Signin';
-import OfferPopup from 'components/Popup/Offer';
-import Navbar from 'components/Navbar';
-import Footer from 'components/Footer';
+import { Signup, Signin, Offer } from 'lib/components/Popup';
+import Navbar from 'lib/components/Navbar';
+import Footer from 'lib/components/Footer';
 import AboutUs from 'pages/AboutUs';
 import LandingPage from 'pages/LandingPage';
-import ListProvider from 'pages/ListProvider';
+import ServiceProvider from 'pages/ServiceProvider';
 import ProfileProvider from 'pages/ProfileProvider';
 import Cart from 'pages/Cart';
 import CartForm from 'pages/Cart/Form';
@@ -18,33 +20,55 @@ import FAQ from 'pages/FAQ';
 import Contact from 'pages/Contact';
 import Dashboard from 'pages/Dashboard';
 
-const RouterManager = props => (
-  <Fragment>
-    <Navbar />
+const RouterManager = ({ progress, location, dispatch, ...props }) => {
+  useEffect(() => {
+    if (location.pathname !== '/service-providers') dispatch(resetFilter());
+  }, [location.pathname]);
 
-    <Switch>
-      <Route exact path='/' component={ AboutUs } />
-      <Route exact path='/landing-page' component={ LandingPage } />
-      <Route exact path='/service-providers' component={ ListProvider } />
-      <Route exact path='/profile-provider' component={ ProfileProvider } />
-      <Route exact path='/cart' component={ Cart } />
-      <Route exact path='/submit-requirements' component={ CartForm } />
-      <Route exact path='/success-checkout' component={ SuccessCheckout } />
-      <Route exact path='/faq' component={ FAQ } />
-      <Route exact path='/contact' component={ Contact } />
-      <Route exact path='/dashboard' component={ Dashboard } />
-    </Switch>
+  return (
+    <Fragment>
+      <Navbar />
 
-    <Footer />
+      <Route render={({location}) => (
+        <TransitionGroup>
+          <CSSTransition
+            key={location.key}
+            classNames="fade"
+            timeout={300}
+          >
+            <Switch location={location}>
+              <Route exact path='/' component={ AboutUs } />
+              <Route path='/landing-page' component={ LandingPage } />
+              <Route path='/service-providers' component={ ServiceProvider } />
+              <Route path='/profile-provider/:id' component={ ProfileProvider } />
+              <Route path='/submit-requirements' component={ CartForm } />
+              <Route path='/success-checkout' component={ SuccessCheckout } />
+              <Route path='/faq' component={ FAQ } />
+              <Route path='/contact' component={ Contact } />
+              <Route path='/cart' component={ Cart } />
+              <PrivateRoute path='/dashboard' component={ Dashboard } />
+            </Switch>
 
-    { props.showModalSignup && <SignupPopup /> }
-    { props.showModalSignin && <SigninPopup /> }
-    { props.showModalOffer && <OfferPopup /> }
-  </Fragment>
-);
+          </CSSTransition>
+        </TransitionGroup>
+      )} />
 
-function mapStateToProps(state) {
-  return state.modalControl;
+      <Footer />
+
+      { props.showModalSignup && <Signup /> }
+      { props.showModalSignin && <Signin /> }
+      { props.showModalOffer && <Offer /> }
+
+      <Loading shown={progress} />
+    </Fragment>
+  );
 }
 
-export default connect(mapStateToProps)(RouterManager);
+function mapStateToProps(state) {
+  return {
+    ...state.modalControl,
+    progress: state.isLoading.isLoading
+  };
+}
+
+export default withRouter(connect(mapStateToProps)(RouterManager));

@@ -1,9 +1,17 @@
-import React, { Fragment } from 'react';
-import { Container } from 'components/Grid';
+import React, { Fragment, useEffect } from 'react';
+import { Container } from 'lib/elements/Grid';
 import Icon from 'icon';
+import { setWistlist } from 'store/actions/Wishlist';
+import { useDispatch } from 'react-redux';
 import StepIndicator from './StepIndicator';
 
 const SuccessCheckout = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    localStorage.removeItem('@viettonkin:cart');
+    dispatch(setWistlist([]));
+  }, [])
 
   return (
     <Fragment>

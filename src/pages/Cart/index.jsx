@@ -1,30 +1,51 @@
-import React, { Fragment, useState } from 'react';
-import { Container, Row } from 'components/Grid';
-import { Link } from 'react-router-dom';
+import React, { Fragment, useState, useEffect } from 'react';
+import { Container, Row, Col } from 'lib/elements/Grid';
+import { setWistlist } from 'store/actions/Wishlist';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Icon from 'icon';
 import StepIndicator from './StepIndicator';
-
-const listProvider = [
-  {
-    logo: '/images/provider/hnt-law.png',
-    product: 'Litigation Services',
-    name: 'H & T Law',
-    text: '<p className="mb-3">Nowadays there are so many phones that we can find it difficult to choose which one suits us, we have so many choices so little time and knowledge about the brands. Well, thats what Im for, I will try to help you to find your ideal smartphone taking into account what you are looking for, your preferences or what you would use the mobile (to play, just to call or for work) and your budget.</p><p className="mb-3">I will provide the following services:</p><ul className="ml-4 sm:ml-6 list-disc"><li>How to choose the smartphone, Tabs, Desktop & Laptop?</li><li>How to root your smartphone?</li><li>How to unlock the bootloader of your smartphone?</li><li>How to install custom ROMs on your smartphone?</li><li>I will also provide the link from where you can easily download the custom ROMs</li><li>How to install custom recovery on your smartphone?</li><li>How to install custom boot animations on your smartphone?</li></ul>',
-  }, {
-    logo: '/images/provider/risid.png',
-    product: 'Risk Advisory',
-    name: 'Risid',
-    text: '<p className="mb-3">Nowadays there are so many phones that we can find it difficult to choose which one suits us, we have so many choices so little time and knowledge about the brands. Well, thats what Im for, I will try to help you to find your ideal smartphone taking into account what you are looking for, your preferences or what you would use the mobile (to play, just to call or for work) and your budget.</p><p className="mb-3">I will provide the following services:</p><ul className="ml-4 sm:ml-6 list-disc"><li>How to choose the smartphone, Tabs, Desktop & Laptop?</li><li>How to root your smartphone?</li><li>How to unlock the bootloader of your smartphone?</li><li>How to install custom ROMs on your smartphone?</li><li>I will also provide the link from where you can easily download the custom ROMs</li><li>How to install custom recovery on your smartphone?</li><li>How to install custom boot animations on your smartphone?</li></ul>',
-  }, {
-    logo: '/images/provider/paypal.png',
-    product: 'Payroll',
-    name: 'PayPal',
-    text: '<p className="mb-3">Nowadays there are so many phones that we can find it difficult to choose which one suits us, we have so many choices so little time and knowledge about the brands. Well, thats what Im for, I will try to help you to find your ideal smartphone taking into account what you are looking for, your preferences or what you would use the mobile (to play, just to call or for work) and your budget.</p><p className="mb-3">I will provide the following services:</p><ul className="ml-4 sm:ml-6 list-disc"><li>How to choose the smartphone, Tabs, Desktop & Laptop?</li><li>How to root your smartphone?</li><li>How to unlock the bootloader of your smartphone?</li><li>How to install custom ROMs on your smartphone?</li><li>I will also provide the link from where you can easily download the custom ROMs</li><li>How to install custom recovery on your smartphone?</li><li>How to install custom boot animations on your smartphone?</li></ul>'
-  }
-]
+import { read } from 'utils/api';
 
 const Cart = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
   const [openInclude, setOpenInclude] = useState({});
+  const [services, setServices] = useState([]);
+  const [serviceId, setServiceId] = useState([]);
+  const [subtotal, setSubtotal] = useState(0);
+  const [getNewList, setNewList] = useState(false);
+
+  useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem('@viettonkin:cart')) || [];
+    const wishList = cart.filter((item, pos) => cart.indexOf(item) === pos);
+    setServiceId(wishList);
+
+    wishList.forEach(async value => {
+      const getDetails = await read(`services/${value}`);
+      setServices(state => [...state, getDetails.data]);
+    });
+
+  }, [getNewList]);
+
+  useEffect(() => {
+    let temp = [];
+    services.forEach(el => temp.push(el.minimumPrice));
+    setSubtotal(temp.reduce((a, b) => a + b, 0));
+  }, [services])
+
+  const deleteServiceId = id => {
+    const serviceList = serviceId;
+    const index = serviceList.indexOf(`${id}`);
+
+    if (index >= 0) {
+      serviceList.splice(index, 1);
+      localStorage.setItem('@viettonkin:cart', JSON.stringify(serviceList));
+      setServiceId(serviceList);
+      setNewList(!getNewList);
+      setServices([]);
+    }
+  };
 
   const toggleComment = id => {
     setOpenInclude(prevOpenInclude => ({
@@ -33,25 +54,34 @@ const Cart = () => {
     }));
   };
 
+  const orderProcess = () => {
+    let temp = [];
+
+    services.forEach(({id, name, partner}) => {
+      temp.push({ id, name, provider: partner.companyName })
+    })
+
+    dispatch(setWistlist(temp))
+    history.push('/submit-requirements');
+  }
+
   return (
     <Fragment>
       <StepIndicator step={1} backButton />
 
       <Container className="md:px-6 lg:px-8 relative py-24">
-        <Row className="-mx-3">
-          <div className="w-8/12 px-4">
-            { listProvider && listProvider.map((item, i) => (
-              <div className="rounded-md shadow mb-8">
-                <div className="p-6 pb-2 flex" key={ i }>
-                  <img src={ item.logo } alt={ item.name } className="mr-5 w-16 h-16 rounded-full" />
+        <Row className="md:justify-evenly">
+          <Col md={7}>
+            { services?.length ? services.map(({ partner, name, id, description }) => (
+              <div className="rounded-md shadow mb-8" key={ id }>
+                <div className="p-6 pb-2 flex">
+                  <img src={ partner?.avatar } alt={ partner?.companyName } className="mr-5 w-16 h-16 rounded-full object-cover" />
 
                   <div className="w-full my-auto">
                     <div className="flex justify-between w-full">
-                      <h2 className="font-bold text-lg">
-                      { item.product }
-                      </h2>
+                      <h2 className="font-bold text-lg">{ name }</h2>
 
-                      <button className="text-xs text-red-500 flex items-center">
+                      <button onClick={() => deleteServiceId( id ) } className="text-xs text-red-500 flex items-center px-2">
                         <Icon name="close" color="#f1333e" size={ 8 } />
                         <span className="ml-3">REMOVE</span>
                       </button>
@@ -59,7 +89,7 @@ const Cart = () => {
 
                     <div className="flex w-full items-center mt-1">
                       <span className="text-gray-500 text-xs">
-                        by <b className="text-orange">{ item.name }</b>
+                        by <b className="text-orange">{ partner?.companyName }</b>
                       </span>
                     </div>
                   </div>
@@ -67,42 +97,31 @@ const Cart = () => {
 
                 <button
                   className="text-darkdrop flex items-center px-6 py-3"
-                  onClick={ () => toggleComment([i]) }
+                  onClick={ () => toggleComment([id]) }
                 >
                   <span className="mr-3">What’s Included</span>
                   <Icon name="triangle" color="#0f4875" size={ 8 } />
                 </button>
 
-                { openInclude[i] && <article className="px-6 py-4 text-sm leading-5 text-gray-700">
-                  <p className="mb-3">Nowadays there are so many phones that we can find it difficult to choose which one suits us, we have so many choices so little time and knowledge about the brands. Well, that's what I'm for, I will try to help you to find your ideal smartphone taking into account what you are looking for, your preferences or what you would use the mobile (to play, just to call or for work) and your budget.</p>
-                  <p className="mb-3">I will provide the following services:</p>
-
-                  <ul className="ml-4 sm:ml-6 list-disc">
-                    <li>How to choose the smartphone, Tabs, Desktop & Laptop?</li>
-                    <li>How to root your smartphone?</li>
-                    <li>How to unlock the bootloader of your smartphone?</li>
-                    <li>How to install custom ROMs on your smartphone?</li>
-                    <li>I will also provide the link from where you can easily download the custom ROMs</li>
-                    <li>How to install custom recovery on your smartphone?</li>
-                    <li>How to install custom boot animations on your smartphone?</li>
-                  </ul>
+                { openInclude[id] && <article className="px-6 py-4 text-sm leading-5 text-gray-700">
+                  { description }
                 </article> }
               </div>
-            )) }
-          </div>
+            )) : <p>Cart is empty!</p> }
+          </Col>
 
-          <div className="w-4/12 px-5">
-            <div className="shadow-lg rounded-md pt-6">
+          <Col md={4}>
+            <div className="shadow-md rounded-md pt-6">
               <h4 className="text-xl px-5">Summary</h4>
 
               <div className="flex justify-between text-gray-500 text-sm mt-5 pb-6 px-5 border-b">
                 <span>Subtotal</span>
-                <span>¥ 7440</span>
+                <span>{ subtotal }</span>
               </div>
 
               <div className="px-5 flex justify-between mb-6 mt-3">
                 <b className="text-sm">Total</b>
-                <div className="font-bold text-lg leading-none">¥ 7440</div>
+                <div className="font-bold text-lg leading-none">{ subtotal }</div>
               </div>
 
               <div className="px-5 flex justify-between mb-6 mt-3">
@@ -110,15 +129,15 @@ const Cart = () => {
                 <p>2 - 3 days</p>
               </div>
 
-              <Link to="/submit-requirements" className="bg-orange p-1 flex w-full rounded-b-md h-12 items-center justify-between">
+              <button onClick={ orderProcess } disabled={ !services?.length } className="bg-orange p-1 flex w-full rounded-b-md h-12 items-center justify-between">
                 <div className="text-center w-full text-white">
                   CONTINUE
                 </div>
-              </Link>
+              </button>
             </div>
 
             <p className="text-center mt-6 text-sm text-gray-400">You won’t be charged yet</p>
-          </div>
+          </Col>
         </Row>
       </Container>
     </Fragment>
