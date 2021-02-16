@@ -32,10 +32,10 @@ const CartForm = ({ countryList, wistlist }) => {
       services_ordered: wistlist
     };
 
-    axios.post('https://www.zohoapis.com/crm/v2/Leads', data, {
+    axios.post('https://www.zohoapis.com/crm/v2/Leads', {data: [data]}, {
       headers: { 'Authorization': `Zoho-oauthtoken ${process.env.REACT_APP_ZOHO_TOKEN}`}
     })
-      .then(res => console.log(res))
+      .then(() => history.push('/success-checkout'))
       .catch(err => alert(err));
   }
 
