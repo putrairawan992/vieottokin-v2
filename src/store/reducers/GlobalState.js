@@ -5,8 +5,7 @@ import {
 
 const initialState = {
   countryList: [],
-  categoryList: [],
-  subCategoryList: []
+  categoryList: []
 };
 
 export default function index(state = initialState, action = null) {
