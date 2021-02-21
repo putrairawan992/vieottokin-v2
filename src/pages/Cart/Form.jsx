@@ -20,15 +20,14 @@ const CartForm = ({ countryList, wistlist }) => {
     e.preventDefault();
 
     const data = {
-      Email: email,
-      $currency_symbol: country.currency,
-      Industry: industry,
-      Country: country.name,
-      Phone: phone,
-      Company_Name: companyName,
-      First_Name: firstName,
-      Last_Name: lastName,
-      Position: position,
+      companyName: companyName,
+      country: country,
+      firstName: firstName,
+      lastName: lastName,
+      position: position,
+      email: email,
+      phone: phone,
+      industry: industry,
       services_ordered: wistlist
     };
 
