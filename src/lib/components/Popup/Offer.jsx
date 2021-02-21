@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { openOffer } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
-import axios from 'axios';
+import { create } from 'utils/api';
 import Icon from 'icon';
 import Modal from 'lib/elements/Modal';
 
@@ -13,21 +13,20 @@ const Offer = ({ dispatch, subCategoryList }) => {
   const addMyOffer = (id, offer) => {
     setSelectedOffer([...selectedOffer, {id, offer}]);
     setOpenOffer(false);
-  }
+  };
 
   const removeMyOffer = index => {
     selectedOffer.splice(index, 1);
     setSelectedOffer([...selectedOffer]);
-  }
+  };
 
   const submit = () => {
-    console.log(selectedOffer)
-    axios.post('', selectedOffer, {
-      headers: { 'Authorization': 'multipart/form-data'}
-    })
-      .then(res => console.log(res))
-      .catch(err => alert(err));
-  }
+    // create('', formData)
+    // .then(() => {
+    //   alert('Submit success');
+    //   dispatch(openOffer(false));
+    // });
+  };
 
   return (
     <Modal>

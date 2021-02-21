@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Container, Row, Col } from 'lib/elements/Grid';
 import { openSignup } from 'store/actions/ModalControl';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import Icon from 'icon';
 import Modal from 'lib/elements/Modal';
+import { create } from 'utils/api';
 
 const SigninPopup = ({countryList, dispatch}) => {
   const [companyName, setCompanyName] = useState('');
   const [companyWeb, setCompanyWeb] = useState('');
-  const [country, setCountry] = useState({currency: '', name: ''});
+  const [country, setCountry] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [position, setPosition] = useState('');
@@ -17,25 +17,26 @@ const SigninPopup = ({countryList, dispatch}) => {
   const [phone, setPhone] = useState('');
   const [industry, setIndustry] = useState('');
 
-  const submit = () => {
-    const data = {
-      Email: email,
-      $currency_symbol: country.currency,
-      Industry: industry,
-      Country: country.name,
-      Phone: phone,
-      Company_Name: companyName,
-      Website: companyWeb,
-      First_Name: firstName,
-      Full_Name: firstName + lastName,
-      Position: position
-  };
+  const submit = e => {
+    e.preventDefault();
 
-    axios.post('https://www.zohoapis.com/crm/v2/Lead', data, {
-      headers: { 'Authorization': `Zoho-oauthtoken ${process.env.REACT_APP_ZOHO_TOKEN}`}
-    })
-      .then(res => console.log(res))
-      .catch(err => alert(err));
+    const data = {
+      companyName: companyName,
+      companyWebsite: companyWeb,
+      country: country,
+      firstName: firstName,
+      lastName: lastName,
+      position: position,
+      email: email,
+      phone: phone,
+      industry: industry
+    };
+
+    create('zoho/join-partners', data)
+      .then(res => {
+        alert(res.message);
+        dispatch(openSignup(false));
+      });
   }
 
   return (
@@ -63,7 +64,7 @@ const SigninPopup = ({countryList, dispatch}) => {
 
                 <input
                   required
-                  className="border py-1 px-2"
+                  className="border py-1 px-2 w-full"
                   onChange={e => setCompanyName(e.target.value)}
                 />
               </Col>
@@ -73,7 +74,7 @@ const SigninPopup = ({countryList, dispatch}) => {
 
                 <input
                   required
-                  className="border py-1 px-2"
+                  className="border py-1 px-2 w-full"
                   onChange={e => setCompanyWeb(e.target.value)}
                 />
               </Col>
@@ -84,15 +85,12 @@ const SigninPopup = ({countryList, dispatch}) => {
                 <span className="mb-2 text-sm font-bold">Country</span>
 
                 <select
-                  onChange={e => setCountry({
-                    currency: e.target.value,
-                    name: e.target[e.target.selectedIndex].getAttribute('name')
-                  })}
+                  onChange={e => setCountry(e.target.value)}
                   className="border p-2 text-xs text-gray-500 w-full"
                 >
                   <option>Select country</option>
-                  { countryList?.map(({id, name, currencySymbol}) => (
-                    <option key={ id } value={ currencySymbol } name={ name }>{ name }</option>
+                  { countryList?.map(({id, name}) => (
+                    <option key={ id } value={ name }>{ name }</option>
                   )) }
                 </select>
               </Col>
@@ -104,7 +102,7 @@ const SigninPopup = ({countryList, dispatch}) => {
 
                 <input
                   required
-                  className="border py-1 px-2"
+                  className="border py-1 px-2 w-full"
                   onChange={e => setFirstName(e.target.value)}
                 />
               </Col>
@@ -114,7 +112,7 @@ const SigninPopup = ({countryList, dispatch}) => {
 
                 <input
                   required
-                  className="border py-1 px-2"
+                  className="border py-1 px-2 w-full"
                   onChange={e => setLastName(e.target.value)}
                 />
               </Col>
@@ -126,7 +124,7 @@ const SigninPopup = ({countryList, dispatch}) => {
 
                 <input
                   required
-                  className="border py-1 px-2"
+                  className="border py-1 px-2 w-full"
                   onChange={e => setPosition(e.target.value)}
                 />
               </Col>
@@ -137,7 +135,7 @@ const SigninPopup = ({countryList, dispatch}) => {
                 <input
                   required
                   type="email"
-                  className="border py-1 px-2"
+                  className="border py-1 px-2 w-full"
                   onChange={e => setEmail(e.target.value)}
                 />
               </Col>
@@ -149,7 +147,7 @@ const SigninPopup = ({countryList, dispatch}) => {
 
                 <input
                   required
-                  className="border py-1 px-2"
+                  className="border py-1 px-2 w-full"
                   onChange={e => setPhone(e.target.value)}
                 />
               </Col>
@@ -159,7 +157,7 @@ const SigninPopup = ({countryList, dispatch}) => {
 
                 <input
                   required
-                  className="border py-1 px-2"
+                  className="border py-1 px-2 w-full"
                   onChange={e => setIndustry(e.target.value)}
                 />
               </Col>

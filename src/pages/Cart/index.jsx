@@ -56,12 +56,9 @@ const Cart = () => {
 
   const orderProcess = () => {
     let temp = [];
+    services.forEach(({id, name, partner}) => temp.push({ id, name, provider: partner.companyName }))
+    dispatch(setWistlist(temp));
 
-    services.forEach(({id, name, partner}) => {
-      temp.push({ id, name, provider: partner.companyName })
-    })
-
-    dispatch(setWistlist(temp))
     history.push('/submit-requirements');
   }
 

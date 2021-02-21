@@ -1,9 +1,9 @@
 import React, { Fragment, useState } from 'react';
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Container, Row, Col } from 'lib/elements/Grid';
 import StepIndicator from './StepIndicator';
+import { create } from 'utils/api';
 
 const CartForm = ({ countryList, wistlist }) => {
   const history = useHistory();
@@ -32,11 +32,8 @@ const CartForm = ({ countryList, wistlist }) => {
       services_ordered: wistlist
     };
 
-    axios.post('https://www.zohoapis.com/crm/v2/Leads', {data: [data]}, {
-      headers: { 'Authorization': `Zoho-oauthtoken ${process.env.REACT_APP_ZOHO_TOKEN}`}
-    })
-      .then(() => history.push('/success-checkout'))
-      .catch(err => alert(err));
+    create('zoho/checkout', data)
+      .then(() => history.push('/success-checkout'));
   }
 
   return (
