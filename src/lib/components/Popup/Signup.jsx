@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Row, Col } from 'lib/elements/Grid';
-import { openSignup } from 'store/actions/ModalControl';
+import { openOffer, openSignup } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import Icon from 'icon';
 import Modal from 'lib/elements/Modal';
@@ -20,7 +20,8 @@ const SigninPopup = ({countryList, dispatch}) => {
   const submit = e => {
     e.preventDefault();
 
-    const data = {
+    dispatch(openSignup(false));
+    dispatch(openOffer({
       companyName: companyName,
       companyWebsite: companyWeb,
       country: country,
@@ -30,14 +31,8 @@ const SigninPopup = ({countryList, dispatch}) => {
       email: email,
       phone: phone,
       industry: industry
-    };
-
-    create('zoho/join-partners', data)
-      .then(res => {
-        alert(res.message);
-        dispatch(openSignup(false));
-      });
-  }
+    }));
+  };
 
   return (
     <Modal>

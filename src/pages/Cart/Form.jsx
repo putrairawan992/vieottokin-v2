@@ -8,7 +8,8 @@ import { create } from 'utils/api';
 const CartForm = ({ countryList, wistlist }) => {
   const history = useHistory();
   const [companyName, setCompanyName] = useState('');
-  const [country, setCountry] = useState({currency: '', name: ''});
+  const [companyWeb, setCompanyWeb] = useState('');
+  const [country, setCountry] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [position, setPosition] = useState('');
@@ -21,6 +22,7 @@ const CartForm = ({ countryList, wistlist }) => {
 
     const data = {
       companyName: companyName,
+      companyWebsite: companyWeb,
       country: country,
       firstName: firstName,
       lastName: lastName,
@@ -63,6 +65,7 @@ const CartForm = ({ countryList, wistlist }) => {
                 <input
                   required
                   className="border w-full py-1 px-2"
+                  onChange={e => setCompanyWeb(e.target.value)}
                 />
               </Col>
             </Row>
@@ -72,15 +75,12 @@ const CartForm = ({ countryList, wistlist }) => {
                 <span className="mb-2 text-sm font-bold">Country</span>
 
                 <select
-                  onChange={e => setCountry({
-                    currency: e.target.value,
-                    name: e.target[e.target.selectedIndex].getAttribute('name')
-                  })}
+                  onChange={e => setCountry(e.target.value)}
                   className="border p-2 text-xs text-gray-500 w-full"
                 >
                   <option>Select country</option>
-                  { countryList?.map(({id, name, currencySymbol}) => (
-                    <option key={ id } value={ currencySymbol } name={ name }>{ name }</option>
+                  { countryList?.map(({id, name}) => (
+                    <option key={ id } value={ name }>{ name }</option>
                   )) }
                 </select>
               </Col>

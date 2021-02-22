@@ -23,7 +23,7 @@ const HeroCTA = ({ showModalOffer, showModalSignup, dispatch }) => {
             <div className="mt-7">
               <Button
                 type="solid"
-                onClick={ () => dispatch(openOffer(true)) }
+                onClick={ () => dispatch(openSignup(true)) }
                 className="px-12 py-4 mx-4"
               >
                 Find Service Providers

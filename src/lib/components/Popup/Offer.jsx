@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { openOffer } from 'store/actions/ModalControl';
-import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { create, read } from 'utils/api';
 import Icon from 'icon';
 import Modal from 'lib/elements/Modal';
 
-const Offer = () => {
-  const dispatch = useDispatch();
+const Offer = ({ dispatch, showModalOffer }) => {
   const [subCategories, setSubCategories ] = useState([]);
   const [selectedOffer, setSelectedOffer ] = useState([]);
   const [keyword, setKeyword] = useState('');
@@ -21,8 +20,8 @@ const Offer = () => {
     fetchData();
   }, []);
 
-  const addMyOffer = (id, offer) => {
-    setSelectedOffer([...selectedOffer, {id, offer}]);
+  const addMyOffer = offer => {
+    setSelectedOffer([...selectedOffer, offer]);
     setOpenOffer(false);
   };
 
@@ -32,14 +31,17 @@ const Offer = () => {
   };
 
   const submit = () => {
-    console.log(selectedOffer)
-    // create('', selectedOffer)
-    // .then(() => {
-    //   alert('Submit success');
-    //   dispatch(openOffer(false));
-    // });
+    const data = {
+      ...showModalOffer,
+      service_offered: selectedOffer
+    };
+console.log(data)
+    create('zoho/join-partners', data)
+      .then(() => {
+        alert("We received your application. We'll get back to you as soon as possible");
+        dispatch(openOffer(false));
+      });
   };
-
 
   return (
     <Modal>
@@ -67,13 +69,13 @@ const Offer = () => {
           </div>
 
           { openOfferList && <div className="shadow-md bg-white rounded-md mt-2 absolute w-full">
-            { subCategories?.filter((find, i) => selectedOffer[i] ? find.id !== selectedOffer[i].id : find)
+            { subCategories?.filter((find, i) => selectedOffer[i] ? !selectedOffer.includes(find.name) : find)
               .filter(find => find.name.toLocaleLowerCase().includes(keyword.toLocaleLowerCase()))
               .map(item => (
                 <div
                   className="cursor-pointer hover:bg-gray-100"
                   key={ item.id }
-                  onClick={ () => addMyOffer(item.id, item.name) }
+                  onClick={ () => addMyOffer(item.name) }
                 >
                   <p className="p-3">{ item.name }</p>
                 </div>
@@ -84,11 +86,10 @@ const Offer = () => {
         { selectedOffer.length > 0 && <ul className="block mt-2">
           { selectedOffer.map((item, i) => (
             <li
-              key={ item.id }
+              key={ i }
               className="border-blue text-blue text-xs border-2 rounded-full px-4 py-2 mr-2 mt-2 inline-flex justify-between items-center"
             >
-              { item.offer }
-
+              { item }
               <button className="ml-6" onClick={ () => removeMyOffer(i) }>
                 <Icon name="close" size={ 10 } color="#86BBFF" />
               </button>
@@ -114,4 +115,8 @@ const Offer = () => {
   );
 }
 
-export default Offer;
+const mapStateToProps = state => ({
+  showModalOffer: state.modalControl.showModalOffer
+});
+
+export default connect(mapStateToProps)(Offer);

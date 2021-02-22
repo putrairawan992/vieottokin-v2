@@ -12,7 +12,7 @@ import {
 const initialState = {
   showModalSignup: false,
   showModalSignin: false,
-  showModalOffer: false,
+  showModalOffer: null,
   showModalNewPartner: false,
   showModalEditPartner: null,
   showModalNewService: false,
