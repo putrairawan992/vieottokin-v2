@@ -4,7 +4,6 @@ import { openOffer, openSignup } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import Icon from 'icon';
 import Modal from 'lib/elements/Modal';
-import { create } from 'utils/api';
 
 const SigninPopup = ({countryList, dispatch}) => {
   const [companyName, setCompanyName] = useState('');
@@ -69,6 +68,8 @@ const SigninPopup = ({countryList, dispatch}) => {
 
                 <input
                   required
+                  pattern="[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+"
+                  placeholder="Enter valid domain without http/s"
                   className="border py-1 px-2 w-full"
                   onChange={e => setCompanyWeb(e.target.value)}
                 />

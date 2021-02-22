@@ -64,6 +64,8 @@ const CartForm = ({ countryList, wistlist }) => {
 
                 <input
                   required
+                  pattern="[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+"
+                  placeholder="Enter valid domain without http/s"
                   className="border w-full py-1 px-2"
                   onChange={e => setCompanyWeb(e.target.value)}
                 />

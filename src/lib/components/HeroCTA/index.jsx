@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Button from 'lib/components/Button';
 import Offer from 'lib/components/Popup/Offer';
 import Signup from 'lib/components/Popup/Signup';
-import { openOffer, openSignup } from 'store/actions/ModalControl';
+import { openSignup } from 'store/actions/ModalControl';
 
 const HeroCTA = ({ showModalOffer, showModalSignup, dispatch }) => {
   return (

@@ -35,7 +35,7 @@ const Offer = ({ dispatch, showModalOffer }) => {
       ...showModalOffer,
       service_offered: selectedOffer
     };
-console.log(data)
+
     create('zoho/join-partners', data)
       .then(() => {
         alert("We received your application. We'll get back to you as soon as possible");
