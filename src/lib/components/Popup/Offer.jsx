@@ -69,7 +69,7 @@ const Offer = ({ dispatch, showModalOffer }) => {
           </div>
 
           { openOfferList && <div className="shadow-md bg-white rounded-md mt-2 absolute w-full">
-            { subCategories?.filter((find, i) => selectedOffer[i] ? !selectedOffer.includes(find.name) : find)
+            { subCategories.sort()?.filter(find => !!selectedOffer ? !selectedOffer.sort().includes(find.name) : find)
               .filter(find => find.name.toLocaleLowerCase().includes(keyword.toLocaleLowerCase()))
               .map(item => (
                 <div

@@ -87,6 +87,7 @@ const Navbar = ({ auth, countryList, categoryList, logoutUser }) => {
     </Container>
   );
 }
+
 const mapStateToProps = state => ({
   auth: state.auth.isAuthenticated,
   countryList: state.globalState.countryList,
