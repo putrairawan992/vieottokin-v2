@@ -39,16 +39,19 @@ const AutoComplete = ({ suggestions, onChange, value, disabled }) => {
 
   const SuggestionsList = () => (
     <ul className="absolute w-full bg-white z-10 pl-8 text-sm border-l border-r border-b py-2">
-      { filteredSuggestions.map((el, i) => (
+      { filteredSuggestions.map((el, i) => {
+        const parts = el.companyName.split(new RegExp(`(${userInput})`, 'gi'));
+
+        return (
         <li key={ i } className="py-1">
           <button
             onClick={ e => selectPartner(e, el.id, el.country, el.categoryId) }
             className="w-full text-left"
           >
-            { el.companyName }
+            { parts.map(part => part.toLowerCase() === userInput.toLowerCase() ? <span className="bg-yellow-300">{ part }</span> : part) }
           </button>
         </li>
-      )) }
+      )}) }
     </ul>
   );
 

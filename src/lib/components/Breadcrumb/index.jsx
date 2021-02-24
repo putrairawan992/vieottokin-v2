@@ -1,10 +1,16 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Container } from 'lib/elements/Grid';
 import Icon from 'icon';
 
 import JapanFlag from 'icon/japan-flag.svg';
 
 const ListProvider = ({ base, current }) => {
+  const [cart, setCart] = useState('');
+
+  useEffect(() => {
+    setCart(JSON.parse(localStorage.getItem('@viettonkin:cart')))
+  }, [])
+
   return (
     <Fragment>
       <Container fluid className="md:px-6 lg:px-8 relative shadow py-4">
@@ -34,7 +40,7 @@ const ListProvider = ({ base, current }) => {
 
             <div className="flex items-center">
               <Icon name="cart" color="#000" size={ 12 } />
-              <p className="ml-2">Cart (0)</p>
+              <p className="ml-2">Cart ({cart.length})</p>
             </div>
           </div>
         </Container>
