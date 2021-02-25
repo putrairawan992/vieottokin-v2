@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { openOffer } from 'store/actions/ModalControl';
+import React, { useEffect, useState, Fragment } from 'react';
+import { openOffer, openSignup, openNotification } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import { create, read } from 'utils/api';
 import Icon from 'icon';
@@ -30,17 +30,19 @@ const Offer = ({ dispatch, showModalOffer }) => {
     setSelectedOffer([...selectedOffer]);
   };
 
-  const submit = () => {
+  const goBack = () => {
+    dispatch(openOffer(false));
+    dispatch(openSignup(true));
+  }
+
+  const submit = async () => {
     const data = {
       ...showModalOffer,
       service_offered: selectedOffer
     };
 
-    create('zoho/join-partners', data)
-      .then(() => {
-        alert("We received your application. We'll get back to you as soon as possible");
-        dispatch(openOffer(false));
-      });
+    const createData = await create('zoho/join-partners', data);
+    createData.status === 200 && dispatch(openOffer(false));
   };
 
   return (
@@ -97,10 +99,7 @@ const Offer = ({ dispatch, showModalOffer }) => {
           )) }
         </ul> }
 
-        <button
-          onClick={ () => dispatch(openOffer(false)) }
-          className="text-orange text-sm font-bold mt-24"
-        >
+        <button onClick={ goBack } className="text-orange text-sm font-bold mt-24">
           GO BACK
         </button>
       </div>

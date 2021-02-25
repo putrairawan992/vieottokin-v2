@@ -6,7 +6,8 @@ import {
   MODAL_EDITPARTNER,
   MODAL_NEWSERVICE,
   MODAL_EDITSERVICE,
-  MODAL_DELETECONFIRM
+  MODAL_DELETECONFIRM,
+  NOTIFICATION
 } from '../types';
 
 const initialState = {
@@ -18,6 +19,7 @@ const initialState = {
   showModalNewService: false,
   showModalEditService: null,
   showModalDeleteConfirm: null,
+  showNotification: null
 };
 
 export default function index(state = initialState, action = null) {
@@ -38,6 +40,8 @@ export default function index(state = initialState, action = null) {
       return { ...state, showModalEditService: action.payload };
     case MODAL_DELETECONFIRM:
       return { ...state, showModalDeleteConfirm: action.payload };
+    case NOTIFICATION:
+      return { ...state, showNotification: action.payload };
     default:
       return state;
   }

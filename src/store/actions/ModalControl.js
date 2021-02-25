@@ -6,7 +6,8 @@ import {
   MODAL_EDITPARTNER,
   MODAL_NEWSERVICE,
   MODAL_EDITSERVICE,
-  MODAL_DELETECONFIRM
+  MODAL_DELETECONFIRM,
+  NOTIFICATION
 } from '../types';
 
 export const openSignup = payload => ({ type: MODAL_SIGNUP, payload });
@@ -17,3 +18,4 @@ export const openEditPartner = payload => ({ type: MODAL_EDITPARTNER, payload })
 export const openNewService = payload => ({ type: MODAL_NEWSERVICE, payload });
 export const openEditService = payload => ({ type: MODAL_EDITSERVICE, payload });
 export const openDeleteConfirm = payload => ({ type: MODAL_DELETECONFIRM, payload });
+export const openNotification = payload => ({ type: NOTIFICATION, payload });

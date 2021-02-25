@@ -13,13 +13,13 @@ const ProviderTable = ({ setCount, dispatch, serviceFilter, countryList }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const resPartners = await read(`admin/partners?page=${page}&limit=${limit}`);
+      const resPartners = await read(`admin/partners?page=${page}&limit=${limit}&search=${search}`);
       setCount({count: resPartners.data.results.count, pages: resPartners.data.lastPage || 1});
       setPartners(resPartners.data.results);
     };
 
     fetchData();
-  }, [limit, page]);
+  }, [limit, page, search.length > 2]);
 
   return (
     <Fragment>
@@ -59,7 +59,7 @@ const ProviderTable = ({ setCount, dispatch, serviceFilter, countryList }) => {
             </tr>
           </thead>
           <tbody>
-            { partners?.rows.filter(find => find.companyName.toLowerCase().includes(search.toLowerCase())).map((item, i) => (
+            { partners?.rows.map((item, i) => (
               <tr key={ i }>
                 <td className={ `pl-5 p-3 ${trBorder}` }>
                   <div className="flex items-center">

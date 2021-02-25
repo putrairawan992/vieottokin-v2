@@ -7,6 +7,7 @@ import Loading from 'lib/elements/Loading';
 import { resetFilter } from 'store/actions/ServiceFilter';
 
 import { Signup, Signin, Offer } from 'lib/components/Popup';
+import Notification from 'lib/elements/Notification';
 import Navbar from 'lib/components/Navbar';
 import Footer from 'lib/components/Footer';
 import AboutUs from 'pages/AboutUs';
@@ -58,6 +59,7 @@ const RouterManager = ({ progress, location, dispatch, ...props }) => {
       { props.showModalSignup && <Signup /> }
       { props.showModalSignin && <Signin /> }
       { props.showModalOffer && <Offer /> }
+      { props.showNotification && <Notification /> }
 
       <Loading shown={progress} />
     </Fragment>
@@ -70,5 +72,4 @@ function mapStateToProps(state) {
     progress: state.isLoading.isLoading
   };
 }
-
 export default withRouter(connect(mapStateToProps)(RouterManager));

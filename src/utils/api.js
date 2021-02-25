@@ -1,5 +1,6 @@
 import axios from 'axios';
 import setLoading from 'store/actions/Loading';
+import { openNotification } from 'store/actions/ModalControl';
 import store from 'store';
 
 const axiosInstance = async (method, path, request) => {
@@ -9,12 +10,23 @@ const axiosInstance = async (method, path, request) => {
   return axios[method](process.env.REACT_APP_API_HOST + path, request)
     .then(response => {
       store.dispatch(setLoading(false));
+
+      method !== 'get'  && store.dispatch(openNotification({
+        type: 'success',
+        message: response.data.message
+      }));
+
       return response.data;
     })
     .catch(error => {
       store.dispatch(setLoading(false));
       console.log(error.response);
-      alert(error.response.data.message);
+
+      store.dispatch(openNotification({
+        type: 'failed',
+        message: error.response.data.message
+      }));
+
       return error.response;
     })
 };

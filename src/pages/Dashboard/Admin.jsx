@@ -3,7 +3,6 @@ import { Container } from 'lib/elements/Grid';
 import Navigator from './Navigator';
 import ProviderTable from './ProviderTable';
 import ServiceTable from './ServiceTable';
-import { connect } from 'react-redux';
 import TableFooter from './TableFooter';
 
 const AdminDashboard = () => {
@@ -54,4 +53,4 @@ const AdminDashboard = () => {
   );
 }
 
-export default connect()(AdminDashboard);
+export default AdminDashboard;
