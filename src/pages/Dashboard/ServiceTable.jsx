@@ -7,19 +7,21 @@ import { Link } from 'react-router-dom';
 
 const trBorder = 'border-b border-gray-300';
 
-const ServiceTable = ({ setCount, dispatch, auth: { user, userProfile } }) => {
+const ServiceTable = ({ setCount, dispatch, serviceFilter, auth: { user, userProfile } }) => {
+  const { limit, page } = serviceFilter;
   const [services, setServices] = useState([]);
   const [search, setSearch] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
-      const resServices = await read(`${user.role === 'Admin' ? 'admin' : 'partners'}/services`);
+      const params = `page=${!search?.length ? page : 1}&limit=${limit}&search=${search}`;
+      const resServices = await read(`${user.role === 'Admin' ? 'admin' : 'partners'}/services?${params}`);
       setCount({count: resServices.data.results.count, pages: resServices.data.lastPage || 1});
       setServices(resServices.data.results);
     };
 
     fetchData();
-  }, []);
+  }, [limit, page, search.length > 3, !search?.length]);
 
   return (
     <Fragment>
@@ -57,22 +59,22 @@ const ServiceTable = ({ setCount, dispatch, auth: { user, userProfile } }) => {
           </tr>
         </thead>
         <tbody>
-          { services.rows?.filter(find => find.name.toLowerCase().includes(search.toLowerCase())).map(item => (
-            <tr key={ item.id }>
+          { services.rows?.map(({ id, name, partner }) => (
+            <tr key={ id }>
               <td className={ `pl-5 p-3 ${trBorder}` }>
                 <div className="flex items-center">
-                  <span>{ item.name }</span>
+                  <span>{ name }</span>
                 </div>
               </td>
 
               <td className={trBorder}>
                 <div className="flex items-center">
                   <img
-                    src={ user.role === 'Admin' ? item.partner?.avatar : userProfile.avatar } alt={item.name}
+                    src={ user.role === 'Admin' ? partner?.avatar : userProfile.avatar } alt={name}
                     className="h-7 w-7 object-cover"
                   />
 
-                  <span className="ml-3">{ user.role === 'Admin' ? item.partner?.companyName : userProfile.companyName }</span>
+                  <span className="ml-3">{ user.role === 'Admin' ? partner?.companyName : userProfile.companyName }</span>
                 </div>
               </td>
 
@@ -80,20 +82,20 @@ const ServiceTable = ({ setCount, dispatch, auth: { user, userProfile } }) => {
                 <div className="flex">
                   <button
                     className="w-8 h-8 rounded bg-darkdrop flex items-center justify-center mr-2"
-                    onClick={ () => dispatch(openEditService(item.id)) }
+                    onClick={ () => dispatch(openEditService(id)) }
                   >
                     <Icon name="pen" size={ 13 } />
                   </button>
 
                   <button
                     className="w-8 h-8 rounded bg-red-700 flex items-center justify-center mr-2"
-                    onClick={ () => dispatch(openDeleteConfirm({id: item.id, data: 'service'})) }
+                    onClick={ () => dispatch(openDeleteConfirm({id, data: 'service'})) }
                   >
                     <Icon name="trash" size={ 13 } />
                   </button>
 
                   <Link
-                    to={ `profile-provider/${item.id}` }
+                    to={ `profile-provider/${id}` }
                     className="px-3 text-xs rounded text-blue border border-blue flex items-center"
                   >
                     View Service
@@ -109,7 +111,8 @@ const ServiceTable = ({ setCount, dispatch, auth: { user, userProfile } }) => {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  serviceFilter: state.serviceFilter,
 })
 
 export default connect(mapStateToProps)(ServiceTable);

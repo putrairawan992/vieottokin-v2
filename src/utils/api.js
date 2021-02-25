@@ -10,7 +10,6 @@ const axiosInstance = async (method, path, request) => {
   return axios[method](process.env.REACT_APP_API_HOST + path, request)
     .then(response => {
       store.dispatch(setLoading(false));
-      console.log(response);
 
       method !== 'get'  && store.dispatch(openNotification({
         type: 'success',

@@ -13,13 +13,14 @@ const ProviderTable = ({ setCount, dispatch, serviceFilter, countryList }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const resPartners = await read(`admin/partners?page=${page}&limit=${limit}&search=${search}`);
+      const params = `page=${!search?.length ? page : 1}&limit=${limit}&search=${search}`;
+      const resPartners = await read(`admin/partners?${params}`);
       setCount({count: resPartners.data.results.count, pages: resPartners.data.lastPage || 1});
       setPartners(resPartners.data.results);
     };
 
     fetchData();
-  }, [limit, page, search.length > 2]);
+  }, [limit, page, search.length > 3, !search?.length]);
 
   return (
     <Fragment>
@@ -59,41 +60,39 @@ const ProviderTable = ({ setCount, dispatch, serviceFilter, countryList }) => {
             </tr>
           </thead>
           <tbody>
-            { partners?.rows.map((item, i) => (
-              <tr key={ i }>
+            { partners?.rows.map(({ id, companyName, avatar, country, city }) => (
+              <tr key={ id }>
                 <td className={ `pl-5 p-3 ${trBorder}` }>
                   <div className="flex items-center">
-                    <img src={ item.avatar } alt={ item.companyName } className="h-7 w-7 hidden md:block object-cover" />
-                    <span className="md:ml-3">{ item.companyName }</span>
+                    <img src={ avatar } alt={ companyName } className="h-7 w-7 hidden md:block object-cover" />
+                    <span className="md:ml-3">{ companyName }</span>
                   </div>
                 </td>
 
                 <td className={ `${trBorder}` }>
                   <div className="flex items-center">
                     <img
-                      src={ countryList.filter(find => find.name === item.country)[0]?.logo || '' }
-                      alt={ item.country }
+                      src={ countryList.filter(find => find.name === country)[0]?.logo || '' }
+                      alt={ country }
                     />
-                    <span className="ml-3">{ item.country }</span>
+                    <span className="ml-3">{ country }</span>
                   </div>
                 </td>
 
-                <td className={ `${trBorder}` }>
-                  { item.city }
-                </td>
+                <td className={ `${trBorder}` }>{ city }</td>
 
                 <td className={ `${trBorder}` }>
                   <div className="flex">
                     <button
                       className="w-8 h-8 rounded bg-darkdrop flex items-center justify-center mr-2"
-                      onClick={ () => dispatch(openEditPartner(item.id)) }
+                      onClick={ () => dispatch(openEditPartner(id)) }
                     >
                       <Icon name="pen" size={ 13 } />
                     </button>
 
                     <button
                       className="w-8 h-8 rounded bg-red-700 flex items-center justify-center"
-                      onClick={ () => dispatch(openDeleteConfirm({id: item.id, data: 'partner'})) }
+                      onClick={ () => dispatch(openDeleteConfirm({id, data: 'partner'})) }
                     >
                       <Icon name="trash" size={ 13 } />
                     </button>
