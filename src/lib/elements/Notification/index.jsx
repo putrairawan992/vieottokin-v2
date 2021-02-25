@@ -18,7 +18,7 @@ const Notification = ({ message, type }) => {
     <div className="h-screen w-full fixed left-0 top-0 flex z-50 justify-center items-center">
       <div className={`flex items-center border-l-4 py-2 px-3 shadow-md mb-20 ${color} bg-opacity-90`}>
         <div className="mr-3">
-          <Icon size={45} name="success-notif" />
+          <Icon size={45} name={type === 'success' ? 'success-notif' : 'error-notif'} />
         </div>
 
         <div className="max-w-xs">{ message }</div>

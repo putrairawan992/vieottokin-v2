@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Fragment } from 'react';
-import { openOffer, openSignup, openNotification } from 'store/actions/ModalControl';
+import { openOffer, openSignup } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import { create, read } from 'utils/api';
 import Icon from 'icon';
@@ -42,7 +42,7 @@ const Offer = ({ dispatch, showModalOffer }) => {
     };
 
     const createData = await create('zoho/join-partners', data);
-    createData.status === 200 && dispatch(openOffer(false));
+    createData.status === 200 && dispatch(openOffer(null));
   };
 
   return (
@@ -104,10 +104,7 @@ const Offer = ({ dispatch, showModalOffer }) => {
         </button>
       </div>
 
-      <button
-        onClick={ submit }
-        className="bg-orange w-full py-3 text-white rounded-b-md"
-      >
+      <button onClick={ submit } className="bg-orange w-full py-3 text-white rounded-b-md">
         SUBMIT
       </button>
     </Modal>

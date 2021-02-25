@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { openNewPartner } from 'store/actions/ModalControl';
+import { openNotification } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import Icon from 'icon';
 import Modal from 'lib/elements/Modal';
@@ -22,7 +23,10 @@ const AddNewPartner = ({ dispatch, countryList, categoryList }) => {
     const fileSize = ((e.target.files[0].size/1024)/1024).toFixed(4);
 
     if (fileSize > 2) {
-      alert('Limit 2MB');
+      dispatch(openNotification({
+        type: 'failed',
+        message: 'Limit 2MB'
+      }));
     } else {
       setPreview(e.target.files[0]);
     }

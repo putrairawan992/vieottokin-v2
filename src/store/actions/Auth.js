@@ -1,5 +1,6 @@
 import axios from 'axios';
 import setAuthToken from 'utils/setAuthToken';
+import { openNotification } from 'store/actions/ModalControl';
 import jwtDecode from 'jwt-decode';
 import { SET_CURRENT_USER, USER_PROFILE } from '../types';
 
@@ -23,9 +24,11 @@ export const loginUser = userData => dispatch => {
 
       return true;
     })
-    .catch(err => {
-      alert(err.response.data.message);
-      console.log(err.response.data);
+    .catch(error => {
+      dispatch(openNotification({
+        type: 'failed',
+        message: error.response.data.message
+      }));
     });
 };
 
