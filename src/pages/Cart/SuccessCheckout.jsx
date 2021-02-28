@@ -1,9 +1,18 @@
-import React, { Fragment } from 'react';
-import { Container } from 'components/Grid';
+import React, { Fragment, useEffect } from 'react';
+import { Container } from 'lib/elements/Grid';
+import { Link } from 'react-router-dom';
 import Icon from 'icon';
+import { setWistlist } from 'store/actions/Wishlist';
+import { useDispatch } from 'react-redux';
 import StepIndicator from './StepIndicator';
 
 const SuccessCheckout = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    localStorage.removeItem('@viettonkin:cart');
+    dispatch(setWistlist([]));
+  }, [])
 
   return (
     <Fragment>
@@ -23,9 +32,9 @@ const SuccessCheckout = () => {
             <p>Our team will get back to you within 24 - 42 hours.</p>
           </article>
 
-          <button className="w-full bg-orange p-4 rounded-b-md text-white text-center">
+          <Link to="/service-providers" className="w-full bg-orange p-4 rounded-b-md text-white text-center block">
             BACK TO SERVICES
-          </button>
+          </Link>
         </div>
       </Container>
     </Fragment>

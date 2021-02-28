@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import { Container, Row, Col } from 'components/Grid';
-import Breadcrumb from 'components/Breadcrumb';
+import { Container, Row, Col } from 'lib/elements/Grid';
+import Breadcrumb from 'lib/components/Breadcrumb';
 import Icon from 'icon';
 
 const Contact = () => {

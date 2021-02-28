@@ -1,16 +1,17 @@
-import React, { Fragment } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, { Fragment, useEffect } from 'react';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import { AnimatedSwitch } from 'react-router-transition';
-// import Fade from 'react-reveal/Fade';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import SignupPopup from 'components/Popup/Signup';
-import SigninPopup from 'components/Popup/Signin';
-import OfferPopup from 'components/Popup/Offer';
-import Navbar from 'components/Navbar';
-import Footer from 'components/footer';
-import AboutUs from 'pages/aboutUs';
-import LandingPage from 'pages/landingPage';
+import PrivateRoute from 'utils/privateRoute';
+import Loading from 'lib/elements/Loading';
+import { resetFilter } from 'store/actions/ServiceFilter';
+
+import { Signup, Signin, Offer } from 'lib/components/Popup';
+import Notification from 'lib/elements/Notification';
+import Navbar from 'lib/components/Navbar';
+import Footer from 'lib/components/Footer';
+import AboutUs from 'pages/AboutUs';
+import LandingPage from 'pages/LandingPage';
 import ServiceProvider from 'pages/ServiceProvider';
 import ProfileProvider from 'pages/ProfileProvider';
 import Cart from 'pages/Cart';
@@ -20,44 +21,55 @@ import FAQ from 'pages/FAQ';
 import Contact from 'pages/Contact';
 import Dashboard from 'pages/Dashboard';
 
-const RouterManager = ({ ...props }) => (
-  <Fragment>
-    <Navbar />
+const RouterManager = ({ progress, location, dispatch, ...props }) => {
+  useEffect(() => {
+    if (location.pathname !== '/service-providers') dispatch(resetFilter());
+  }, [location.pathname]);
 
-    <Route render={({location}) => (
-      <TransitionGroup>
-        <CSSTransition
-          key={location.key}
-          classNames="fade"
-          timeout={300}
-        >
-          <Switch location={location}>
-            <Route exact path='/' component={ AboutUs } />
-            <Route path='/landing-page' component={ LandingPage } />
-            <Route path='/service-providers' component={ ServiceProvider } />
-            <Route path='/profile-provider' component={ ProfileProvider } />
-            <Route path='/cart' component={ Cart } />
-            <Route path='/submit-requirements' component={ CartForm } />
-            <Route path='/success-checkout' component={ SuccessCheckout } />
-            <Route path='/faq' component={ FAQ } />
-            <Route path='/contact' component={ Contact } />
-            <Route path='/dashboard' component={ Dashboard } />
-          </Switch>
+  return (
+    <Fragment>
+      <Navbar />
 
-        </CSSTransition>
-      </TransitionGroup>
-    )} />
+      <Route render={({location}) => (
+        <TransitionGroup>
+          <CSSTransition
+            key={location.key}
+            classNames="fade"
+            timeout={300}
+          >
+            <Switch location={location}>
+              <Route exact path='/' component={ AboutUs } />
+              <Route path='/landing-page' component={ LandingPage } />
+              <Route path='/service-providers' component={ ServiceProvider } />
+              <Route path='/profile-provider/:id' component={ ProfileProvider } />
+              <Route path='/submit-requirements' component={ CartForm } />
+              <Route path='/success-checkout' component={ SuccessCheckout } />
+              <Route path='/faq' component={ FAQ } />
+              <Route path='/contact' component={ Contact } />
+              <Route path='/cart' component={ Cart } />
+              <PrivateRoute path='/dashboard' component={ Dashboard } />
+            </Switch>
 
-    <Footer />
+          </CSSTransition>
+        </TransitionGroup>
+      )} />
 
-    { props.showModalSignup && <SignupPopup /> }
-    { props.showModalSignin && <SigninPopup /> }
-    { props.showModalOffer && <OfferPopup /> }
-  </Fragment>
-);
+      <Footer />
 
-function mapStateToProps(state) {
-  return state.modalControl;
+      { props.showModalSignup && <Signup /> }
+      { props.showModalSignin && <Signin /> }
+      { props.showModalOffer && <Offer /> }
+      { props.showNotification && <Notification /> }
+
+      <Loading shown={progress} />
+    </Fragment>
+  );
 }
 
-export default connect(mapStateToProps)(RouterManager);
+function mapStateToProps(state) {
+  return {
+    ...state.modalControl,
+    progress: state.isLoading.isLoading
+  };
+}
+export default withRouter(connect(mapStateToProps)(RouterManager));

@@ -3,17 +3,23 @@ import {
   MODAL_SIGNIN,
   MODAL_OFFER,
   MODAL_NEWPARTNER,
+  MODAL_EDITPARTNER,
   MODAL_NEWSERVICE,
-  MODAL_DELETECONFIRM
+  MODAL_EDITSERVICE,
+  MODAL_DELETECONFIRM,
+  NOTIFICATION
 } from '../types';
 
 const initialState = {
   showModalSignup: false,
   showModalSignin: false,
-  showModalOffer: false,
+  showModalOffer: null,
   showModalNewPartner: false,
+  showModalEditPartner: null,
   showModalNewService: false,
-  showModalDeleteConfirm: false,
+  showModalEditService: null,
+  showModalDeleteConfirm: null,
+  showNotification: null
 };
 
 export default function index(state = initialState, action = null) {
@@ -26,10 +32,16 @@ export default function index(state = initialState, action = null) {
       return { ...state, showModalOffer: action.payload };
     case MODAL_NEWPARTNER:
       return { ...state, showModalNewPartner: action.payload };
+    case MODAL_EDITPARTNER:
+      return { ...state, showModalEditPartner: action.payload };
     case MODAL_NEWSERVICE:
       return { ...state, showModalNewService: action.payload };
+    case MODAL_EDITSERVICE:
+      return { ...state, showModalEditService: action.payload };
     case MODAL_DELETECONFIRM:
       return { ...state, showModalDeleteConfirm: action.payload };
+    case NOTIFICATION:
+      return { ...state, showNotification: action.payload };
     default:
       return state;
   }
