@@ -52,7 +52,7 @@ const ServiceProvider = ({ serviceFilter }) => {
                 </Col>
 
                 <Col md={9}>
-                  <h2 className="font-bold">{ item.partner.companyName }</h2>
+                  <h2 className="font-bold">{item.name} - { item.partner.companyName }</h2>
 
                   <small className="text-gray-500">
                     <span className="text-orange">
@@ -71,7 +71,7 @@ const ServiceProvider = ({ serviceFilter }) => {
                     <small className="text-gray-500 text-xxs">starting from</small>
 
                     <div className="font-bold text-lg md:mb-3 leading-none">
-                      { item.currencySymbol } { item.minimumPrice }
+                      { item.currencySymbol || "$" } { item.minimumPrice }
                     </div>
                   </div>
 

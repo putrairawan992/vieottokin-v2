@@ -50,7 +50,7 @@ const Navbar = ({ auth, countryList, categoryList, logoutUser }) => {
       <Container>
         <Row className="md:text-sm text-md relative items-center justify-between">
           <Link to="/" className="md:w-2/12 w-4/12">
-            <img src="/images/logo.svg" alt="logo" />
+            <img src="/images/v-logo.png" alt="logo" />
           </Link>
 
           <div className="relative md:block hidden w-4/12 md:pl-10">
