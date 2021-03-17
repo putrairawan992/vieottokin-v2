@@ -1,0 +1,8 @@
+env: development
+react_app_api_host: https://b3gjpc5a07.api.ventoorhub.com/api/
+app_start: '/usr/bin/node {{ current_dir }}/node_modules/react-scripts/scripts/start.js'
+app_name: ventoorhub_frontend
+branch: develop
+pre_deploy_script:
+  - npm i
+  - npm run tailwind:build
