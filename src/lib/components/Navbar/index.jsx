@@ -11,15 +11,12 @@ import Icon from 'icon';
 import { read } from 'utils/api';
 
 const listMenu = [
-  {
-    label: 'Home',
-    link: '/landing-page'
-  }, {
+   {
     label: 'Service',
     link: '/service-providers'
   }, {
     label: 'How it works',
-    link: '/#'
+    link: '/about'
   }, {
     label: 'Help',
     link: '/faq'

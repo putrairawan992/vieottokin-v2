@@ -50,19 +50,19 @@ const SearchBar = () => {
   return (
     <div ref={wrapperRef}>
       <div className="flex items-center justify-between">
-        <div className="bg-white h-10 md:w-12 w-8 flex justify-center items-center rounded-l-sm">
+        <div className="bg-white h-10 md:w-12 w-8 flex justify-center items-center rounded-l-sm no-radius-input-right">
           <Icon name="search" size={ 12 } color="#333" />
         </div>
 
         <input
-          className="h-10 w-full text-sm text-gray-500 pl-2"
+          className="h-10 w-full text-sm text-gray-500 pl-2 no-radius"
           placeholder="What service are you looking for?"
           onChange={ e => setParams({ ...params, search: e.target.value }) }
           onFocus={ () => setShowFilter(true) }
           onKeyDown={ redirectEnter }
         />
 
-        <button onClick={ redirectButton } className="px-5 text-xs h-10 bg-orange rounded-r-sm hidden md:block">
+        <button onClick={ redirectButton } className="px-5 text-xs h-10 bg-orange rounded-r-sm hidden md:block no-radius-input-left">
           Search
         </button>
       </div>

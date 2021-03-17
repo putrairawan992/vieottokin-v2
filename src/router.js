@@ -38,8 +38,8 @@ const RouterManager = ({ progress, location, dispatch, ...props }) => {
             timeout={300}
           >
             <Switch location={location}>
-              <Route exact path='/' component={ AboutUs } />
-              <Route path='/landing-page' component={ LandingPage } />
+              <Route exact path='/' component={ LandingPage } />
+              <Route path='/about' component={ AboutUs } />
               <Route path='/service-providers' component={ ServiceProvider } />
               <Route path='/profile-provider/:id' component={ ProfileProvider } />
               <Route path='/submit-requirements' component={ CartForm } />

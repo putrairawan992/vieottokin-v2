@@ -28,7 +28,7 @@ const ProfileProvider = () => {
 
   return (
     <Fragment>
-      <Breadcrumb base={[ 'Home', 'Services', 'IT Advisory' ]} current="Search" />
+      <Breadcrumb base={[ { label: 'Home', path: '/'}, {label: 'Services', path: '/service-providers'} ]} current={service.name} />
 
       <Container className="py-20">
         <Row>

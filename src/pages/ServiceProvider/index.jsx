@@ -25,7 +25,7 @@ const ServiceProvider = ({ serviceFilter }) => {
 
   return (
     <Fragment>
-      <Breadcrumb base={[ 'Home' ]} current="Search" />
+      <Breadcrumb base={[ {label: 'Home', path: '/'} ]} current="Services" />
 
       <Container className="md:px-6 lg:px-8 py-20">
         <Row>

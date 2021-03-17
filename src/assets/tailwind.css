@@ -27,3 +27,20 @@ button:disabled,
 button[disabled]{
     cursor: default;
 }
+
+.no-radius-input-right {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    outline:none !important;
+}
+
+.no-radius-input-left {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    outline:none !important;
+}
+
+.no-radius {
+    border-radius: 0;
+    outline: none !important;
+}
