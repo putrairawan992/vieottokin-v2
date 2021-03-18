@@ -33,7 +33,6 @@ const FilterSidebar = ({ dispatch, categoryList, countryList, filter }) => {
   }
 
   const applyFilter = () => {
-    console.log(params)
     dispatch(setFilter({
       categoryId: params.categoryId,
       country: params.country,
@@ -52,7 +51,6 @@ const FilterSidebar = ({ dispatch, categoryList, countryList, filter }) => {
     };
 
     if (filter.country !== '' || filter.city !== '') fetchData();
-    if (filter.categoryId !== '') setParams({...params, categoryId: filter.categoryId});
   }, [filter])
 
   return (
@@ -107,10 +105,9 @@ const FilterSidebar = ({ dispatch, categoryList, countryList, filter }) => {
               key={ id }
               value={ id }
               label={ name }
-              checked={ id === params.categoryId}
+              checked={ id === (filter.categoryId !== '' ? filter.categoryId : params.categoryId)}
               onChange={ e => setParams({...params, categoryId: parseInt(e.target.value)}) }
             />
-
           )) }
         </div>
       )) }
