@@ -42,7 +42,7 @@ const FilterSidebar = ({ dispatch, categoryList, countryList, filter }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const id = countryList.filter(find => find.name === filter.country)[0].id;
+      const id = countryList?.filter(find => find?.name === filter?.country)[0]?.id;
       const resCity = await read(`countries/${id}/cities`);
 
       setCountryId(id);

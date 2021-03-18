@@ -1,11 +1,11 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import { Container, Row, Col } from 'lib/elements/Grid';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { read } from 'utils/api';
-import Breadcrumb from 'lib/components/Breadcrumb';
-import FilterSidebar from './FilterSidebar';
-import Icon from 'icon';
+import React, { Fragment, useState, useEffect } from "react";
+import { Container, Row, Col } from "lib/elements/Grid";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { read } from "utils/api";
+import Breadcrumb from "lib/components/Breadcrumb";
+import FilterSidebar from "./FilterSidebar";
+import Icon from "icon";
 
 const ServiceProvider = ({ serviceFilter }) => {
   const { search, categoryId, country, city } = serviceFilter;
@@ -14,9 +14,15 @@ const ServiceProvider = ({ serviceFilter }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const resServices = await read(`services?&search=${search}&category_id=${categoryId}&country=${country}&city=${city}`);
-      const resCategory = await read('categories');
-      resCategory.data.map(({ SubCategory }) => setCategory(state => [...state, ...SubCategory]));
+      const resServices = await read(
+        `services?&search=${search}&category_id=${categoryId}&country=${
+          country ? country : ""
+        }&city=${country && city ? city : ""}`
+      );
+      const resCategory = await read("categories");
+      resCategory.data.map(({ SubCategory }) =>
+        setCategory((state) => [...state, ...SubCategory])
+      );
       setService(resServices.data.results);
     };
 
@@ -25,7 +31,7 @@ const ServiceProvider = ({ serviceFilter }) => {
 
   return (
     <Fragment>
-      <Breadcrumb base={[ {label: 'Home', path: '/'} ]} current="Services" />
+      <Breadcrumb base={[{ label: "Home", path: "/" }]} current="Services" />
 
       <Container className="md:px-6 lg:px-8 py-20">
         <Row>
@@ -35,43 +41,58 @@ const ServiceProvider = ({ serviceFilter }) => {
 
           <Col md={9} className="md:px-8 mt-12 md:mt-0">
             <p className="text-gray-500 mb-5 text-sm">
-              A total of <b>{ service.count }</b> service providers
+              A total of <b>{service.count}</b> service providers
             </p>
 
-            { service.rows?.map((item, i) => (
+            {service.rows?.map((item, i) => (
               <Row
                 className="bg-white shadow rounded-md px-3 py-4 border-l-4 border-softdrop border mb-5"
-                key={ i }
+                key={i}
               >
                 <Col xs={2} md={1}>
                   <img
-                    src={ item.partner.avatar }
-                    alt={ item.partner.companyName }
+                    src={item.partner.avatar}
+                    alt={item.partner.companyName}
                     className="rounded-full w-11 h-11 object-cover"
                   />
                 </Col>
 
                 <Col md={9}>
-                  <h2 className="font-bold">{item.name} - { item.partner.companyName }</h2>
+                  <h2 className="font-bold">
+                    {item.name} - {item.partner.companyName}
+                  </h2>
 
                   <small className="text-gray-500">
                     <span className="text-orange">
-                      { category?.filter(find => find.id === item.categoryId)[0].name }</span> in { item.partner.city }
+                      {
+                        category?.filter(
+                          (find) => find.id === item.categoryId
+                        )[0].name
+                      }
+                    </span>{" "}
+                    in {item.partner.city}
                   </small>
 
-                  <p className="text-xs mt-1 text-gray-500">{ item.description.substring(0, 200) }...</p>
+                  <p className="text-xs mt-1 text-gray-500">
+                    {item.description.substring(0, 200)}...
+                  </p>
                 </Col>
 
-                <Col md={2} className="md:relative flex md:flex-col flex-row text-right md:mt-auto mt-3">
+                <Col
+                  md={2}
+                  className="md:relative flex md:flex-col flex-row text-right md:mt-auto mt-3"
+                >
                   <button className="md:absolute md:-top-4 -top-7 md:right-0">
                     <Icon name="bookmark" color="#f58120" />
                   </button>
 
                   <div className="ml-3 md:m-0">
-                    <small className="text-gray-500 text-xxs">starting from</small>
+                    <small className="text-gray-500 text-xxs">
+                      starting from
+                    </small>
 
                     <div className="font-bold text-lg md:mb-3 leading-none">
-                      { item.currencySymbol || "$" } { item.minimumPrice }
+                      {item.currencySymbol || "$"} {item.minimumPrice}
                     </div>
                   </div>
 
@@ -80,23 +101,22 @@ const ServiceProvider = ({ serviceFilter }) => {
                     className="border-orange rounded text-orange inline-flex items-center border px-3 h-8 py-2 ml-auto mt-auto font-bold"
                   >
                     <span className="mr-3 text-xxs">VIEW SERVICE</span>
-                    <Icon name="arrow-right" color="#F58120" size={ 6 } />
+                    <Icon name="arrow-right" color="#F58120" size={6} />
                   </Link>
                 </Col>
               </Row>
-            )) }
+            ))}
           </Col>
         </Row>
       </Container>
-
     </Fragment>
   );
-}
+};
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   serviceFilter: state.serviceFilter,
   countryList: state.globalState.countryList,
-  categoryList: state.globalState.categoryList
+  categoryList: state.globalState.categoryList,
 });
 
 export default connect(mapStateToProps)(ServiceProvider);
