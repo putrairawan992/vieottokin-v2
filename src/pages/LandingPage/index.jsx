@@ -46,20 +46,20 @@ const Home = ({ dispatch, countryList, country }) => {
               <div className="flex items-center">
                 <button
                   onClick={ () => setShowCountry(!showCountry) }
-                  className="bg-white h-12 border-r p-5 w-18 flex justify-center items-center rounded-l-sm cursor-pointer"
+                  className="bg-white h-12 border-r p-5 w-18 flex justify-center items-center rounded-l-sm cursor-pointer no-radius-input-right"
                 >
                   <span className="text-gray-500 text-xs mr-3">{ country || 'Location' }</span>
                   <Icon name="triangle" size={ 10 } color="#333" className="mt-1" />
                 </button>
 
                 <input
-                  className="h-12 w-6/12 md:w-4/12 px-3 text-gray-500"
+                  className="h-12 w-6/12 md:w-4/12 px-3 text-gray-500 no-radius"
                   placeholder="What service are you looking for?"
                   onChange={ e => dispatch(setFilter({search: e.target.value})) }
                   onKeyDown={ redirectEnter }
                 />
 
-                <button onClick={ redirectButton } className="w-24 text-xs h-12 bg-orange text-white rounded-r-sm">
+                <button onClick={ redirectButton } className="w-24 text-xs h-12 bg-orange text-white rounded-r-sm no-radius-input-left">
                   Search
                 </button>
               </div>

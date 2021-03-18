@@ -1,0 +1,5 @@
+apps_dir: /srv
+app_dir: '{{ apps_dir }}/{{ app_name }}'
+deploy_dir: '{{ app_dir }}/{{ build_number }}'
+current_dir: '{{ app_dir }}/current'
+app_log: '{{ app_dir }}/log'

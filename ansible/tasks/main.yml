@@ -1,0 +1,81 @@
+---
+- name: Create deploy and log diretory
+  file:
+    dest: '{{ item }}'
+    state: directory
+  with_items:
+    -  '{{ app_log }}'
+    -  '{{ deploy_dir }}'
+
+- name: Setup key on destination server
+  template:
+    src: priv_key_file
+    dest: '{{ priv_key_path }}'
+    mode: 0400
+  no_log: true
+
+- name: Clone ventoorhub frontend from gitlab
+  git:
+    repo: '{{ apps_repo_url }}'
+    dest: '{{ deploy_dir }}'
+    key_file: '{{ priv_key_path }}'
+    version: '{{ branch }}'
+    accept_hostkey: yes
+    force: yes
+
+- name: Copy .env to deploy directory
+  template:
+    src: env.j2
+    dest: '{{ deploy_dir }}/.env'
+  no_log: true
+
+- name: Copy startup script for apps
+  template: 
+    src: apps.conf
+    dest: '/etc/supervisor/conf.d/{{ app_name }}.conf'
+
+- block:
+  - name: Pre deploy script
+    shell:
+      cmd: '{{ item }}'
+      chdir: '{{ deploy_dir }}'
+    with_items:
+      - '{{ pre_deploy_script }}'
+
+  rescue:
+  - name: When installation application fail, delete deployment folder that fail
+    file:
+      path: "{{ deploy_dir }}"
+      state: absent
+
+  - name: End deployment when error submitted
+    meta: end_play
+
+- name: Create new link to from deployment directory to current directory
+  file:
+    src: '{{ deploy_dir }}'
+    dest: '{{ current_dir }}'
+    force: true
+    state: link
+
+- name: Restart apps
+  supervisorctl:
+    name: '{{ app_name }}'
+    state: restarted 
+
+- name: Restart nginx
+  systemd:
+    name: nginx
+    state: reloaded
+
+- name: Delete deployment folder when more than 5 folder
+  become: yes
+  shell:
+    cmd: ls -t | grep -v current | grep -v log | tail -n +3 | xargs -r rm -rf --
+    chdir: '{{ app_dir }}'
+
+- name: Delete key on destination server
+  file:
+    path: '{{ priv_key_path }}'
+    state: absent
+    mode: 0400

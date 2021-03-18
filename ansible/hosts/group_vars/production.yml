@@ -1,0 +1,8 @@
+env: production
+react_app_api_host: https://api.ventoorhub.com/api/
+app_start: '/usr/bin/node {{ current_dir }}/node_modules/react-scripts/scripts/start.js'
+app_name: ventoorhub_frontend
+branch: master
+pre_deploy_script:
+  - npm i
+  - npm run tailwind:prod

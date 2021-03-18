@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Container } from 'lib/elements/Grid';
 import Icon from 'icon';
 
@@ -18,7 +19,7 @@ const ListProvider = ({ base, current }) => {
           <div className="text-xs flex items-center">
             { base.map((item, i) => (
               <Fragment key={ i }>
-                <span>{ item }</span>
+                <Link to={item.path}>{ item.label }</Link>
                 <Icon name="arrow-right" color="#000" size={ 6 } className="mx-3" />
               </Fragment>
             )) }
@@ -27,21 +28,10 @@ const ListProvider = ({ base, current }) => {
           </div>
 
           <div className="text-xs flex items-center mt-3 md:mt-0">
-            <div className="flex items-center">
-              <img src={ JapanFlag } alt="japan flag" />
-              <p className="mx-3">Japan</p>
-              <Icon name="triangle" color="#000" size={ 6 } />
-            </div>
-
-            <div className="flex items-center mx-5">
-              <Icon name="bookmark" color="#000" size={ 12 } />
-              <p className="ml-2">Saved</p>
-            </div>
-
-            <div className="flex items-center">
+            <Link to={'/cart'} className="flex items-center">
               <Icon name="cart" color="#000" size={ 12 } />
-              <p className="ml-2">Cart ({cart.length})</p>
-            </div>
+              <p className="ml-2">Cart ({cart ? cart.length : 0})</p>
+            </Link>
           </div>
         </Container>
       </Container>

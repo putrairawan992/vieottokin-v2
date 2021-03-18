@@ -28,7 +28,7 @@ const ProfileProvider = () => {
 
   return (
     <Fragment>
-      <Breadcrumb base={[ 'Home', 'Services', 'IT Advisory' ]} current="Search" />
+      <Breadcrumb base={[ { label: 'Home', path: '/'}, {label: 'Services', path: '/service-providers'} ]} current={service.name} />
 
       <Container className="py-20">
         <Row>
@@ -44,7 +44,7 @@ const ProfileProvider = () => {
 
               <Col md={10} className="my-auto md:pl-3 pl-0">
                 <div className="flex justify-between w-full">
-                  <h1 className="font-bold text-lg capitalize">{ service.partner?.companyName }</h1>
+                  <h1 className="font-bold text-lg capitalize">{service.name} - { service.partner?.companyName }</h1>
 
                   <span className="bg-orange py-1 px-4 text-xs text-white flex items-center uppercase">
                     { category }
@@ -94,7 +94,7 @@ const ProfileProvider = () => {
 
           <Col md={4} className="md:mt-0 mt-8">
             <PriceTagPanel
-              currency={ service.currencySymbol }
+              currency={ service.currencySymbol || '$' }
               price={ service.minimumPrice }
               category={ category }
             />

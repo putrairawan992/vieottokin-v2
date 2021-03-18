@@ -1,12 +1,14 @@
 import React, { Fragment } from 'react';
 import { Container } from 'lib/elements/Grid';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import Button from 'lib/components/Button';
 import Offer from 'lib/components/Popup/Offer';
 import Signup from 'lib/components/Popup/Signup';
 import { openSignup } from 'store/actions/ModalControl';
 
 const HeroCTA = ({ showModalOffer, showModalSignup, dispatch }) => {
+  const history = useHistory();
   return (
     <Fragment>
       <Container fluid className="md:px-6 lg:px-8 relative text-center py-28">
@@ -23,7 +25,7 @@ const HeroCTA = ({ showModalOffer, showModalSignup, dispatch }) => {
             <div className="mt-7">
               <Button
                 type="solid"
-                onClick={ () => dispatch(openSignup(true)) }
+                onClick={ () => history.push('/service-providers') }
                 className="px-12 py-4 mx-4"
               >
                 Find Service Providers

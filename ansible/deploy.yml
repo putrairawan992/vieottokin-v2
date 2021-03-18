@@ -1,0 +1,7 @@
+- name: Deploy ventoorhub frontend
+  hosts: "{{ env }}"
+  user: ubuntu
+  vars_files:
+    - "vh.vault"
+  roles: 
+    - ./
