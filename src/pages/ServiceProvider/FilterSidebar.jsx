@@ -39,22 +39,27 @@ const FilterSidebar = ({ dispatch, categoryList, countryList, filter }) => {
   const applyFilter = () => {
     dispatch(setFilter({
       categoryId: params.categoryId,
-      country: params.country,
+      country: params.country || '',
       city: params.city
     }));
   }
 
   useEffect(() => {
-    const fetchData = async () => {
-      const id = countryList.filter(find => find.name === filter.country)[0].id;
-      const resCity = await read(`countries/${id}/cities`);
+    const { country, categoryId, city } = filter;
 
-      setCountryId(id);
-      setParams({...params, country: filter.country, city: filter.city })
-      setCityList(resCity.data);
+    const fetchData = async () => {
+      if (country !== '') {
+        const id = countryList.filter(find => find.name === country)[0].id;
+        const resCity = await read(`countries/${id}/cities`);
+
+        setCountryId(id);
+        setCityList(resCity.data);
+      }
+
+      setParams({...params, categoryId, country, city });
     };
 
-    if (filter.country !== '' || filter.city !== '') fetchData();
+    if (country !== '' || city !== '' || countryId !== '') fetchData();
   }, [filter])
 
   return (
@@ -109,7 +114,7 @@ const FilterSidebar = ({ dispatch, categoryList, countryList, filter }) => {
               key={ id }
               value={ id }
               label={ name }
-              checked={ id === (filter.categoryId !== '' ? filter.categoryId : params.categoryId)}
+              checked={ id === params.categoryId }
               onChange={ e => setParams({...params, categoryId: parseInt(e.target.value)}) }
             />
           )) }
