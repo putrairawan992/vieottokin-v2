@@ -25,11 +25,15 @@ const FilterSidebar = ({ dispatch, categoryList, countryList, filter }) => {
   const [params, setParams] = useState({categoryId: 0, country: '', city: ''});
 
   const selectCountry = async (id, name) => {
-    setParams({...params, country: name});
-    const resCity = await read(`countries/${id}/cities`);
+    if (id === '') {
+      setCityList([]);
+    } else {
+      const resCity = await read(`countries/${id}/cities`);
+      setCityList(resCity.data);
+    }
 
+    setParams({...params, country: name});
     setCountryId(id);
-    setCityList(resCity.data);
   }
 
   const applyFilter = () => {
