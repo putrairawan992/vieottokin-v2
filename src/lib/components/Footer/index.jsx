@@ -22,8 +22,13 @@ const Footer = () => {
         </nav>
 
         <div className="flex">
-          <Icon name="facebook" className="w-5 mr-4" />
-          <Icon name="linkedin" className="w-5" />
+          <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+            <Icon name="facebook" className="w-5 mr-4" />
+          </a>
+
+          <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
+            <Icon name="linkedin" className="w-5" />
+          </a>
         </div>
       </Container>
 

@@ -38,6 +38,8 @@ const ServiceProvider = ({ serviceFilter }) => {
               A total of <b>{ service.count }</b> service providers
             </p>
 
+            { !service.rows?.length && <p>The service is currently not availble</p> }
+
             { service.rows?.map((item, i) => (
               <Row
                 className="bg-white shadow rounded-md px-3 py-4 border-l-4 border-softdrop border mb-5"
