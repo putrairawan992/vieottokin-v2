@@ -91,7 +91,7 @@ const ServiceProvider = ({ serviceFilter }) => {
 
     </Fragment>
   );
-}
+};
 
 const mapStateToProps = state => ({
   serviceFilter: state.serviceFilter,

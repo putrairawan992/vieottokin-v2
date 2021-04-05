@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useParams, useHistory } from 'react-router-dom';
 import Icon from 'icon';
 
@@ -47,7 +48,12 @@ const PriceTagPanel = ({ currency, price, category }) => {
         <b className="text-orange">*</b> The rate provided is the cheapest estimate for this service. Final rate will depend on the needed service.
       </p>
     </Fragment>
-  )
+  );
+};
+
+PriceTagPanel.propTypes= {
+  currency: PropTypes.string,
+  price: PropTypes.number
 };
 
 export default PriceTagPanel;

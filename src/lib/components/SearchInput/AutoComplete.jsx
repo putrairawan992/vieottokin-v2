@@ -86,7 +86,9 @@ AutoComplete.defaultProps = {
 
 AutoComplete.propTypes = {
   suggestions: PropTypes.instanceOf(Array),
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  onChange: PropTypes.func,
+  value: PropTypes.string
 };
 
 export default AutoComplete;
