@@ -1,0 +1,17 @@
+{
+  "nav": [
+    {
+      "label": "Home",
+      "link": "/landing-page"
+    }, {
+      "label": "Service",
+      "link": "/service-providers"
+    }, {
+      "label": "How it works",
+      "link": "/#"
+    }, {
+      "label": "Help",
+      "link": "/faq"
+    }
+  ]
+}

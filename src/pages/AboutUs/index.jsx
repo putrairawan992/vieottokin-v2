@@ -1,20 +1,7 @@
 import React, { Fragment } from 'react';
 import { Container, Row, Col } from 'lib/elements/Grid';
 import HeroCTA from 'lib/components/HeroCTA';
-
-const whatWeBelieve = [{
-  image: '/images/about-innovation.png',
-  title: 'Innovation',
-  text: 'We leverage technology to improve how we do things to help your company grow in emerging markets.'
-}, {
-  image: '/images/about-professionalism.png',
-  title: 'Professionalism',
-  text: 'We don’t leave you behind. We stay with you for the entire journey to make sure you get the best service you deserve.'
-}, {
-  image: '/images/about-transparency.png',
-  title: 'Transparency',
-  text: 'No more vague pricing with vague service. Ventoorhub is designed to give you transparency and an informed decision-making process.'
-}]
+import content from './content.json';
 
 const AboutUs = () => {
   return (
@@ -40,7 +27,7 @@ const AboutUs = () => {
         </h2>
 
         <Row className="items-end">
-          { whatWeBelieve.map((item, i) => (
+          { content.whatWeBelieve.map((item, i) => (
             <Col md={4} className="rounded mt-8" key={ i }>
               <img src={ item.image } className="mx-auto object-cover" alt={ item.title } />
 

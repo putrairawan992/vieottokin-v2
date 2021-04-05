@@ -9,22 +9,7 @@ import { Authenticated, UnAuthenticated } from './UserMenu';
 import SearchBar from 'lib/components/SearchInput/SearchBar';
 import Icon from 'icon';
 import { read } from 'utils/api';
-
-const listMenu = [
-  {
-    label: 'Home',
-    link: '/landing-page'
-  }, {
-    label: 'Service',
-    link: '/service-providers'
-  }, {
-    label: 'How it works',
-    link: '/#'
-  }, {
-    label: 'Help',
-    link: '/faq'
-  }
-]
+import listMenu from './listMenu.json';
 
 const navStyle = {
   mobile: 'flex-col w-full flex-grow text-right items-center top-10 z-20 bg-softdrop absolute',
@@ -68,7 +53,7 @@ const Navbar = ({ auth, countryList, categoryList, logoutUser }) => {
               </div>
             </div>
 
-            { listMenu.map((item, i) => (
+            { listMenu.nav.map((item, i) => (
               <Link
                 onClick={ () => setMenu(!mobile) }
                 className="md:mx-4 pr-4 md:pr-0 whitespace-nowrap my-1 w-full md:my-0 md:w-auto"

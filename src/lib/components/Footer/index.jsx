@@ -2,26 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container } from 'lib/elements/Grid';
 import Icon from 'icon';
-
-const listMenu = [{
-  label: 'Terms of Use',
-  link: '/'
-}, {
-  label: 'Privacy Policy',
-  link: '/'
-}, {
-  label: 'Contact',
-  link: '/contact'
-}, {
-  label: 'Service Standard (ISO)',
-  link: '/'
-}, {
-  label: 'Partnership',
-  link: '/'
-}, {
-  label: 'Partner Dashboard',
-  link: '/'
-}]
+import listMenu from './listMenu.json';
 
 const Footer = () => {
   return (
@@ -30,7 +11,7 @@ const Footer = () => {
         <img src="images/logo.svg" className="w-32 md:w-52 mr-0 md:mr-12" alt="logo" />
 
         <nav className="flex-row flex-grow md:flex hidden">
-          { listMenu.map((item, i) => (
+          { listMenu.nav.map((item, i) => (
             <Link
               className="mt-2 text-sm mr-6"
               to={ item.link } key={ i }
@@ -48,7 +29,7 @@ const Footer = () => {
 
       <Container className="md:hidden flex">
         <nav className="-mx-2 justify-between flex flex-wrap pb-4 pt-2">
-          { listMenu.map((item, i) => (
+          { listMenu.nav.map((item, i) => (
             <Link
               className="mx-2 mt-2 text-sm"
               to={ item.link } key={ i }

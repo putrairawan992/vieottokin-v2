@@ -1,0 +1,22 @@
+{
+  "nav": [
+    {
+    "label": "Terms of Use",
+    "link": "/"
+  }, {
+    "label": "Privacy Policy",
+    "link": "/"
+  }, {
+    "label": "Contact",
+    "link": "/contact"
+  }, {
+    "label": "Service Standard (ISO)",
+    "link": "/"
+  }, {
+    "label": "Partnership",
+    "link": "/"
+  }, {
+    "label": "Partner Dashboard",
+    "link": "/"
+  }]
+}
