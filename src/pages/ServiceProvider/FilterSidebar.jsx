@@ -56,11 +56,11 @@ const FilterSidebar = ({ dispatch, categoryList, countryList, filter }) => {
         setCityList(resCity.data);
       }
 
-      setParams({...params, categoryId, country, city });
+      setParams(state => ({state, categoryId, country, city }));
     };
 
     if (country !== '' || city !== '' || countryId !== '') fetchData();
-  }, [filter])
+  }, [filter, countryList])
 
   return (
     <Fragment>

@@ -12,7 +12,7 @@ const SuccessCheckout = () => {
   useEffect(() => {
     localStorage.removeItem('@viettonkin:cart');
     dispatch(setWistlist([]));
-  }, [])
+  }, [dispatch])
 
   return (
     <Fragment>

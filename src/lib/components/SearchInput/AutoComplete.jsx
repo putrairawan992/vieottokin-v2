@@ -57,7 +57,7 @@ const AutoComplete = ({ suggestions, onChange, value, disabled }) => {
 
   return (
     <Fragment>
-      <div className="flex w-full border border-gray-300 items-center justify-between">
+      <label className="flex w-full border border-gray-300 items-center justify-between">
         <div className="bg-white h-10 w-10 flex justify-center items-center rounded-l-sm">
           <Icon name="search" size={ 12 } color="#333" />
         </div>
@@ -70,7 +70,7 @@ const AutoComplete = ({ suggestions, onChange, value, disabled }) => {
           className="h-10 w-full text-gray-500 pl-2"
           placeholder="Search partners"
         />
-      </div>
+      </label>
 
       { showSuggestions && <SuggestionsList /> }
       { found && <small>No suggestions</small> }

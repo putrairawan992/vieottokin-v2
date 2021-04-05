@@ -19,8 +19,9 @@ const ProviderTable = ({ setCount, dispatch, serviceFilter, countryList }) => {
       setPartners(resPartners.data.results);
     };
 
-    fetchData();
-  }, [limit, page, search.length > 3, !search?.length]);
+    const limitSearch =  search.length > 3 || !search?.length;
+    limitSearch && fetchData();
+  }, [limit, page]);
 
   return (
     <Fragment>
@@ -28,7 +29,7 @@ const ProviderTable = ({ setCount, dispatch, serviceFilter, countryList }) => {
         <h2 className="text-darkdrop font-medium text-lg">Partners</h2>
 
         <div className="flex">
-          <div className="flex border-gray-300 border rounded items-center justify-between">
+          <label className="flex border-gray-300 border rounded items-center justify-between">
             <div className="bg-white h-10 w-12 flex justify-center items-center rounded-l-sm">
               <Icon name="search" size={ 12 } color="#333" />
             </div>
@@ -38,7 +39,7 @@ const ProviderTable = ({ setCount, dispatch, serviceFilter, countryList }) => {
               placeholder="Search"
               onChange={ e => setSearch(e.target.value) }
             />
-          </div>
+          </label>
 
           <button
             className="px-5 text-xs h-10 text-white md:ml-5 font-medium bg-orange rounded"

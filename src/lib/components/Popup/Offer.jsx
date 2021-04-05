@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, useState } from 'react';
 import { openOffer, openSignup } from 'store/actions/ModalControl';
 import { connect } from 'react-redux';
 import { create, read } from 'utils/api';
@@ -57,7 +57,7 @@ const Offer = ({ dispatch, showModalOffer }) => {
 
       <div className="flex flex-col mb-2 m-6">
         <div className="relative w-full">
-          <div className="flex items-center border rounded-l-sm">
+          <label className="flex items-center border rounded-l-sm">
             <div className="bg-white flex justify-center items-center px-4">
               <Icon name="search" size={ 12 } color="#333" />
             </div>
@@ -68,7 +68,7 @@ const Offer = ({ dispatch, showModalOffer }) => {
               placeholder="What service are you looking for?"
               onChange={ e => setKeyword(e.target.value) }
             />
-          </div>
+          </label>
 
           { openOfferList && <div className="shadow-md bg-white rounded-md mt-2 absolute w-full">
             { subCategories.sort()?.filter(find => !!selectedOffer ? !selectedOffer.sort().includes(find.name) : find)

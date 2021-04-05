@@ -55,7 +55,7 @@ const EditService = ({ dispatch, countryList, showModalEditService, auth }) => {
     };
 
     fetchData();
-  }, [showModalEditService]);
+  }, [showModalEditService, auth]);
 
   useEffect(() => {
     const fetchData = async () => {

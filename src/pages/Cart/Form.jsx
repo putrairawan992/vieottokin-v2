@@ -50,108 +50,126 @@ const CartForm = ({ countryList, wistlist }) => {
           <Container className="mt-6">
             <Row className="mb-5">
               <Col md={6}>
-                <span className="mb-2 text-sm font-semibold">Company Name</span>
+                <label>
+                  <span className="mb-2 text-sm font-semibold">Company Name</span>
 
-                <input
-                  required
-                  className="border w-full py-1 px-2"
-                  onChange={e => setCompanyName(e.target.value)}
-                />
+                  <input
+                    required
+                    className="border w-full py-1 px-2"
+                    onChange={e => setCompanyName(e.target.value)}
+                  />
+                </label>
               </Col>
 
               <Col md={6}>
-                <span className="mb-2 text-sm font-semibold">Company Website</span>
+                <label>
+                  <span className="mb-2 text-sm font-semibold">Company Website</span>
 
-                <input
-                  required
-                  pattern="[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+"
-                  placeholder="Enter valid domain without http/s"
-                  className="border w-full py-1 px-2"
-                  onChange={e => setCompanyWeb(e.target.value)}
-                />
+                  <input
+                    required
+                    pattern="[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+"
+                    placeholder="Enter valid domain without http/s"
+                    className="border w-full py-1 px-2"
+                    onChange={e => setCompanyWeb(e.target.value)}
+                  />
+                </label>
               </Col>
             </Row>
 
             <Row className="mb-5">
               <Col md={12} className="flex-col">
-                <span className="mb-2 text-sm font-bold">Country</span>
+                <label>
+                  <span className="mb-2 text-sm font-bold">Country</span>
 
-                <select
-                  onChange={e => setCountry(e.target.value)}
-                  className="border p-2 text-xs text-gray-500 w-full"
-                >
-                  <option>Select country</option>
-                  { countryList?.map(({id, name}) => (
-                    <option key={ id } value={ name }>{ name }</option>
-                  )) }
-                </select>
+                  <select
+                    onChange={e => setCountry(e.target.value)}
+                    className="border p-2 text-xs text-gray-500 w-full"
+                  >
+                    <option>Select country</option>
+                    { countryList?.map(({id, name}) => (
+                      <option key={ id } value={ name }>{ name }</option>
+                    )) }
+                  </select>
+                </label>
               </Col>
             </Row>
 
             <Row className="mb-5">
               <Col md={6}>
-                <span className="mr-5 mb-2 text-sm font-bold">First Name</span>
+                <label>
+                  <span className="mr-5 mb-2 text-sm font-bold">First Name</span>
 
-                <input
-                  required
-                  className="border w-full py-1 px-2"
-                  onChange={e => setFirstName(e.target.value)}
-                />
+                  <input
+                    required
+                    className="border w-full py-1 px-2"
+                    onChange={e => setFirstName(e.target.value)}
+                  />
+                </label>
               </Col>
 
               <Col md={6}>
-                <span className="mr-5 mb-2 text-sm font-bold">Last Name</span>
+                <label>
+                  <span className="mr-5 mb-2 text-sm font-bold">Last Name</span>
 
-                <input
-                  required
-                  className="border w-full py-1 px-2"
-                  onChange={e => setLastName(e.target.value)}
-                />
-              </Col>
-            </Row>
-
-            <Row className="mb-5">
-              <Col md={6}>
-                <span className="mr-5 mb-2 text-sm font-bold">Position</span>
-
-                <input
-                  required
-                  className="border w-full py-1 px-2"
-                  onChange={e => setPosition(e.target.value)}
-                />
-              </Col>
-
-              <Col md={6}>
-                <span className="mr-5 mb-2 text-sm font-bold">Email</span>
-
-                <input
-                  required
-                  type="email"
-                  className="border w-full py-1 px-2"
-                  onChange={e => setEmail(e.target.value)}
-                />
+                  <input
+                    required
+                    className="border w-full py-1 px-2"
+                    onChange={e => setLastName(e.target.value)}
+                  />
+                </label>
               </Col>
             </Row>
 
             <Row className="mb-5">
               <Col md={6}>
-                <span className="mr-5 mb-2 text-sm font-bold">Phone</span>
+                <label>
+                  <span className="mr-5 mb-2 text-sm font-bold">Position</span>
 
-                <input
-                  required
-                  className="border w-full py-1 px-2"
-                  onChange={e => setPhone(e.target.value)}
-                />
+                  <input
+                    required
+                    className="border w-full py-1 px-2"
+                    onChange={e => setPosition(e.target.value)}
+                  />
+                </label>
               </Col>
 
               <Col md={6}>
-                <span className="mr-5 mb-2 text-sm font-bold">Industry</span>
+                <label>
+                  <span className="mr-5 mb-2 text-sm font-bold">Email</span>
 
-                <input
-                  required
-                  className="border w-full py-1 px-2"
-                  onChange={e => setIndustry(e.target.value)}
-                />
+                  <input
+                    required
+                    type="email"
+                    className="border w-full py-1 px-2"
+                    onChange={e => setEmail(e.target.value)}
+                  />
+                </label>
+              </Col>
+            </Row>
+
+            <Row className="mb-5">
+              <Col md={6}>
+                <label>
+                  <span className="mr-5 mb-2 text-sm font-bold">Phone</span>
+
+                  <input
+                    required
+                    className="border w-full py-1 px-2"
+                    onChange={e => setPhone(e.target.value)}
+                  />
+                </label>
+              </Col>
+
+              <Col md={6}>
+                <label>
+                  <span className="mr-5 mb-2 text-sm font-bold">Industry</span>
+
+                  <input
+                    required
+                    className="border w-full py-1 px-2"
+                    onChange={e => setIndustry(e.target.value)}
+                  />
+                </label>
               </Col>
             </Row>
           </Container>

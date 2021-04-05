@@ -43,7 +43,7 @@ const Home = ({ dispatch, countryList, country }) => {
             </p>
 
             <div className="mt-6">
-              <div className="flex items-center">
+              <label className="flex items-center">
                 <button
                   onClick={ () => setShowCountry(!showCountry) }
                   className="bg-white h-12 border-r p-5 w-18 flex justify-center items-center rounded-l-sm cursor-pointer"
@@ -62,7 +62,7 @@ const Home = ({ dispatch, countryList, country }) => {
                 <button onClick={ redirectButton } className="w-24 text-xs h-12 bg-orange text-white rounded-r-sm">
                   Search
                 </button>
-              </div>
+              </label>
 
               { showCountry && <ul className="w-6/12 md:w-2/12 bg-white text-gray-500 px-5 py-2 mt-2 rounded-sm absolute">
                 { countryList.map(el => (
