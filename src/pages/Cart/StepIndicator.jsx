@@ -19,7 +19,7 @@ const StepIndicator = ({ step, backButton, history }) => (
               Order Details
             </p>
 
-            <Icon name="chevron-right" color="#999" size={ 10 } />
+            <Icon name="chevron-right" color="text-grey-stone" size={ 10 } />
           </div>
 
           <div className="md:w-60 flex items-center md:justify-between md:mr-6 mt-2 md:mt-0">
@@ -31,7 +31,7 @@ const StepIndicator = ({ step, backButton, history }) => (
               Submit Requirements
             </p>
 
-            <Icon name="chevron-right" color="#999" size={ 10 } />
+            <Icon name="chevron-right" color="text-grey-stone" size={ 10 } />
           </div>
 
           <div className="md:w-28 flex items-center md:justify-between mt-2 md:mt-0">
@@ -46,7 +46,7 @@ const StepIndicator = ({ step, backButton, history }) => (
         </div>
 
         { backButton && <button className="flex items-center text-orange text-sm" onClick={ () => history.goBack() }>
-          <Icon name="arrow-left" color="#F58120" size={ 10 } />
+          <Icon name="arrow-left" color="text-orange" size={ 10 } />
           <span className="ml-3 font-bold">GO BACK</span>
         </button> }
       </Row>

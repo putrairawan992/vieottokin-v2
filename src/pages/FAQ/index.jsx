@@ -91,7 +91,7 @@ const FAQ = () => {
                     { item.question }
                   </span>
 
-                  <Icon name="triangle" color="#333" size={10} />
+                  <Icon name="triangle" color="text-grey-icon" size={10} />
                 </button>
 
                 { openAnswer[i] && <p className="mt-3 text-gray-500">{ item.answer }</p> }

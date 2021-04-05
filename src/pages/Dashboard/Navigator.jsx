@@ -14,16 +14,16 @@ const Navigator = ({ count, tableType, switchTable, role }) => (
         className="flex items-center md:mr-8 mr-4"
         onClick={ () => switchTable('partners') }
       >
-        <Icon name="user" color={ tableType === 'partners' ? '#0c4596' : '#333' } />
-        <span className={ `md:ml-3 ml-1 text-sm font-medium ${ tableType === 'partners' ? 'text-darkdrop' : '#999' }` }>Partners</span>
+        <Icon name="user" color={ tableType === 'partners' ? 'text-blue-space' : 'text-grey-icon' } />
+        <span className={ `md:ml-3 ml-1 text-sm font-medium ${ tableType === 'partners' ? 'text-darkdrop' : 'text-grey-stone' }` }>Partners</span>
       </button>
 
       <button
         className="flex items-center"
         onClick={ () => switchTable('services') }
       >
-        <Icon name="suitcase" color={ tableType === 'services' ? '#0c4596' : '#333' } />
-        <span className={ `md:ml-3 ml-1 text-sm font-medium ${ tableType === 'services' ? 'text-darkdrop' : '#999' }` }>Services</span>
+        <Icon name="suitcase" color={ tableType === 'services' ? 'text-blue-space' : 'text-grey-icon' } />
+        <span className={ `md:ml-3 ml-1 text-sm font-medium ${ tableType === 'services' ? 'text-darkdrop' : 'text-grey-stone' }` }>Services</span>
       </button>
     </div> }
   </Container>

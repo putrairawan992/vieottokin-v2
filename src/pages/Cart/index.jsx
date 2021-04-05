@@ -66,7 +66,7 @@ const Cart = () => {
     <Fragment>
       <StepIndicator step={1} backButton />
 
-      <Container className="md:px-6 lg:px-8 relative py-24">
+      <Container className="md:px-6 lg:px-8 relative py-24 min-h-screen">
         <Row className="md:justify-evenly">
           <Col md={7}>
             { services?.length ? services.map(({ partner, name, id, description }) => (
@@ -79,7 +79,7 @@ const Cart = () => {
                       <h2 className="font-bold text-lg">{ name }</h2>
 
                       <button onClick={() => deleteServiceId( id ) } className="text-xs text-red-500 flex items-center px-2">
-                        <Icon name="close" color="#f1333e" size={ 8 } />
+                        <Icon name="close" color="text-red-400" size={ 8 } />
                         <span className="ml-3">REMOVE</span>
                       </button>
                     </div>
@@ -97,7 +97,7 @@ const Cart = () => {
                   onClick={ () => toggleComment([id]) }
                 >
                   <span className="mr-3">What’s Included</span>
-                  <Icon name="triangle" color="#0f4875" size={ 8 } />
+                  <Icon name="triangle" color="text-softdrop" size={ 8 } />
                 </button>
 
                 { openInclude[id] && <article className="px-6 py-4 text-sm leading-5 text-gray-700">

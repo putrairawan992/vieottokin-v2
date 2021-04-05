@@ -19,7 +19,7 @@ const ListProvider = ({ base, current }) => {
             { base.map((item, i) => (
               <Fragment key={ i }>
                 <span>{ item }</span>
-                <Icon name="arrow-right" color="#000" size={ 6 } className="mx-3" />
+                <Icon name="arrow-right" color="text-black" size={ 6 } className="mx-3" />
               </Fragment>
             )) }
 
@@ -30,16 +30,16 @@ const ListProvider = ({ base, current }) => {
             <div className="flex items-center">
               <img src={ JapanFlag } alt="japan flag" />
               <p className="mx-3">Japan</p>
-              <Icon name="triangle" color="#000" size={ 6 } />
+              <Icon name="triangle" color="text-black" size={ 6 } />
             </div>
 
             <div className="flex items-center mx-5">
-              <Icon name="bookmark" color="#000" size={ 12 } />
+              <Icon name="bookmark" color="text-black" size={ 12 } />
               <p className="ml-2">Saved</p>
             </div>
 
             <div className="flex items-center">
-              <Icon name="cart" color="#000" size={ 12 } />
+              <Icon name="cart" color="text-black" size={ 12 } />
               <p className="ml-2">Cart ({cart.length})</p>
             </div>
           </div>

@@ -64,7 +64,7 @@ const ServiceProvider = ({ serviceFilter }) => {
 
                 <Col md={2} className="md:relative flex md:flex-col flex-row text-right md:mt-auto mt-3">
                   <button className="md:absolute md:-top-4 -top-7 md:right-0">
-                    <Icon name="bookmark" color="#f58120" />
+                    <Icon name="bookmark" color="text-orange" />
                   </button>
 
                   <div className="ml-3 md:m-0">
@@ -80,7 +80,7 @@ const ServiceProvider = ({ serviceFilter }) => {
                     className="border-orange rounded text-orange inline-flex items-center border px-3 h-8 py-2 ml-auto mt-auto font-bold"
                   >
                     <span className="mr-3 text-xxs">VIEW SERVICE</span>
-                    <Icon name="arrow-right" color="#F58120" size={ 6 } />
+                    <Icon name="arrow-right" color="text-orange" size={ 6 } />
                   </Link>
                 </Col>
               </Row>

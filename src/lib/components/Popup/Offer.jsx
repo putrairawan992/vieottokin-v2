@@ -51,7 +51,7 @@ const Offer = ({ dispatch, showModalOffer }) => {
         <h3 className="font-medium text-lg">Services Offered</h3>
 
         <button className="h-auto" onClick={ () => dispatch(openOffer(false)) }>
-          <Icon name="close" color="#333" />
+          <Icon name="close" color="text-grey-icon" />
         </button>
       </div>
 
@@ -59,7 +59,7 @@ const Offer = ({ dispatch, showModalOffer }) => {
         <div className="relative w-full">
           <label className="flex items-center border rounded-l-sm">
             <div className="bg-white flex justify-center items-center px-4">
-              <Icon name="search" size={ 12 } color="#333" />
+              <Icon name="search" size={ 12 } color="text-grey-icon" />
             </div>
 
             <input
@@ -93,7 +93,7 @@ const Offer = ({ dispatch, showModalOffer }) => {
             >
               { item }
               <button className="ml-6" onClick={ () => removeMyOffer(i) }>
-                <Icon name="close" size={ 10 } color="#86BBFF" />
+                <Icon name="close" size={ 10 } color="text-blue-strom" />
               </button>
             </li>
           )) }

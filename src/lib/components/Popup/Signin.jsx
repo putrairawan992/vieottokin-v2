@@ -23,7 +23,7 @@ const SigninPopup = ({ loginUser }) => {
     <Modal>
       <div className="text-center p-6 pb-0">
         <button className="ml-auto block" onClick={ () => dispatch(openSignin(false)) }>
-          <Icon name="close" color="#333" />
+          <Icon name="close" color="text-grey-icon" />
         </button>
       </div>
 
@@ -65,7 +65,7 @@ const SigninPopup = ({ loginUser }) => {
                   className="absolute right-2"
                   onClick={ () => setHidePassword(!hidePassword) }
                 >
-                  <Icon name={ hidePassword ? 'eye-off' : 'eye-on' } color="#333" />
+                  <Icon name={ hidePassword ? 'eye-off' : 'eye-on' } color="text-grey-icon" />
                 </button>
               </div>
             </label>

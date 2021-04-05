@@ -49,7 +49,7 @@ const Home = ({ dispatch, countryList, country }) => {
                   className="bg-white h-12 border-r p-5 w-18 flex justify-center items-center rounded-l-sm cursor-pointer"
                 >
                   <span className="text-gray-500 text-xs mr-3">{ country || 'Location' }</span>
-                  <Icon name="triangle" size={ 10 } color="#333" className="mt-1" />
+                  <Icon name="triangle" size={ 10 } color="text-grey-icon" className="mt-1" />
                 </button>
 
                 <input

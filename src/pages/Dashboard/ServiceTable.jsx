@@ -32,7 +32,7 @@ const ServiceTable = ({ setCount, dispatch, serviceFilter, auth: { user, userPro
         <div className="flex">
           <label className="flex border-gray-300 border rounded items-center justify-between">
             <div className="bg-white h-10 w-12 flex justify-center items-center rounded-l-sm">
-              <Icon name="search" size={ 12 } color="#333" />
+              <Icon name="search" size={ 12 } color="text-grey-icon" />
             </div>
 
             <input

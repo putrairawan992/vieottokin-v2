@@ -59,7 +59,7 @@ const AutoComplete = ({ suggestions, onChange, value, disabled }) => {
     <Fragment>
       <label className="flex w-full border border-gray-300 items-center justify-between">
         <div className="bg-white h-10 w-10 flex justify-center items-center rounded-l-sm">
-          <Icon name="search" size={ 12 } color="#333" />
+          <Icon name="search" size={ 12 } color="text-grey-icon" />
         </div>
 
         <input

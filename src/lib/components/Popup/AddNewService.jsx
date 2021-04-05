@@ -74,7 +74,7 @@ const AddNewService = ({ dispatch, countryList, auth }) => {
         <h3 className="font-medium text-xl">Add New Service</h3>
 
         <button className="ml-auto block" onClick={ () => dispatch(openNewService(false)) }>
-          <Icon name="close" color="#333" />
+          <Icon name="close" color="text-grey-icon" />
         </button>
       </div>
 

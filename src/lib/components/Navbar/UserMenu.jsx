@@ -9,7 +9,7 @@ export const Authenticated = ({ logout }) => (
     </Link>
 
     <button className="flex items-center ml-auto text-blue" onClick={ logout } >
-      <Icon name="power-off" size={ 12 } color="#20BFEF" className="mr-2" />
+      <Icon name="power-off" size={ 12 } color="text-blue-light" className="mr-2" />
       Logout
     </button>
   </Fragment>
@@ -17,7 +17,7 @@ export const Authenticated = ({ logout }) => (
 
 export const UnAuthenticated = ({ signin }) => (
   <button className="flex items-center ml-auto text-blue" onClick={ signin } >
-    <Icon name="user" size={ 12 } color="#20BFEF" className="mr-2" />
+    <Icon name="user" size={ 12 } color="text-blue-light" className="mr-2" />
     Login
   </button>
 );

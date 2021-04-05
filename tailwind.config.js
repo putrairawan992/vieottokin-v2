@@ -15,9 +15,15 @@ module.exports = {
       colors: {
         'orange': "#f58120",
         'blue': '#1eb0e0',
+        'blue-light': '#20bfef',
+        'blue-space': '#0c4596',
+        'blue-strom': '#6493b9',
         'darkdrop': '#0d3555',
         'darkdrop-1': '#062945',
         'softdrop': '#0f4875',
+        'grey-icon': '#333',
+        'grey-stone': '#999',
+        'grey-blue': '#7e8692',
       }
     },
   },

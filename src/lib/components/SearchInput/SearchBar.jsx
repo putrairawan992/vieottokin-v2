@@ -52,7 +52,7 @@ const SearchBar = () => {
       <div className="flex items-center justify-between">
         <label className="flex items-center w-full">
           <div className="bg-white h-10 md:w-12 w-8 flex justify-center items-center rounded-l-sm">
-            <Icon name="search" size={ 12 } color="#333" />
+            <Icon name="search" size={ 12 } color="text-grey-icon" />
           </div>
 
           <input

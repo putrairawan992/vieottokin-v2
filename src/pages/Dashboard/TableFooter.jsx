@@ -25,7 +25,7 @@ const TableFooter = ({ data, currentPage, dispatch }) => (
         onClick={ () => dispatch(setFilter({page: currentPage - 1 })) }
         disabled={ currentPage === 1 }
       >
-        <Icon name="chevron-left" size={12} color="#7e8692" />
+        <Icon name="chevron-left" size={12} color="text-grey-blue" />
         <i className="ml-2">prev</i>
       </button>
 
@@ -46,7 +46,7 @@ const TableFooter = ({ data, currentPage, dispatch }) => (
         disabled={ currentPage === data.page }
       >
         <i className="mr-2">next</i>
-        <Icon name="chevron-right" size={12} color="#7e8692" />
+        <Icon name="chevron-right" size={12} color="text-grey-blue" />
       </button>
     </nav>
   </div>

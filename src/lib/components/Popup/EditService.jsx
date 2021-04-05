@@ -80,7 +80,7 @@ const EditService = ({ dispatch, countryList, showModalEditService, auth }) => {
         <h3 className="font-medium text-xl">Edit Service</h3>
 
         <button className="ml-auto block" onClick={ () => dispatch(openEditService(false)) }>
-          <Icon name="close" color="#333" />
+          <Icon name="close" color="text-grey-icon" />
         </button>
       </div>
 

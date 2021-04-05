@@ -66,7 +66,7 @@ const AddNewPartner = ({ dispatch, countryList, categoryList }) => {
         <h3 className="font-medium text-xl">Add New Partner</h3>
 
         <button className="ml-auto block" onClick={ () => dispatch(openNewPartner(false)) }>
-          <Icon name="close" color="#333" />
+          <Icon name="close" color="text-grey-icon" />
         </button>
       </div>
 
@@ -76,7 +76,7 @@ const AddNewPartner = ({ dispatch, countryList, categoryList }) => {
             <label className="w-24 h-24 text-center flex flex-col cursor-pointer rounded-full overflow-hidden justify-center border-2 border-dashed">
               {
                 preview ? <img src={ URL.createObjectURL(preview) } className="h-full object-cover" alt="logo" />
-                : <Icon name="image" size={30} className="mx-auto" color="#6493b9" />
+                : <Icon name="image" size={30} className="mx-auto" color="text-blue-strom" />
               }
 
               { !preview && <small className="text-xxs text-blue">

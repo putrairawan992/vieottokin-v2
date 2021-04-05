@@ -7,12 +7,12 @@ const Icon = ({ size, color, name, className }) => (
     viewBox={iconPath[name].box}
     width={size}
     height={size}
-    className={className}
+    className={`${color} ${className} fill-current`}
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
   >
     { iconPath[name].path.map((item, i) => (
-      <path key={ i } fillRule="evenodd" fill={color} d={item} />
+      <path key={ i } fillRule="evenodd" d={item} />
     )) }
   </svg>
 );
@@ -31,7 +31,7 @@ export const IconImage = ({ name, className }) => {
 
 Icon.defaultProps = {
   size: 16,
-  color: "#fff",
+  color: "text-white",
   className: ''
 };
 

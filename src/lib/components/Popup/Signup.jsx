@@ -37,7 +37,7 @@ const SigninPopup = ({countryList, dispatch}) => {
     <Modal>
       <div className="text-center p-6 pb-0">
         <button className="ml-auto block" onClick={ () => dispatch(openSignup(false)) }>
-          <Icon name="close" color="#333" />
+          <Icon name="close" color="text-grey-icon" />
         </button>
       </div>
 

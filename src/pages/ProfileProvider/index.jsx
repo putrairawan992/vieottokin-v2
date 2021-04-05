@@ -52,7 +52,7 @@ const ProfileProvider = () => {
                 </div>
 
                 <div className="flex w-full items-center my-4">
-                  <Icon name="badge" color="#f5821f" />
+                  <Icon name="badge" color="text-orange" />
 
                   <span className="text-gray-500 text-xs ml-3">
                     <b>{ service.trustedBy || 0 }</b> business trusted Viettonkin for this service

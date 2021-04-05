@@ -77,7 +77,7 @@ const EditPartner = ({ dispatch, showModalEditPartner, countryList, categoryList
         <h3 className="font-medium text-xl">Edit Partner</h3>
 
         <button className="ml-auto block" onClick={ () => dispatch(openEditPartner(null)) }>
-          <Icon name="close" color="#333" />
+          <Icon name="close" color="text-grey-icon" />
         </button>
       </div>
 
@@ -86,7 +86,7 @@ const EditPartner = ({ dispatch, showModalEditPartner, countryList, categoryList
           <label className="w-24 h-24 text-center flex flex-col cursor-pointer overflow-hidden rounded-full justify-center border-2 border-dashed">
             { file ? <img src={ URL.createObjectURL(file) } className="h-full object-cover" alt="avatar" />
               : avatar ? <img src={ avatar } className="h-full object-cover" alt="avatar" />
-              : <Icon name="image" size={30} className="mx-auto" color="#6493b9" />
+              : <Icon name="image" size={30} className="mx-auto" color="text-blue-strom" />
             }
 
             { !file && !avatar && <small className="text-xxs text-blue">Add file or drag<br/>& drop here</small> }

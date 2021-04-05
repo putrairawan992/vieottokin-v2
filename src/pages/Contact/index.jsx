@@ -23,7 +23,7 @@ const Contact = () => {
 
             <div className="flex items-center">
               <div className="mr-3">
-                <Icon name="phone" color="#f58120" size={18} />
+                <Icon name="phone" color="text-orange" size={18} />
               </div>
 
               <p>+84 918 866 858</p>
@@ -31,7 +31,7 @@ const Contact = () => {
 
             <div className="flex items-center mt-4">
               <div className="mr-3">
-                <Icon name="email" color="#f58120" size={18} />
+                <Icon name="email" color="text-orange" size={18} />
               </div>
 
               <p>info@viettonkin.com</p>
@@ -39,7 +39,7 @@ const Contact = () => {
 
             <div className="flex items-start mt-4">
               <div className="mr-3">
-                <Icon name="map-marker" color="#f58120" size={21} />
+                <Icon name="map-marker" color="text-orange" size={21} />
               </div>
 
               <p className="text-sm md:text-base">
