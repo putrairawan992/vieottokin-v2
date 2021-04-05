@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { read } from 'utils/api';
 import Breadcrumb from 'lib/components/Breadcrumb';
-import FilterSidebar from './FilterSidebar';
+import FilterSidebar from './components/FilterSidebar';
 import Icon from 'icon';
 
 const ServiceProvider = ({ serviceFilter }) => {

@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { Container } from 'lib/elements/Grid';
-import Navigator from './Navigator';
-import ServiceTable from './ServiceTable';
+import Navigator from './components/Navigator';
+import ServiceTable from './components/ServiceTable';
 import { connect } from 'react-redux';
-import TableFooter from './TableFooter';
+import TableFooter from './components/TableFooter';
 
 const PartnerDashboard = () => {
   const [serviceCount, setServiceCount] = useState(0);

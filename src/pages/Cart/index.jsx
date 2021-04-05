@@ -4,7 +4,7 @@ import { setWistlist } from 'store/actions/Wishlist';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Icon from 'icon';
-import StepIndicator from './StepIndicator';
+import StepIndicator from './components/StepIndicator';
 import { read } from 'utils/api';
 
 const Cart = () => {

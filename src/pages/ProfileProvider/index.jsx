@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'lib/elements/Grid';
 import Breadcrumb from 'lib/components/Breadcrumb';
-import PriceTagPanel from './PriceTagPanel';
+import PriceTagPanel from './components/PriceTagPanel';
 import Icon from 'icon';
 import { read } from 'utils/api';
 

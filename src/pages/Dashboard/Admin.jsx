@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { Container } from 'lib/elements/Grid';
-import Navigator from './Navigator';
-import ProviderTable from './ProviderTable';
-import ServiceTable from './ServiceTable';
-import TableFooter from './TableFooter';
+import Navigator from './components/Navigator';
+import ProviderTable from './components/ProviderTable';
+import ServiceTable from './components/ServiceTable';
+import TableFooter from './components/TableFooter';
 
 const AdminDashboard = () => {
   const [showTable, setShowTable] = useState('partners');
